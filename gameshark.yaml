@@ -1,0 +1,74 @@
+name: (C) Mushroom &Nu15:5 (GameShark)
+sha1: 5ac1387c18b0632f7d4c1106eb591d801835c57e
+options:
+  basename: gameshark
+  target_path: baserom.z64
+  base_path: .
+  compiler: SN64
+  find_file_boundaries: True
+  do_c_func_detection: yes
+  migrate_rodata_to_functions: yes
+  header_encoding: ASCII
+  platform: n64
+  create_undefined_funcs_auto: False
+  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  create_undefined_syms_auto: False
+  # undefined_syms_auto_path: undefined_syms_auto.txt
+  symbol_addrs_path: symbol_addrs.txt
+  # asm_path: asm
+  # src_path: src
+  # build_path: build
+  extensions_path: tools/splat_ext
+  # mips_abi_float_regs: o32
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  auto_all_sections: [".data", ".rodata", ".bss"]
+  libultra_symbols: True
+  hardware_regs: True
+  # generated_s_preamble:
+    # .include "macro.inc"
+
+    # .set noat
+
+    # .set noreorder
+
+segments:
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80200400
+    subsegments:
+      - [0x1000, asm]
+
+  - name: loader
+    type: code
+    start: 0x1080
+    vram: 0x80200480
+    follows_vram: entry
+    subsegments:
+      - [0x1080, asm]
+
+  - name: main
+    type: code
+    start: 0x1180
+    vram: 0x80040180
+    subsegments:
+      - [0x1180, c, main]
+
+  - name: data
+    type: code
+    start: 0x39C0
+    vram: 0x800429C0
+    follows_vram: main
+    subsegments:
+      - [0x39C0, bin]
+      - [0x2F000, hasm]
+      - [0x2F100, bin]
+  - [0x40000]
