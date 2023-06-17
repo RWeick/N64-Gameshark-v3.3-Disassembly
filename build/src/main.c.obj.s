@@ -1464,10 +1464,10 @@ __gnu_compiled_c:
 	.def	func_80040180;	.val	func_80040180;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040180
 
-	.loc	1 53
+	.loc	1 56
 LM1:
 
-	.loc	1 53
+	.loc	1 56
 LM2:
 	.ent	func_80040180
 func_80040180:
@@ -1480,23 +1480,23 @@ $Lb0:
 	subu	$sp,$sp,24
 	sw	$16,16($sp)
 
-	.loc	1 56
+	.loc	1 59
 LM3:
 	move	$16,$0
 	li	$4,131072			# 0x00020000
 	ori	$4,$4,0x57ff
 	li	$3,-2144337920			# 0x80300000
 
-	.loc	1 53
+	.loc	1 56
 LM4:
 	sw	$31,20($sp)
 $L5:
 
-	.loc	1 57
+	.loc	1 60
 LM5:
 	sw	$0,0($3)
 
-	.loc	1 56
+	.loc	1 59
 LM6:
 	addu	$16,$16,1
 	slt	$2,$4,$16
@@ -1508,7 +1508,7 @@ LM6:
 	.set	reorder
 
 
-	.loc	1 60
+	.loc	1 63
 LM7:
 	.set	noreorder
 	.set	nomacro
@@ -1518,7 +1518,7 @@ LM7:
 	.set	reorder
 
 
-	.loc	1 61
+	.loc	1 64
 LM8:
 	li	$4,-2145910784			# 0x80180000
 	.set	noreorder
@@ -1529,11 +1529,11 @@ LM8:
 	.set	reorder
 
 
-	.loc	1 62
+	.loc	1 65
 LM9:
 	jal	func_800402D8
 
-	.loc	1 63
+	.loc	1 66
 LM10:
 	.set	noreorder
 	.set	nomacro
@@ -1544,7 +1544,7 @@ LM10:
 
 $L10:
 
-	.loc	1 66
+	.loc	1 69
 LM11:
 	.set	noreorder
 	.set	nomacro
@@ -1554,12 +1554,12 @@ LM11:
 	.set	reorder
 
 
-	.loc	1 65
+	.loc	1 68
 LM12:
 	slt	$2,$16,60
 	bne	$2,$0,$L10
 
-	.loc	1 69
+	.loc	1 72
 LM13:
 	.set	noreorder
 	.set	nomacro
@@ -1569,12 +1569,12 @@ LM13:
 	.set	reorder
 
 
-	.loc	1 71
+	.loc	1 74
 LM14:
 	move	$16,$0
 $L15:
 
-	.loc	1 72
+	.loc	1 75
 LM15:
 	.set	noreorder
 	.set	nomacro
@@ -1584,12 +1584,12 @@ LM15:
 	.set	reorder
 
 
-	.loc	1 71
+	.loc	1 74
 LM16:
 	slt	$2,$16,60
 	bne	$2,$0,$L15
 
-	.loc	1 75
+	.loc	1 78
 LM17:
 	.set	noreorder
 	.set	nomacro
@@ -1599,7 +1599,7 @@ LM17:
 	.set	reorder
 
 
-	.loc	1 76
+	.loc	1 79
 LM18:
 	li	$4,-2145386496			# 0x80200000
 	ori	$4,$4,0x0400
@@ -1612,7 +1612,7 @@ LM18:
 	.set	reorder
 
 
-	.loc	1 77
+	.loc	1 80
 LM19:
 	.set	noreorder
 	.set	nomacro
@@ -1622,7 +1622,7 @@ LM19:
 	.set	reorder
 
 
-	.loc	1 78
+	.loc	1 81
 LM20:
 	li	$4,-2139619328			# 0x80780000
 	ori	$4,$4,0x0800
@@ -1635,7 +1635,7 @@ LM20:
 	.set	reorder
 
 
-	.loc	1 79
+	.loc	1 82
 LM21:
 	.set	noreorder
 	.set	nomacro
@@ -1645,12 +1645,12 @@ LM21:
 	.set	reorder
 
 
-	.loc	1 81
+	.loc	1 84
 LM22:
 	move	$16,$0
 $L20:
 
-	.loc	1 82
+	.loc	1 85
 LM23:
 	.set	noreorder
 	.set	nomacro
@@ -1660,7 +1660,7 @@ LM23:
 	.set	reorder
 
 
-	.loc	1 81
+	.loc	1 84
 LM24:
 	slt	$2,$16,60
 	.set	noreorder
@@ -1671,7 +1671,7 @@ LM24:
 	.set	reorder
 
 
-	.loc	1 85
+	.loc	1 88
 LM25:
 $Le1:
 	.bend	$Le1	33
@@ -1683,7 +1683,7 @@ $Le1:
 	.set	reorder
 
 
-	.loc	1 86
+	.loc	1 89
 LM26:
 	lw	$31,20($sp)
 	lw	$16,16($sp)
@@ -1696,17 +1696,17 @@ LM26:
 	.set	reorder
 
 
-	.loc	1 86
+	.loc	1 89
 LM27:
 	.end	func_80040180
 	.align	2
 	.def	func_80040278;	.val	func_80040278;	.scl	2;	.type	0x2f;	.endef
 	.globl	func_80040278
 
-	.loc	1 88
+	.loc	1 91
 LM28:
 
-	.loc	1 88
+	.loc	1 91
 LM29:
 	.ent	func_80040278
 func_80040278:
@@ -1720,25 +1720,25 @@ $Le3:
 	.bend	$Le3	1
 	subu	$sp,$sp,32
 
-	.loc	1 92
+	.loc	1 95
 LM30:
 	li	$4,-1308622848			# 0xb2000000
 
-	.loc	1 88
+	.loc	1 91
 LM31:
 	sw	$17,20($sp)
 
-	.loc	1 91
+	.loc	1 94
 LM32:
 	lui	$17,%hi(D_80042AA0) # high
 	li	$2,6291456			# 0x00600000
 
-	.loc	1 88
+	.loc	1 91
 LM33:
 	sw	$31,24($sp)
 	sw	$16,16($sp)
 
-	.loc	1 92
+	.loc	1 95
 LM34:
 	.set	noreorder
 	.set	nomacro
@@ -1748,11 +1748,11 @@ LM34:
 	.set	reorder
 
 
-	.loc	1 93
+	.loc	1 96
 LM35:
 	lw	$16,-1296039936
 
-	.loc	1 94
+	.loc	1 97
 LM36:
 	.set	noreorder
 	.set	nomacro
@@ -1762,30 +1762,30 @@ LM36:
 	.set	reorder
 
 
-	.loc	1 96
+	.loc	1 99
 LM37:
 	li	$3,-2143879168			# 0x80370000
 	ori	$3,$3,0x1240
 
-	.loc	1 97
+	.loc	1 100
 LM38:
 	lw	$31,24($sp)
 
-	.loc	1 95
+	.loc	1 98
 LM39:
 	li	$2,4194304			# 0x00400000
 	sw	$2,%lo(D_80042AA0)($17)
 
-	.loc	1 97
+	.loc	1 100
 LM40:
 	lw	$17,20($sp)
 
-	.loc	1 96
+	.loc	1 99
 LM41:
 	xor	$16,$16,$3
 	sltu	$2,$16,1
 
-	.loc	1 97
+	.loc	1 100
 LM42:
 	lw	$16,16($sp)
 	#nop
@@ -1797,7 +1797,7 @@ LM42:
 	.set	reorder
 
 
-	.loc	1 97
+	.loc	1 100
 LM43:
 	.end	func_80040278
  #APP
@@ -1838,10 +1838,10 @@ sw         $16, 0x10($29)
 	.def	wait_PI;	.val	wait_PI;	.scl	2;	.type	0x21;	.endef
 	.globl	wait_PI
 
-	.loc	1 109
+	.loc	1 114
 LM44:
 
-	.loc	1 109
+	.loc	1 114
 LM45:
 	.ent	wait_PI
 wait_PI:
@@ -1849,7 +1849,7 @@ wait_PI:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 110
+	.loc	1 115
 LM46:
 	lui	$3,%hi(PI_STATUS_REG) # high
 $L24:
@@ -1861,7 +1861,7 @@ $L24:
 	bne	$2,$0,$L24
 	j	$31
 
-	.loc	1 110
+	.loc	1 115
 LM47:
 	.end	wait_PI
  #APP
@@ -1871,10 +1871,10 @@ LM47:
 	.def	func_80040580;	.val	func_80040580;	.scl	2;	.type	0x25;	.endef
 	.globl	func_80040580
 
-	.loc	1 114
+	.loc	1 121
 LM48:
 
-	.loc	1 114
+	.loc	1 121
 LM49:
 	.ent	func_80040580
 func_80040580:
@@ -1889,29 +1889,29 @@ $Le5:
 	.bend	$Le5	1
 	subu	$sp,$sp,24
 
-	.loc	1 117
+	.loc	1 124
 LM50:
 	lui	$2,%hi(D_80042AA4) # high
 	lui	$3,%hi(D_80042AA0) # high
 
-	.loc	1 114
+	.loc	1 121
 LM51:
 	sw	$16,16($sp)
 
-	.loc	1 117
+	.loc	1 124
 LM52:
 	lw	$16,%lo(D_80042AA4)($2)
 	lw	$2,%lo(D_80042AA0)($3)
 
-	.loc	1 114
+	.loc	1 121
 LM53:
 	sw	$31,20($sp)
 
-	.loc	1 117
+	.loc	1 124
 LM54:
 	or	$16,$16,$2
 
-	.loc	1 118
+	.loc	1 125
 LM55:
 	.set	noreorder
 	.set	nomacro
@@ -1921,11 +1921,11 @@ LM55:
 	.set	reorder
 
 
-	.loc	1 119
+	.loc	1 126
 LM56:
 	lw	$2,0($16)
 
-	.loc	1 120
+	.loc	1 127
 LM57:
 	lw	$31,20($sp)
 	lw	$16,16($sp)
@@ -1938,17 +1938,17 @@ LM57:
 	.set	reorder
 
 
-	.loc	1 120
+	.loc	1 127
 LM58:
 	.end	func_80040580
 	.align	2
 	.def	func_800405BC;	.val	func_800405BC;	.scl	2;	.type	0x21;	.endef
 	.globl	func_800405BC
 
-	.loc	1 122
+	.loc	1 129
 LM59:
 
-	.loc	1 122
+	.loc	1 129
 LM60:
 	.ent	func_800405BC
 func_800405BC:
@@ -1964,27 +1964,27 @@ $Le7:
 	.bend	$Le7	1
 	subu	$sp,$sp,24
 
-	.loc	1 123
+	.loc	1 130
 LM61:
 	andi	$5,$5,0xffff
 	sll	$3,$5,16
 
-	.loc	1 124
+	.loc	1 131
 LM62:
 	lui	$2,%hi(D_80042AA4) # high
 	lui	$6,%hi(D_80042AA0) # high
 	lw	$2,%lo(D_80042AA4)($2)
 	lw	$6,%lo(D_80042AA0)($6)
 
-	.loc	1 123
+	.loc	1 130
 LM63:
 	or	$3,$3,$5
 
-	.loc	1 122
+	.loc	1 129
 LM64:
 	sw	$31,16($sp)
 
-	.loc	1 124
+	.loc	1 131
 LM65:
 	or	$2,$2,$6
 	or	$2,$2,$4
@@ -1992,11 +1992,11 @@ LM65:
 	sw	$3,0($2)
 	#.set	novolatile
 
-	.loc	1 125
+	.loc	1 132
 LM66:
 	jal	wait_PI
 
-	.loc	1 126
+	.loc	1 133
 LM67:
 	lw	$31,16($sp)
 	#nop
@@ -2008,17 +2008,17 @@ LM67:
 	.set	reorder
 
 
-	.loc	1 126
+	.loc	1 133
 LM68:
 	.end	func_800405BC
 	.align	2
 	.def	func_80040600;	.val	func_80040600;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040600
 
-	.loc	1 128
+	.loc	1 135
 LM69:
 
-	.loc	1 128
+	.loc	1 135
 LM70:
 	.ent	func_80040600
 func_80040600:
@@ -2033,29 +2033,29 @@ $Le9:
 	.bend	$Le9	1
 	subu	$sp,$sp,24
 
-	.loc	1 131
+	.loc	1 138
 LM71:
 	li	$2,251658240			# 0x0f000000
 
-	.loc	1 128
+	.loc	1 135
 LM72:
 	sw	$16,16($sp)
 
-	.loc	1 131
+	.loc	1 138
 LM73:
 	and	$16,$4,$2
 	li	$2,268435456			# 0x10000000
 	or	$16,$16,$2
 
-	.loc	1 132
+	.loc	1 139
 LM74:
 	li	$4,1024			# 0x00000400
 
-	.loc	1 128
+	.loc	1 135
 LM75:
 	sw	$31,20($sp)
 
-	.loc	1 132
+	.loc	1 139
 LM76:
 	.set	noreorder
 	.set	nomacro
@@ -2065,21 +2065,21 @@ LM76:
 	.set	reorder
 
 
-	.loc	1 133
+	.loc	1 140
 LM77:
 	lui	$3,%hi(D_80042AA4) # high
 	li	$2,-1342177280			# 0xb0000000
 
-	.loc	1 134
+	.loc	1 141
 LM78:
 	lw	$31,20($sp)
 
-	.loc	1 133
+	.loc	1 140
 LM79:
 	or	$16,$16,$2
 	sw	$16,%lo(D_80042AA4)($3)
 
-	.loc	1 134
+	.loc	1 141
 LM80:
 	lw	$16,16($sp)
 	#nop
@@ -2091,17 +2091,17 @@ LM80:
 	.set	reorder
 
 
-	.loc	1 134
+	.loc	1 141
 LM81:
 	.end	func_80040600
 	.align	2
 	.def	func_80040648;	.val	func_80040648;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040648
 
-	.loc	1 136
+	.loc	1 143
 LM82:
 
-	.loc	1 136
+	.loc	1 143
 LM83:
 	.ent	func_80040648
 func_80040648:
@@ -2110,16 +2110,16 @@ func_80040648:
 	.fmask	0x00000000,0
 	subu	$sp,$sp,24
 
-	.loc	1 137
+	.loc	1 144
 LM84:
 	li	$5,8323072			# 0x007f0000
 	ori	$5,$5,0xf7ff
 
-	.loc	1 136
+	.loc	1 143
 LM85:
 	sw	$31,16($sp)
 
-	.loc	1 137
+	.loc	1 144
 LM86:
 	.set	noreorder
 	.set	nomacro
@@ -2138,17 +2138,17 @@ LM86:
 	.set	reorder
 
 
-	.loc	1 137
+	.loc	1 144
 LM87:
 	.end	func_80040648
 	.align	2
 	.def	func_8004066C;	.val	func_8004066C;	.scl	2;	.type	0x21;	.endef
 	.globl	func_8004066C
 
-	.loc	1 140
+	.loc	1 147
 LM88:
 
-	.loc	1 140
+	.loc	1 147
 LM89:
 	.ent	func_8004066C
 func_8004066C:
@@ -2167,7 +2167,7 @@ $Lb10:
 	sw	$18,24($sp)
 	sw	$17,20($sp)
 
-	.loc	1 144
+	.loc	1 151
 LM90:
 	.set	noreorder
 	.set	nomacro
@@ -2177,13 +2177,13 @@ LM90:
 	.set	reorder
 
 
-	.loc	1 145
+	.loc	1 152
 LM91:
 	li	$17,1			# 0x00000001
 	li	$18,33554432			# 0x02000000
 	ori	$18,$18,0x0200
 
-	.loc	1 146
+	.loc	1 153
 LM92:
 	and	$2,$19,$17
 $L40:
@@ -2198,7 +2198,7 @@ $L40:
 	ori	$16,$16,0x0100
 $L37:
 
-	.loc	1 147
+	.loc	1 154
 LM93:
 	li	$4,2048			# 0x00000800
 	.set	noreorder
@@ -2209,7 +2209,7 @@ LM93:
 	.set	reorder
 
 
-	.loc	1 148
+	.loc	1 155
 LM94:
 	li	$4,2048			# 0x00000800
 	.set	noreorder
@@ -2220,7 +2220,7 @@ LM94:
 	.set	reorder
 
 
-	.loc	1 149
+	.loc	1 156
 LM95:
 	li	$4,2048			# 0x00000800
 	.set	noreorder
@@ -2231,7 +2231,7 @@ LM95:
 	.set	reorder
 
 
-	.loc	1 145
+	.loc	1 152
 LM96:
 	sll	$17,$17,1
 	slt	$2,$17,256
@@ -2243,7 +2243,7 @@ LM96:
 	.set	reorder
 
 
-	.loc	1 151
+	.loc	1 158
 LM97:
 $Le11:
 	.bend	$Le11	12
@@ -2261,7 +2261,7 @@ $Le11:
 	.set	reorder
 
 
-	.loc	1 151
+	.loc	1 158
 LM98:
 	.end	func_8004066C
  #APP
@@ -2300,10 +2300,10 @@ LM98:
 	.def	func_80040884;	.val	func_80040884;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040884
 
-	.loc	1 159
+	.loc	1 166
 LM99:
 
-	.loc	1 159
+	.loc	1 166
 LM100:
 	.ent	func_80040884
 func_80040884:
@@ -2316,16 +2316,16 @@ $Lb12:
 	subu	$sp,$sp,24
 	sw	$16,16($sp)
 
-	.loc	1 161
+	.loc	1 168
 LM101:
 	move	$16,$0
 
-	.loc	1 159
+	.loc	1 166
 LM102:
 	sw	$31,20($sp)
 $L45:
 
-	.loc	1 162
+	.loc	1 169
 LM103:
 	.set	noreorder
 	.set	nomacro
@@ -2335,13 +2335,13 @@ LM103:
 	.set	reorder
 
 
-	.loc	1 161
+	.loc	1 168
 LM104:
 	addu	$16,$16,1
 	slt	$2,$16,7
 	bne	$2,$0,$L45
 
-	.loc	1 164
+	.loc	1 171
 LM105:
 $Le13:
 	.bend	$Le13	6
@@ -2356,17 +2356,17 @@ $Le13:
 	.set	reorder
 
 
-	.loc	1 164
+	.loc	1 171
 LM106:
 	.end	func_80040884
 	.align	2
 	.def	func_800408BC;	.val	func_800408BC;	.scl	2;	.type	0x25;	.endef
 	.globl	func_800408BC
 
-	.loc	1 166
+	.loc	1 173
 LM107:
 
-	.loc	1 166
+	.loc	1 173
 LM108:
 	.ent	func_800408BC
 func_800408BC:
@@ -2374,14 +2374,14 @@ func_800408BC:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 167
+	.loc	1 174
 LM109:
 	lui	$6,%hi(D_80042A40) # high
 	lw	$2,%lo(D_80042A40)($6)
 	#nop
 	srl	$2,$2,1
 
-	.loc	1 168
+	.loc	1 175
 LM110:
 	.set	noreorder
 	.set	nomacro
@@ -2391,7 +2391,7 @@ LM110:
 	.set	reorder
 
 
-	.loc	1 169
+	.loc	1 176
 LM111:
 	lui	$4,%hi(D_80042A50) # high
 	lui	$2,%hi(D_80042A6C) # high
@@ -2402,19 +2402,19 @@ LM111:
 	addu	$3,$3,1
 	lbu	$5,0($2)
 
-	.loc	1 170
+	.loc	1 177
 LM112:
 	li	$2,128			# 0x00000080
 	sw	$2,%lo(D_80042A40)($6)
 
-	.loc	1 169
+	.loc	1 176
 LM113:
 	lui	$2,%hi(D_80042A54) # high
 	sw	$3,%lo(D_80042A50)($4)
 	sw	$5,%lo(D_80042A54)($2)
 $L48:
 
-	.loc	1 172
+	.loc	1 179
 LM114:
 	lui	$2,%hi(D_80042A54) # high
 	lw	$2,%lo(D_80042A54)($2)
@@ -2429,7 +2429,7 @@ LM114:
 	.set	reorder
 
 
-	.loc	1 172
+	.loc	1 179
 LM115:
 	.end	func_800408BC
  #APP
@@ -2468,10 +2468,10 @@ LM115:
 	.def	func_80040D1C;	.val	func_80040D1C;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040D1C
 
-	.loc	1 181
+	.loc	1 188
 LM116:
 
-	.loc	1 181
+	.loc	1 188
 LM117:
 	.ent	func_80040D1C
 func_80040D1C:
@@ -2479,14 +2479,14 @@ func_80040D1C:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 182
+	.loc	1 189
 LM118:
 $Lb14:
 	.begin	$Lb14	2
 	.def	i;	.val	5;	.scl	4;	.type	0x4;	.endef
 	.def	temp;	.val	4;	.scl	4;	.type	0x4;	.endef
 
-	.loc	1 185
+	.loc	1 192
 LM119:
 	li	$5,314			# 0x0000013a
 	li	$10,1			# 0x00000001
@@ -2495,75 +2495,75 @@ LM119:
 	lui	$2,%hi(D_80042A48) # high
 	lw	$8,%lo(D_80042A48)($2)
 
-	.loc	1 184
+	.loc	1 191
 LM120:
 	lui	$2,%hi(D_80042A60) # high
 
-	.loc	1 185
+	.loc	1 192
 LM121:
 	lui	$3,%hi(D_80042A7C) # high
 
-	.loc	1 184
+	.loc	1 191
 LM122:
 	lw	$2,%lo(D_80042A60)($2)
 
-	.loc	1 185
+	.loc	1 192
 LM123:
 	lw	$7,%lo(D_80042A7C)($3)
 	move	$6,$2
 
-	.loc	1 184
+	.loc	1 191
 LM124:
 	sw	$0,1256($6)
 $L53:
 
-	.loc	1 186
+	.loc	1 193
 LM125:
 	addu	$4,$5,-1
 
-	.loc	1 187
+	.loc	1 194
 LM126:
 	sll	$2,$4,2
 	addu	$2,$2,$9
 
-	.loc	1 188
+	.loc	1 195
 LM127:
 	sll	$3,$5,2
 
-	.loc	1 187
+	.loc	1 194
 LM128:
 	sw	$5,0($2)
 
-	.loc	1 188
+	.loc	1 195
 LM129:
 	addu	$2,$3,$8
 	sw	$4,0($2)
 
-	.loc	1 189
+	.loc	1 196
 LM130:
 	addu	$2,$3,$7
 
-	.loc	1 190
+	.loc	1 197
 LM131:
 	addu	$3,$3,$6
 
-	.loc	1 189
+	.loc	1 196
 LM132:
 	sw	$10,0($2)
 
-	.loc	1 190
+	.loc	1 197
 LM133:
 	lw	$2,0($3)
 
-	.loc	1 185
+	.loc	1 192
 LM134:
 	move	$5,$4
 
-	.loc	1 190
+	.loc	1 197
 LM135:
 	addu	$2,$2,1
 
-	.loc	1 185
+	.loc	1 192
 LM136:
 	.set	noreorder
 	.set	nomacro
@@ -2573,50 +2573,50 @@ LM136:
 	.set	reorder
 
 
-	.loc	1 192
+	.loc	1 199
 LM137:
 	lui	$2,%hi(D_80042A7C) # high
 	lw	$2,%lo(D_80042A7C)($2)
 
-	.loc	1 194
+	.loc	1 201
 LM138:
 	li	$5,4096			# 0x00001000
 
-	.loc	1 192
+	.loc	1 199
 LM139:
 	sw	$0,0($2)
 
-	.loc	1 193
+	.loc	1 200
 LM140:
 	lui	$2,%hi(D_80042A64) # high
 	lw	$2,%lo(D_80042A64)($2)
 
-	.loc	1 194
+	.loc	1 201
 LM141:
 	li	$6,10000			# 0x00002710
 	addu	$4,$2,16384
 
-	.loc	1 193
+	.loc	1 200
 LM142:
 	sw	$0,16384($2)
 $L58:
 
-	.loc	1 195
+	.loc	1 202
 LM143:
 	addu	$3,$5,200
 	div	$3,$6,$3
 	lw	$2,0($4)
 
-	.loc	1 194
+	.loc	1 201
 LM144:
 	addu	$5,$5,-1
 
-	.loc	1 195
+	.loc	1 202
 LM145:
 	addu	$2,$2,$3
 	sw	$2,-4($4)
 
-	.loc	1 194
+	.loc	1 201
 LM146:
 	.set	noreorder
 	.set	nomacro
@@ -2626,13 +2626,13 @@ LM146:
 	.set	reorder
 
 
-	.loc	1 197
+	.loc	1 204
 LM147:
 $Le15:
 	.bend	$Le15	17
 	j	$31
 
-	.loc	1 197
+	.loc	1 204
 LM148:
 	.end	func_80040D1C
  #APP
@@ -2651,10 +2651,10 @@ LM148:
 	.def	func_80040F3C;	.val	func_80040F3C;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80040F3C
 
-	.loc	1 201
+	.loc	1 208
 LM149:
 
-	.loc	1 201
+	.loc	1 208
 LM150:
 	.ent	func_80040F3C
 func_80040F3C:
@@ -2666,11 +2666,11 @@ func_80040F3C:
 	sw	$17,20($sp)
 	move	$17,$4
 
-	.loc	1 201
+	.loc	1 208
 LM151:
 	sw	$31,24($sp)
 
-	.loc	1 202
+	.loc	1 209
 LM152:
 	.set	noreorder
 	.set	nomacro
@@ -2680,7 +2680,7 @@ LM152:
 	.set	reorder
 
 
-	.loc	1 203
+	.loc	1 210
 LM153:
 	lui	$3,%hi(D_80042AC8) # high
 	lw	$2,%lo(D_80042AC8)($3)
@@ -2694,7 +2694,7 @@ LM153:
 
 $L63:
 
-	.loc	1 204
+	.loc	1 211
 LM154:
 	.set	noreorder
 	.set	nomacro
@@ -2704,13 +2704,13 @@ LM154:
 	.set	reorder
 
 
-	.loc	1 205
+	.loc	1 212
 LM155:
 	lw	$2,%lo(D_80042AC8)($16)
 	#nop
 	addu	$2,$2,-1
 
-	.loc	1 206
+	.loc	1 213
 LM156:
 	.set	noreorder
 	.set	nomacro
@@ -2732,7 +2732,7 @@ $L62:
 	.set	reorder
 
 
-	.loc	1 206
+	.loc	1 213
 LM157:
 	.end	func_80040F3C
  #APP
@@ -2791,10 +2791,10 @@ LM157:
 	.def	func_800413CC;	.val	func_800413CC;	.scl	2;	.type	0x21;	.endef
 	.globl	func_800413CC
 
-	.loc	1 219
+	.loc	1 226
 LM158:
 
-	.loc	1 219
+	.loc	1 226
 LM159:
 	.ent	func_800413CC
 func_800413CC:
@@ -2807,24 +2807,24 @@ $Lb16:
 	subu	$sp,$sp,32
 	sw	$16,16($sp)
 
-	.loc	1 221
+	.loc	1 228
 LM160:
 	move	$16,$0
 
-	.loc	1 219
+	.loc	1 226
 LM161:
 	sw	$17,20($sp)
 
-	.loc	1 221
+	.loc	1 228
 LM162:
 	lui	$17,%hi(D_80042AC4) # high
 
-	.loc	1 219
+	.loc	1 226
 LM163:
 	sw	$31,24($sp)
 $L69:
 
-	.loc	1 222
+	.loc	1 229
 LM164:
 	.set	noreorder
 	.set	nomacro
@@ -2835,17 +2835,17 @@ LM164:
 
 	lw	$3,%lo(D_80042AC4)($17)
 
-	.loc	1 222
+	.loc	1 229
 LM165:
 	#nop
 	sll	$3,$3,1
 	addu	$3,$3,$2
 
-	.loc	1 221
+	.loc	1 228
 LM166:
 	slt	$2,$16,17
 
-	.loc	1 221
+	.loc	1 228
 LM167:
 	.set	noreorder
 	.set	nomacro
@@ -2855,7 +2855,7 @@ LM167:
 	.set	reorder
 
 
-	.loc	1 224
+	.loc	1 231
 LM168:
 $Le17:
 	.bend	$Le17	6
@@ -2871,7 +2871,7 @@ $Le17:
 	.set	reorder
 
 
-	.loc	1 224
+	.loc	1 231
 LM169:
 	.end	func_800413CC
  #APP
@@ -2933,10 +2933,10 @@ lw         $2, %lo(D_800429F0)($2)
 	.def	func_80042060;	.val	func_80042060;	.scl	2;	.type	0x6c;	.endef
 	.globl	func_80042060
 
-	.loc	1 241
+	.loc	1 250
 LM170:
 
-	.loc	1 241
+	.loc	1 250
 LM171:
 	.ent	func_80042060
 func_80042060:
@@ -2947,7 +2947,7 @@ func_80042060:
 	.def	c;	.val	5;	.scl	17;	.type	0x4;	.endef
 	.def	n;	.val	6;	.scl	17;	.type	0xe;	.endef
 
-	.loc	1 242
+	.loc	1 251
 LM172:
 $Lb18:
 	.begin	$Lb18	2
@@ -2955,7 +2955,7 @@ $Lb18:
 	.def	count;	.val	3;	.scl	4;	.type	0xe;	.endef
 	move	$7,$4
 
-	.loc	1 245
+	.loc	1 254
 LM173:
 	.set	noreorder
 	.set	nomacro
@@ -2966,15 +2966,15 @@ LM173:
 
 $L74:
 
-	.loc	1 246
+	.loc	1 255
 LM174:
 	sb	$5,0($7)
 
-	.loc	1 247
+	.loc	1 256
 LM175:
 	addu	$3,$3,1
 
-	.loc	1 249
+	.loc	1 258
 LM176:
 	sltu	$2,$3,$6
 	.set	noreorder
@@ -2986,12 +2986,12 @@ LM176:
 
 $L73:
 
-	.loc	1 251
+	.loc	1 260
 LM177:
 $Le19:
 	.bend	$Le19	11
 
-	.loc	1 252
+	.loc	1 261
 LM178:
 	.set	noreorder
 	.set	nomacro
@@ -3001,17 +3001,17 @@ LM178:
 	.set	reorder
 
 
-	.loc	1 252
+	.loc	1 261
 LM179:
 	.end	func_80042060
 	.align	2
 	.def	func_80042088;	.val	func_80042088;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x68;	.endef
 	.globl	func_80042088
 
-	.loc	1 254
+	.loc	1 263
 LM180:
 
-	.loc	1 254
+	.loc	1 263
 LM181:
 	.ent	func_80042088
 func_80042088:
@@ -3019,23 +3019,23 @@ func_80042088:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 255
+	.loc	1 264
 LM182:
 	lui	$2,%hi(D_80042A30) # high
 	lw	$2,%lo(D_80042A30)($2)
 	j	$31
 
-	.loc	1 255
+	.loc	1 264
 LM183:
 	.end	func_80042088
 	.align	2
 	.def	func_80042098;	.val	func_80042098;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x68;	.endef
 	.globl	func_80042098
 
-	.loc	1 258
+	.loc	1 267
 LM184:
 
-	.loc	1 258
+	.loc	1 267
 LM185:
 	.ent	func_80042098
 func_80042098:
@@ -3044,22 +3044,22 @@ func_80042098:
 	.fmask	0x00000000,0
 	.def	arg0;	.val	4;	.scl	17;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
-	.loc	1 259
+	.loc	1 268
 LM186:
 	lw	$2,4($4)
 	j	$31
 
-	.loc	1 259
+	.loc	1 268
 LM187:
 	.end	func_80042098
 	.align	2
 	.def	func_800420A4;	.val	func_800420A4;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x68;	.endef
 	.globl	func_800420A4
 
-	.loc	1 262
+	.loc	1 271
 LM188:
 
-	.loc	1 262
+	.loc	1 271
 LM189:
 	.ent	func_800420A4
 func_800420A4:
@@ -3068,22 +3068,22 @@ func_800420A4:
 	.fmask	0x00000000,0
 	.def	arg0;	.val	4;	.scl	17;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
-	.loc	1 263
+	.loc	1 272
 LM190:
 	lw	$2,8($4)
 	j	$31
 
-	.loc	1 263
+	.loc	1 272
 LM191:
 	.end	func_800420A4
 	.align	2
 	.def	func_800420B0;	.val	func_800420B0;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x68;	.endef
 	.globl	func_800420B0
 
-	.loc	1 266
+	.loc	1 275
 LM192:
 
-	.loc	1 266
+	.loc	1 275
 LM193:
 	.ent	func_800420B0
 func_800420B0:
@@ -3096,7 +3096,7 @@ func_800420B0:
 	sw	$31,20($sp)
 	.def	cur;	.val	16;	.scl	17;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
-	.loc	1 267
+	.loc	1 276
 LM194:
 $L80:
 	.set	noreorder
@@ -3114,7 +3114,7 @@ $L80:
 	.set	reorder
 
 
-	.loc	1 268
+	.loc	1 277
 LM195:
 	.set	noreorder
 	.set	nomacro
@@ -3124,7 +3124,7 @@ LM195:
 	.set	reorder
 
 
-	.loc	1 269
+	.loc	1 278
 LM196:
 	.set	noreorder
 	.set	nomacro
@@ -3135,7 +3135,7 @@ LM196:
 
 $L81:
 
-	.loc	1 270
+	.loc	1 279
 LM197:
 	lw	$31,20($sp)
 	lw	$16,16($sp)
@@ -3148,17 +3148,17 @@ LM197:
 	.set	reorder
 
 
-	.loc	1 270
+	.loc	1 279
 LM198:
 	.end	func_800420B0
 	.align	2
 	.def	func_800420F0;	.val	func_800420F0;	.scl	2;	.type	0x2f;	.endef
 	.globl	func_800420F0
 
-	.loc	1 273
+	.loc	1 282
 LM199:
 
-	.loc	1 273
+	.loc	1 282
 LM200:
 	.ent	func_800420F0
 func_800420F0:
@@ -3167,7 +3167,7 @@ func_800420F0:
 	.fmask	0x00000000,0
 	.def	arg0;	.val	4;	.scl	17;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
-	.loc	1 274
+	.loc	1 283
 LM201:
 	lw	$2,4($4)
 	#nop
@@ -3180,7 +3180,7 @@ LM201:
 	.set	reorder
 
 
-	.loc	1 274
+	.loc	1 283
 LM202:
 	.end	func_800420F0
  #APP
@@ -3209,10 +3209,10 @@ LM202:
 	.def	func_8004224C;	.val	func_8004224C;	.scl	2;	.type	0x25;	.endef
 	.globl	func_8004224C
 
-	.loc	1 281
+	.loc	1 290
 LM203:
 
-	.loc	1 281
+	.loc	1 290
 LM204:
 	.ent	func_8004224C
 func_8004224C:
@@ -3227,11 +3227,11 @@ $Lb20:
 	.def	temp_a3;	.val	6;	.scl	4;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 	move	$6,$4
 
-	.loc	1 287
+	.loc	1 295
 LM205:
 	move	$7,$6
 
-	.loc	1 289
+	.loc	1 297
 LM206:
 	lbu	$3,-16($7)
 	li	$2,68			# 0x00000044
@@ -3243,7 +3243,7 @@ LM206:
 	.set	reorder
 
 
-	.loc	1 290
+	.loc	1 298
 LM207:
 $L89:
 	.set	noreorder
@@ -3255,7 +3255,7 @@ $L89:
 
 $L85:
 
-	.loc	1 292
+	.loc	1 300
 LM208:
 	lbu	$3,1($6)
 	li	$2,77			# 0x0000004d
@@ -3267,7 +3267,7 @@ LM208:
 	.set	reorder
 
 
-	.loc	1 295
+	.loc	1 303
 LM209:
 	lbu	$3,2($6)
 	#nop
@@ -3279,40 +3279,40 @@ LM209:
 	.set	reorder
 
 
-	.loc	1 298
+	.loc	1 306
 LM210:
 	sb	$2,2($6)
 
-	.loc	1 299
+	.loc	1 307
 LM211:
 	lw	$4,-12($7)
 
-	.loc	1 306
+	.loc	1 314
 LM212:
 	move	$2,$0
 
-	.loc	1 300
+	.loc	1 308
 LM213:
 	lw	$5,4($4)
 
-	.loc	1 301
+	.loc	1 309
 LM214:
 	li	$3,126			# 0x0000007e
 	sb	$3,0($4)
 
-	.loc	1 302
+	.loc	1 310
 LM215:
 	sb	$3,1($4)
 
-	.loc	1 303
+	.loc	1 311
 LM216:
 	sb	$3,2($4)
 
-	.loc	1 304
+	.loc	1 312
 LM217:
 	sw	$5,-12($7)
 
-	.loc	1 306
+	.loc	1 314
 LM218:
 	.set	noreorder
 	.set	nomacro
@@ -3323,13 +3323,13 @@ LM218:
 
 $L87:
 
-	.loc	1 296
+	.loc	1 304
 LM219:
 
-	.loc	1 307
+	.loc	1 315
 LM220:
 $Le21:
-	.bend	$Le21	27
+	.bend	$Le21	26
 	.set	noreorder
 	.set	nomacro
 	j	$31
@@ -3338,7 +3338,7 @@ $Le21:
 	.set	reorder
 
 
-	.loc	1 307
+	.loc	1 315
 LM221:
 	.end	func_8004224C
  #APP
@@ -3357,10 +3357,10 @@ LM221:
 	.def	func_8004231C;	.val	func_8004231C;	.scl	2;	.type	0x21;	.endef
 	.globl	func_8004231C
 
-	.loc	1 311
+	.loc	1 319
 LM222:
 
-	.loc	1 311
+	.loc	1 319
 LM223:
 	.ent	func_8004231C
 func_8004231C:
@@ -3369,14 +3369,14 @@ func_8004231C:
 	.fmask	0x00000000,0
 	.def	arg0;	.val	4;	.scl	17;	.type	0x11;	.endef
 
-	.loc	1 312
+	.loc	1 320
 LM224:
  #APP
 	cache      0x15, 0x0($4)
  #NO_APP
 	j	$31
 
-	.loc	1 312
+	.loc	1 320
 LM225:
 	.end	func_8004231C
  #APP
@@ -3426,10 +3426,10 @@ jr         $31
 	.def	waitPIReserved;	.val	waitPIReserved;	.scl	2;	.type	0x21;	.endef
 	.globl	waitPIReserved
 
-	.loc	1 370
+	.loc	1 378
 LM226:
 
-	.loc	1 370
+	.loc	1 378
 LM227:
 	.ent	waitPIReserved
 waitPIReserved:
@@ -3437,7 +3437,7 @@ waitPIReserved:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 371
+	.loc	1 379
 LM228:
 	lui	$3,%hi(SI_BASE14_REG) # high
 $L92:
@@ -3449,17 +3449,17 @@ $L92:
 	bne	$2,$0,$L92
 	j	$31
 
-	.loc	1 371
+	.loc	1 379
 LM229:
 	.end	waitPIReserved
 	.align	2
 	.def	readPIRam;	.val	readPIRam;	.scl	2;	.type	0x2f;	.endef
 	.globl	readPIRam
 
-	.loc	1 374
+	.loc	1 382
 LM230:
 
-	.loc	1 374
+	.loc	1 382
 LM231:
 	.ent	readPIRam
 readPIRam:
@@ -3471,7 +3471,7 @@ readPIRam:
 	sw	$16,16($sp)
 	sw	$31,20($sp)
 
-	.loc	1 375
+	.loc	1 383
 LM232:
 	.set	noreorder
 	.set	nomacro
@@ -3481,7 +3481,7 @@ LM232:
 	.set	reorder
 
 
-	.loc	1 376
+	.loc	1 384
 LM233:
 	lw	$2,0($16)
 	lw	$31,20($sp)
@@ -3495,17 +3495,17 @@ LM233:
 	.set	reorder
 
 
-	.loc	1 376
+	.loc	1 384
 LM234:
 	.end	readPIRam
 	.align	2
 	.def	writePIRam;	.val	writePIRam;	.scl	2;	.type	0x21;	.endef
 	.globl	writePIRam
 
-	.loc	1 379
+	.loc	1 387
 LM235:
 
-	.loc	1 379
+	.loc	1 387
 LM236:
 	.ent	writePIRam
 writePIRam:
@@ -3520,7 +3520,7 @@ writePIRam:
 	sw	$16,16($sp)
 	sw	$31,24($sp)
 
-	.loc	1 380
+	.loc	1 388
 LM237:
 	.set	noreorder
 	.set	nomacro
@@ -3530,7 +3530,7 @@ LM237:
 	.set	reorder
 
 
-	.loc	1 381
+	.loc	1 389
 LM238:
 	sw	$16,0($17)
 	lw	$31,24($sp)
@@ -3545,17 +3545,17 @@ LM238:
 	.set	reorder
 
 
-	.loc	1 381
+	.loc	1 389
 LM239:
 	.end	writePIRam
 	.align	2
 	.def	pifUnlock;	.val	pifUnlock;	.scl	2;	.type	0x21;	.endef
 	.globl	pifUnlock
 
-	.loc	1 384
+	.loc	1 392
 LM240:
 
-	.loc	1 384
+	.loc	1 392
 LM241:
 	.ent	pifUnlock
 pifUnlock:
@@ -3564,15 +3564,15 @@ pifUnlock:
 	.fmask	0x00000000,0
 	subu	$sp,$sp,24
 
-	.loc	1 385
+	.loc	1 393
 LM242:
 	li	$4,-1077936128			# 0xbfc00000
 
-	.loc	1 384
+	.loc	1 392
 LM243:
 	sw	$31,16($sp)
 
-	.loc	1 385
+	.loc	1 393
 LM244:
 	.set	noreorder
 	.set	nomacro
@@ -3600,7 +3600,7 @@ LM244:
 	.set	reorder
 
 
-	.loc	1 385
+	.loc	1 393
 LM245:
 	.end	pifUnlock
  #APP
@@ -3619,10 +3619,10 @@ LM245:
 	.def	func_80042504;	.val	func_80042504;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80042504
 
-	.loc	1 401
+	.loc	1 409
 LM246:
 
-	.loc	1 401
+	.loc	1 409
 LM247:
 	.ent	func_80042504
 func_80042504:
@@ -3633,11 +3633,11 @@ func_80042504:
 	subu	$sp,$sp,24
 	move	$5,$4
 
-	.loc	1 401
+	.loc	1 409
 LM248:
 	sw	$31,16($sp)
 
-	.loc	1 402
+	.loc	1 410
 LM249:
 	.set	noreorder
 	.set	nomacro
@@ -3647,7 +3647,7 @@ LM249:
 	.set	reorder
 
 
-	.loc	1 403
+	.loc	1 411
 LM250:
 	jal	func_8004267C
 	lw	$31,16($sp)
@@ -3660,17 +3660,17 @@ LM250:
 	.set	reorder
 
 
-	.loc	1 403
+	.loc	1 411
 LM251:
 	.end	func_80042504
 	.align	2
 	.def	func_8004252C;	.val	func_8004252C;	.scl	2;	.type	0x25;	.endef
 	.globl	func_8004252C
 
-	.loc	1 406
+	.loc	1 414
 LM252:
 
-	.loc	1 406
+	.loc	1 414
 LM253:
 	.ent	func_8004252C
 func_8004252C:
@@ -3679,26 +3679,26 @@ func_8004252C:
 	.fmask	0x00000000,0
 	.def	arg0;	.val	4;	.scl	17;	.type	0xc;	.endef
 
-	.loc	1 407
+	.loc	1 415
 LM254:
 $Lb22:
 	.begin	$Lb22	2
 	.def	var_a1;	.val	5;	.scl	4;	.type	0x5;	.endef
 	.def	ret;	.val	6;	.scl	4;	.type	0x5;	.endef
 
-	.loc	1 410
+	.loc	1 418
 LM255:
 
-	.loc	1 413
+	.loc	1 421
 LM256:
 	lui	$3,%hi(D_80042AD0) # high
 	lbu	$2,%lo(D_80042AD0)($3)
 
-	.loc	1 411
+	.loc	1 419
 LM257:
 	li	$6,255			# 0x000000ff
 
-	.loc	1 413
+	.loc	1 421
 LM258:
 	.set	noreorder
 	.set	nomacro
@@ -3712,7 +3712,7 @@ LM258:
 	addiu	$7,$3,%lo(D_80042AD0) # low
 	move	$3,$7
 
-	.loc	1 414
+	.loc	1 422
 LM259:
 	lbu	$2,0($3)
 $L107:
@@ -3724,12 +3724,12 @@ $L107:
 	.set	reorder
 
 
-	.loc	1 415
+	.loc	1 423
 LM260:
 	addu	$2,$5,$7
 	lbu	$6,1($2)
 
-	.loc	1 416
+	.loc	1 424
 LM261:
 	.set	noreorder
 	.set	nomacro
@@ -3740,11 +3740,11 @@ LM261:
 
 $L104:
 
-	.loc	1 420
+	.loc	1 428
 LM262:
 	lbu	$2,0($3)
 
-	.loc	1 420
+	.loc	1 428
 LM263:
 	#nop
 	.set	noreorder
@@ -3756,27 +3756,27 @@ LM263:
 
 $L102:
 
-	.loc	1 422
+	.loc	1 430
 LM264:
 $Le23:
 	.bend	$Le23	17
 	move	$2,$6
 
-	.loc	1 423
+	.loc	1 431
 LM265:
 	j	$31
 
-	.loc	1 423
+	.loc	1 431
 LM266:
 	.end	func_8004252C
 	.align	2
 	.def	func_80042584;	.val	func_80042584;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80042584
 
-	.loc	1 425
+	.loc	1 433
 LM267:
 
-	.loc	1 425
+	.loc	1 433
 LM268:
 	.ent	func_80042584
 func_80042584:
@@ -3792,16 +3792,16 @@ $Lb24:
 	sw	$16,16($sp)
 	move	$16,$4
 
-	.loc	1 429
+	.loc	1 437
 LM269:
 	li	$4,1536			# 0x00000600
 
-	.loc	1 425
+	.loc	1 433
 LM270:
 	sw	$31,28($sp)
 	sw	$18,24($sp)
 
-	.loc	1 429
+	.loc	1 437
 LM271:
 	.set	noreorder
 	.set	nomacro
@@ -3811,7 +3811,7 @@ LM271:
 	.set	reorder
 
 
-	.loc	1 430
+	.loc	1 438
 LM272:
 	.set	noreorder
 	.set	nomacro
@@ -3823,7 +3823,7 @@ LM272:
 	li	$3,65536			# 0x00010000
 	or	$17,$2,$3
 
-	.loc	1 431
+	.loc	1 439
 LM273:
 	slt	$2,$17,257
 	.set	noreorder
@@ -3835,7 +3835,7 @@ LM273:
 
 	ori	$18,$18,0x0400
 
-	.loc	1 432
+	.loc	1 440
 LM274:
 	andi	$2,$17,0x0001
 $L115:
@@ -3850,7 +3850,7 @@ $L115:
 	ori	$16,$16,0x0200
 $L112:
 
-	.loc	1 433
+	.loc	1 441
 LM275:
 	.set	noreorder
 	.set	nomacro
@@ -3860,7 +3860,7 @@ LM275:
 	.set	reorder
 
 
-	.loc	1 434
+	.loc	1 442
 LM276:
 	.set	noreorder
 	.set	nomacro
@@ -3870,7 +3870,7 @@ LM276:
 	.set	reorder
 
 
-	.loc	1 435
+	.loc	1 443
 LM277:
 	.set	noreorder
 	.set	nomacro
@@ -3880,13 +3880,13 @@ LM277:
 	.set	reorder
 
 
-	.loc	1 436
+	.loc	1 444
 LM278:
 	srl	$2,$17,31
 	addu	$2,$17,$2
 	sra	$17,$2,1
 
-	.loc	1 437
+	.loc	1 445
 LM279:
 	slt	$2,$17,257
 	.set	noreorder
@@ -3898,7 +3898,7 @@ LM279:
 
 $L110:
 
-	.loc	1 438
+	.loc	1 446
 LM280:
 $Le25:
 	.bend	$Le25	14
@@ -3910,7 +3910,7 @@ $Le25:
 	.set	reorder
 
 
-	.loc	1 439
+	.loc	1 447
 LM281:
 	lw	$31,28($sp)
 	lw	$18,24($sp)
@@ -3925,17 +3925,17 @@ LM281:
 	.set	reorder
 
 
-	.loc	1 439
+	.loc	1 447
 LM282:
 	.end	func_80042584
 	.align	2
 	.def	func_80042628;	.val	func_80042628;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80042628
 
-	.loc	1 441
+	.loc	1 449
 LM283:
 
-	.loc	1 441
+	.loc	1 449
 LM284:
 	.ent	func_80042628
 func_80042628:
@@ -3945,11 +3945,11 @@ func_80042628:
 	.def	arg0;	.val	4;	.scl	17;	.type	0xc;	.endef
 	subu	$sp,$sp,24
 
-	.loc	1 441
+	.loc	1 449
 LM285:
 	sw	$31,16($sp)
 
-	.loc	1 442
+	.loc	1 450
 LM286:
 	.set	noreorder
 	.set	nomacro
@@ -3968,7 +3968,7 @@ LM286:
 	.set	reorder
 
 
-	.loc	1 442
+	.loc	1 450
 LM287:
 	.end	func_80042628
  #APP
@@ -3997,10 +3997,10 @@ LM287:
 	.def	func_8004267C;	.val	func_8004267C;	.scl	2;	.type	0x21;	.endef
 	.globl	func_8004267C
 
-	.loc	1 462
+	.loc	1 470
 LM288:
 
-	.loc	1 462
+	.loc	1 470
 LM289:
 	.ent	func_8004267C
 func_8004267C:
@@ -4008,13 +4008,13 @@ func_8004267C:
 	.mask	0x00000000,0
 	.fmask	0x00000000,0
 
-	.loc	1 463
+	.loc	1 471
 LM290:
 $Lb26:
 	.begin	$Lb26	2
 	.def	var_v0;	.val	2;	.scl	4;	.type	0x4;	.endef
 
-	.loc	1 464
+	.loc	1 472
 LM291:
 	li	$2,159			# 0x0000009f
 	addu	$2,$2,-1
@@ -4027,23 +4027,23 @@ $L122:
 	.set	reorder
 
 
-	.loc	1 465
+	.loc	1 473
 LM292:
 $Le27:
 	.bend	$Le27	4
 	j	$31
 
-	.loc	1 465
+	.loc	1 473
 LM293:
 	.end	func_8004267C
 	.align	2
 	.def	func_80042694;	.val	func_80042694;	.scl	2;	.type	0x21;	.endef
 	.globl	func_80042694
 
-	.loc	1 467
+	.loc	1 475
 LM294:
 
-	.loc	1 467
+	.loc	1 475
 LM295:
 	.ent	func_80042694
 func_80042694:
@@ -4053,7 +4053,7 @@ func_80042694:
 	.def	arg0;	.val	4;	.scl	17;	.type	0xc;	.endef
 	subu	$sp,$sp,24
 
-	.loc	1 468
+	.loc	1 476
 LM296:
 	andi	$4,$4,0x00ff
 	sll	$2,$4,24
@@ -4063,15 +4063,15 @@ LM296:
 	or	$2,$2,$3
 	or	$2,$2,$4
 
-	.loc	1 467
+	.loc	1 475
 LM297:
 	sw	$31,16($sp)
 
-	.loc	1 468
+	.loc	1 476
 LM298:
 	sw	$2,-1101004804
 
-	.loc	1 469
+	.loc	1 477
 LM299:
 	jal	func_8004267C
 	lw	$31,16($sp)
@@ -4084,17 +4084,17 @@ LM299:
 	.set	reorder
 
 
-	.loc	1 469
+	.loc	1 477
 LM300:
 	.end	func_80042694
 	.align	2
 	.def	func_800426D4;	.val	func_800426D4;	.scl	2;	.type	0x21;	.endef
 	.globl	func_800426D4
 
-	.loc	1 472
+	.loc	1 480
 LM301:
 
-	.loc	1 472
+	.loc	1 480
 LM302:
 	.ent	func_800426D4
 func_800426D4:
@@ -4104,16 +4104,16 @@ func_800426D4:
 	.def	arg0;	.val	4;	.scl	17;	.type	0x3;	.endef
 	subu	$sp,$sp,24
 
-	.loc	1 473
+	.loc	1 481
 LM303:
 	sll	$5,$4,16
 	li	$4,1536			# 0x00000600
 
-	.loc	1 472
+	.loc	1 480
 LM304:
 	sw	$31,16($sp)
 
-	.loc	1 473
+	.loc	1 481
 LM305:
 	.set	noreorder
 	.set	nomacro
@@ -4132,17 +4132,17 @@ LM305:
 	.set	reorder
 
 
-	.loc	1 473
+	.loc	1 481
 LM306:
 	.end	func_800426D4
 	.align	2
 	.def	func_800426F8;	.val	func_800426F8;	.scl	2;	.type	0x25;	.endef
 	.globl	func_800426F8
 
-	.loc	1 476
+	.loc	1 484
 LM307:
 
-	.loc	1 476
+	.loc	1 484
 LM308:
 	.ent	func_800426F8
 func_800426F8:
@@ -4151,11 +4151,11 @@ func_800426F8:
 	.fmask	0x00000000,0
 	subu	$sp,$sp,24
 
-	.loc	1 476
+	.loc	1 484
 LM309:
 	sw	$31,16($sp)
 
-	.loc	1 477
+	.loc	1 485
 LM310:
 	.set	noreorder
 	.set	nomacro
@@ -4174,17 +4174,17 @@ LM310:
 	.set	reorder
 
 
-	.loc	1 477
+	.loc	1 485
 LM311:
 	.end	func_800426F8
 	.align	2
 	.def	func_80042714;	.val	func_80042714;	.scl	2;	.type	0x25;	.endef
 	.globl	func_80042714
 
-	.loc	1 482
+	.loc	1 490
 LM312:
 
-	.loc	1 482
+	.loc	1 490
 LM313:
 	.ent	func_80042714
 func_80042714:
@@ -4201,7 +4201,7 @@ $Lb28:
 	move	$16,$4
 	sw	$31,24($sp)
 
-	.loc	1 486
+	.loc	1 494
 LM314:
 	.set	noreorder
 	.set	nomacro
@@ -4212,7 +4212,7 @@ LM314:
 
 	move	$17,$2
 
-	.loc	1 487
+	.loc	1 495
 LM315:
 	li	$4,-2			# 0xfffffffe
 	.set	noreorder
@@ -4223,23 +4223,23 @@ LM315:
 	.set	reorder
 
 
-	.loc	1 488
+	.loc	1 496
 LM316:
 $L127:
 	jal	func_800426F8
 	andi	$2,$2,0x0010
 	beq	$2,$0,$L127
 
-	.loc	1 489
+	.loc	1 497
 LM317:
 	jal	func_800426F8
 
-	.loc	1 490
+	.loc	1 498
 LM318:
 	andi	$4,$16,0x000f
 	ori	$4,$4,0x0010
 
-	.loc	1 490
+	.loc	1 498
 LM319:
 	.set	noreorder
 	.set	nomacro
@@ -4249,14 +4249,14 @@ LM319:
 	.set	reorder
 
 
-	.loc	1 491
+	.loc	1 499
 LM320:
 $L130:
 	jal	func_800426F8
 	andi	$2,$2,0x0010
 	bne	$2,$0,$L130
 
-	.loc	1 492
+	.loc	1 500
 LM321:
 $Le29:
 	.bend	$Le29	11
@@ -4268,7 +4268,7 @@ $Le29:
 	.set	reorder
 
 
-	.loc	1 493
+	.loc	1 501
 LM322:
 	.set	noreorder
 	.set	nomacro
@@ -4278,11 +4278,11 @@ LM322:
 	.set	reorder
 
 
-	.loc	1 494
+	.loc	1 502
 LM323:
 	move	$2,$16
 
-	.loc	1 495
+	.loc	1 503
 LM324:
 	lw	$31,24($sp)
 	lw	$17,20($sp)
@@ -4296,17 +4296,17 @@ LM324:
 	.set	reorder
 
 
-	.loc	1 495
+	.loc	1 503
 LM325:
 	.end	func_80042714
 	.align	2
 	.def	func_800427A4;	.val	func_800427A4;	.scl	2;	.type	0x25;	.endef
 	.globl	func_800427A4
 
-	.loc	1 497
+	.loc	1 505
 LM326:
 
-	.loc	1 497
+	.loc	1 505
 LM327:
 	.ent	func_800427A4
 func_800427A4:
@@ -4318,11 +4318,11 @@ func_800427A4:
 	sw	$16,16($sp)
 	move	$16,$4
 
-	.loc	1 497
+	.loc	1 505
 LM328:
 	sw	$31,20($sp)
 
-	.loc	1 498
+	.loc	1 506
 LM329:
 	.set	noreorder
 	.set	nomacro
@@ -4352,7 +4352,7 @@ LM329:
 	.set	reorder
 
 
-	.loc	1 498
+	.loc	1 506
 LM330:
 	.end	func_800427A4
  #APP
@@ -4391,10 +4391,10 @@ LM330:
 	.def	func_800428E4;	.val	func_800428E4;	.scl	2;	.type	0x21;	.endef
 	.globl	func_800428E4
 
-	.loc	1 507
+	.loc	1 515
 LM331:
 
-	.loc	1 507
+	.loc	1 515
 LM332:
 	.ent	func_800428E4
 func_800428E4:
@@ -4407,14 +4407,14 @@ func_800428E4:
 	move	$16,$4
 	sw	$31,20($sp)
 
-	.loc	1 508
+	.loc	1 516
 LM333:
 	lbu	$2,0($16)
 	#nop
 	beq	$2,$0,$L136
 $L137:
 
-	.loc	1 509
+	.loc	1 517
 LM334:
 	lbu	$4,0($16)
 	.set	noreorder
@@ -4425,7 +4425,7 @@ LM334:
 	.set	reorder
 
 
-	.loc	1 511
+	.loc	1 519
 LM335:
 	lbu	$2,0($16)
 	#nop
@@ -4442,7 +4442,7 @@ $L136:
 	.set	reorder
 
 
-	.loc	1 511
+	.loc	1 519
 LM336:
 	.end	func_800428E4
  #APP
@@ -4463,27 +4463,12 @@ LM336:
 	.def	D_800429CC;	.val	D_800429CC;	.scl	2;	.type	0x5;	.endef
 
 	.comm	D_800429CC,4
-	.def	D_80042AA0;	.val	D_80042AA0;	.scl	2;	.type	0x5;	.endef
-
-	.comm	D_80042AA0,4
-	.def	D_80042AA4;	.val	D_80042AA4;	.scl	2;	.type	0x5;	.endef
-
-	.comm	D_80042AA4,4
 	.def	D_80042A30;	.val	D_80042A30;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
 	.comm	D_80042A30,4
 	.def	D_80042A34;	.val	D_80042A34;	.scl	2;	.tag	_80042100S;	.size	16;	.type	0x18;	.endef
 
 	.comm	D_80042A34,4
-	.def	D_80042A50;	.val	D_80042A50;	.scl	2;	.type	0x5;	.endef
-
-	.comm	D_80042A50,4
-	.def	D_80042A54;	.val	D_80042A54;	.scl	2;	.type	0x5;	.endef
-
-	.comm	D_80042A54,4
-	.def	D_80042A6C;	.val	D_80042A6C;	.scl	2;	.type	0x1c;	.endef
-
-	.comm	D_80042A6C,4
 	.def	D_80042A40;	.val	D_80042A40;	.scl	2;	.type	0xf;	.endef
 
 	.comm	D_80042A40,4
@@ -4493,18 +4478,33 @@ LM336:
 	.def	D_80042A4C;	.val	D_80042A4C;	.scl	2;	.type	0x15;	.endef
 
 	.comm	D_80042A4C,4
+	.def	D_80042A50;	.val	D_80042A50;	.scl	2;	.type	0x5;	.endef
+
+	.comm	D_80042A50,4
+	.def	D_80042A54;	.val	D_80042A54;	.scl	2;	.type	0x5;	.endef
+
+	.comm	D_80042A54,4
 	.def	D_80042A60;	.val	D_80042A60;	.scl	2;	.type	0x15;	.endef
 
 	.comm	D_80042A60,4
 	.def	D_80042A64;	.val	D_80042A64;	.scl	2;	.type	0x15;	.endef
 
 	.comm	D_80042A64,4
+	.def	D_80042A6C;	.val	D_80042A6C;	.scl	2;	.type	0x1c;	.endef
+
+	.comm	D_80042A6C,4
 	.def	D_80042A7C;	.val	D_80042A7C;	.scl	2;	.type	0x15;	.endef
 
 	.comm	D_80042A7C,4
-	.def	D_80042AC8;	.val	D_80042AC8;	.scl	2;	.type	0x5;	.endef
+	.def	D_80042AA0;	.val	D_80042AA0;	.scl	2;	.type	0x5;	.endef
 
-	.comm	D_80042AC8,4
+	.comm	D_80042AA0,4
+	.def	D_80042AA4;	.val	D_80042AA4;	.scl	2;	.type	0x5;	.endef
+
+	.comm	D_80042AA4,4
 	.def	D_80042AC4;	.val	D_80042AC4;	.scl	2;	.type	0x5;	.endef
 
 	.comm	D_80042AC4,4
+	.def	D_80042AC8;	.val	D_80042AC8;	.scl	2;	.type	0x5;	.endef
+
+	.comm	D_80042AC8,4

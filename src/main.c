@@ -1,4 +1,4 @@
-#include "common.h"
+﻿#include "common.h"
 
 s32 func_800402D8(void);                                  /* extern */
 void func_80040600(s32 arg0);
@@ -19,31 +19,34 @@ typedef struct _80042100S {
 
 void func_80042100(Struct80042100* arg0, Struct80042100* arg1);
 
-s32 D_800429C0;
-s32 D_800429CC;
+s32 D_800429C0; // shell.bin\0\0\0
+s32 D_800429CC; // trainer.bin\0
 
-s32 D_80042AA0;
-s32 D_80042AA4;
+Struct80042100* D_80042A30; // 0x00000000
+Struct80042100* D_80042A34; // 0x00000000
+u32 D_80042A40; // 0x00000000
 
-Struct80042100* D_80042A30;
-Struct80042100* D_80042A34;
+s32* D_80042A48; // 0x00000000
+s32* D_80042A4C; // 0x00000000
+s32 D_80042A50; // 0x00000000
+s32 D_80042A54; // 0x00000000
 
-s32 D_80042A50;
-s32 D_80042A54;
-u8 * D_80042A6C;
-u32 D_80042A40;
+s32* D_80042A60; // 0x00000000
+s32* D_80042A64; // 0x00000000
+u8 * D_80042A6C; // 0x00000000
 
-s32* D_80042A48;
-s32* D_80042A4C;
-s32* D_80042A60;
-s32* D_80042A64;
-s32* D_80042A7C;
+s32* D_80042A7C; // 0x00000000
 
-s32 D_80042AC8;
+s32 D_80042AA0; // 0x00400000
+s32 D_80042AA4; // 0xB0000000
 
-s32 D_80042AC4;
+s32 D_80042AC4; // 0x00000000
+s32 D_80042AC8; // 0x00000000
 
-extern u8 D_80042AD0[];
+extern u8 D_80042AD0[]; // 20 00 2E 7F 30 84 31 9F 32 C8 33 8A 34 93 35 A2
+                        // 36 A0 37 8F 38 80 39 82 45 E0 46 E1 48 91 4C F4
+                        // 4F 84 50 C1 52 81 61 FE 62 FD 63 FB 64 F7 65 EF
+                        // 66 DF 67 BF 7A EA 00 FF FF 00
 
 extern volatile u32 VI_CURRENT_REG;
 extern volatile u32 PI_STATUS_REG;
@@ -102,15 +105,19 @@ INCLUDE_ASM(s32, "main", func_8004043C);
 
 INCLUDE_ASM(s32, "main", func_800404FC);
 
+#ifndef NON_MATCHING
 asm (
     "lui        $3, (0x80040000 >> 16)\n"
     "sw         $16, 0x10($29)"
 );
+#endif
 void wait_PI(void) {
     while (PI_STATUS_REG & 3); // wait until PI is not busy
 }
 
+#ifndef NON_MATCHING
 asm ("lw         $31, 0x14($29)");
+#endif
 s32 func_80040580(s32 arg0) {
     s32* temp_s0;
 
@@ -188,12 +195,12 @@ void func_80040D1C(void) {
         D_80042A48[i] = temp;
         D_80042A7C[i] = 1;
         D_80042A60[i-1] = D_80042A60[i] + 1;
-    } ;
+    }
     D_80042A7C[0] = 0;
     D_80042A64[0x1000] = 0;
     for  (i = 0x1000; i > 0; i--) {
         D_80042A64[i - 1] = D_80042A64[i] + 10000 / (i + 200);
-    } ;
+    }
 }
 
 INCLUDE_ASM(s32, "main", func_80040DFC);
@@ -233,11 +240,13 @@ INCLUDE_ASM(s32, "main", func_80041C58);
 
 INCLUDE_ASM(s32, "main", func_80041FCC);
 
+#ifndef NON_MATCHING
 asm(
     "addu       $2, $4, $0\n"
     "lui        $2, %hi(D_800429F0)\n"
     "lw         $2, %lo(D_800429F0)($2)"
     );
+#endif
 u8* func_80042060(u8* str, int c, size_t n) { // memset
     u8* ptr = str;
     size_t count = 0;
@@ -276,12 +285,11 @@ u32 func_800420F0(Struct80042100* arg0) { // getSpaceToNext
 
 INCLUDE_ASM(void, "main", func_80042100);
 
-INCLUDE_ASM(s32, "main", func_80042178);
+INCLUDE_ASM(s32, "main", func_80042178); // malloc
 
-s32 func_8004224C(Struct80042100* arg0) { // deleteNode
+s32 func_8004224C(Struct80042100* arg0) { // free
     Struct80042100* temp_a0;
     Struct80042100* temp_a1;
-    Struct80042100* temp_a2;
     Struct80042100* temp_a3;
 
     temp_a3 = arg0;
@@ -474,7 +482,7 @@ void func_800426D4(s16 arg0) {
 }
 
 s32 func_800426F8(void) {
-    func_80040580(0);
+    return func_80040580(0);
 }
 
 #define WAIT_COND (func_800426F8() & 0x10)

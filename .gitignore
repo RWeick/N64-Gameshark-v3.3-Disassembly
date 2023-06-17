@@ -1,0 +1,5 @@
+asm_gcc/
+*.o
+*.i
+*.obj.s
+*.Identifier

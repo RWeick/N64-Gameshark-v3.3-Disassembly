@@ -2344,28 +2344,31 @@ void func_80042100(Struct80042100* arg0, Struct80042100* arg1);
 s32 D_800429C0;
 s32 D_800429CC;
 
-s32 D_80042AA0;
-s32 D_80042AA4;
-
 Struct80042100* D_80042A30;
 Struct80042100* D_80042A34;
-
-s32 D_80042A50;
-s32 D_80042A54;
-u8 * D_80042A6C;
 u32 D_80042A40;
 
 s32* D_80042A48;
 s32* D_80042A4C;
+s32 D_80042A50;
+s32 D_80042A54;
+
 s32* D_80042A60;
 s32* D_80042A64;
+u8 * D_80042A6C;
+
 s32* D_80042A7C;
 
-s32 D_80042AC8;
+s32 D_80042AA0;
+s32 D_80042AA4;
 
 s32 D_80042AC4;
+s32 D_80042AC8;
 
 extern u8 D_80042AD0[];
+
+
+
 
 extern volatile u32 VI_CURRENT_REG;
 extern volatile u32 PI_STATUS_REG;
@@ -2424,15 +2427,19 @@ s32 func_8004043C(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n
 
 s32 func_800404FC(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n" "\t.global " "func_800404FC" "" "\r\n" "\t.ent " "func_800404FC" "" "\r\n" "\t.end " "func_800404FC" "" "\r\n" "\t.include \"asm/nonmatchings/""main""/""func_800404FC"".s\"\r\n" "\t.set reorder\r\n" "\t.set at\r\n" );;
 
+
 asm (
     "lui        $3, (0x80040000 >> 16)\n"
     "sw         $16, 0x10($29)"
 );
+
 void wait_PI(void) {
     while (PI_STATUS_REG & 3);
 }
 
+
 asm ("lw         $31, 0x14($29)");
+
 s32 func_80040580(s32 arg0) {
     s32* temp_s0;
 
@@ -2555,11 +2562,13 @@ s32 func_80041C58(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n
 
 s32 func_80041FCC(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n" "\t.global " "func_80041FCC" "" "\r\n" "\t.ent " "func_80041FCC" "" "\r\n" "\t.end " "func_80041FCC" "" "\r\n" "\t.include \"asm/nonmatchings/""main""/""func_80041FCC"".s\"\r\n" "\t.set reorder\r\n" "\t.set at\r\n" );;
 
+
 asm(
     "addu       $2, $4, $0\n"
     "lui        $2, %hi(D_800429F0)\n"
     "lw         $2, %lo(D_800429F0)($2)"
     );
+
 u8* func_80042060(u8* str, int c, size_t n) {
     u8* ptr = str;
     size_t count = 0;
@@ -2603,7 +2612,6 @@ s32 func_80042178(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n
 s32 func_8004224C(Struct80042100* arg0) {
     Struct80042100* temp_a0;
     Struct80042100* temp_a1;
-    Struct80042100* temp_a2;
     Struct80042100* temp_a3;
 
     temp_a3 = arg0;
@@ -2633,7 +2641,7 @@ s32 func_800422BC(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n
 void func_8004231C(void* arg0) {
     asm("cache      0x15, 0x0($4)");
 }
-# 324 "src/main.c"
+# 332 "src/main.c"
 asm(
     "func_80042328:\n"
         "jr $4"
@@ -2697,7 +2705,7 @@ void writePIRam(u32* arg0, u32 arg1) {
 void pifUnlock(void) {
     writePIRam((u32*)0xBFC007FC, readPIRam((u32*)0xBFC007FC) | 8);
 }
-# 398 "src/main.c"
+# 406 "src/main.c"
 void func_800424B8(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n" "\t.global " "func_800424B8" "" "\r\n" "\t.ent " "func_800424B8" "" "\r\n" "\t.end " "func_800424B8" "" "\r\n" "\t.include \"asm/nonmatchings/""main""/""func_800424B8"".s\"\r\n" "\t.set reorder\r\n" "\t.set at\r\n" );;
 
 
@@ -2750,7 +2758,7 @@ void func_80042628(u8 arg0) {
 
 
 void func_80042644(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n" "\t.global " "func_80042644" "" "\r\n" "\t.ent " "func_80042644" "" "\r\n" "\t.end " "func_80042644" "" "\r\n" "\t.include \"asm/nonmatchings/""main""/""func_80042644"".s\"\r\n" "\t.set reorder\r\n" "\t.set at\r\n" );;
-# 459 "src/main.c"
+# 467 "src/main.c"
 void func_8004264C(); asm ( "\t.text\r\n" "\t.set noat\r\n" "\t.set noreorder\r\n" "\t.global " "func_8004264C" "" "\r\n" "\t.ent " "func_8004264C" "" "\r\n" "\t.end " "func_8004264C" "" "\r\n" "\t.include \"asm/nonmatchings/""main""/""func_8004264C"".s\"\r\n" "\t.set reorder\r\n" "\t.set at\r\n" );;
 
 
@@ -2769,7 +2777,7 @@ void func_800426D4(s16 arg0) {
 }
 
 s32 func_800426F8(void) {
-    func_80040580(0);
+    return func_80040580(0);
 }
 
 
