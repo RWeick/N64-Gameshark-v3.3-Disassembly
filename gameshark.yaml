@@ -33,27 +33,23 @@ options:
 
 segments:
   - name: header
-    type: header
+    type: gsheader
     start: 0x0
 
   - name: boot
     type: bin
     start: 0x40
 
-  - name: entry
-    type: code
+  - name: pad
+    type: bin
     start: 0x1000
-    vram: 0x80200400
-    subsegments:
-      - [0x1000, asm]
 
   - name: loader
     type: code
     start: 0x1080
     vram: 0x80200480
-    follows_vram: entry
     subsegments:
-      - [0x1080, asm]
+      - [0x1080, asm, loader]
 
   - name: main
     type: code

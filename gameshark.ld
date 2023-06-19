@@ -30,52 +30,35 @@ SECTIONS
     boot_ROM_END = __romPos;
     boot_VRAM_END = .;
 
-    entry_ROM_START = __romPos;
-    entry_VRAM = ADDR(.entry);
-    .entry 0x80200400 : AT(entry_ROM_START) SUBALIGN(16)
+    pad_ROM_START = __romPos;
+    pad_VRAM = ADDR(.pad);
+    .pad : AT(pad_ROM_START) SUBALIGN(16)
     {
-        entry_TEXT_START = .;
-        build/asm/1000.s.o(.text);
-        entry_TEXT_END = .;
-        entry_TEXT_SIZE = ABSOLUTE(entry_TEXT_END - entry_TEXT_START);
-        entry_DATA_START = .;
-        _1000_s = .;
-        build/asm/1000.s.o(.data);
-        entry_DATA_END = .;
-        entry_DATA_SIZE = ABSOLUTE(entry_DATA_END - entry_DATA_START);
-        entry_RODATA_START = .;
-        build/asm/1000.s.o(.rodata);
-        entry_RODATA_END = .;
-        entry_RODATA_SIZE = ABSOLUTE(entry_RODATA_END - entry_RODATA_START);
+        pad_DATA_START = .;
+        pad_bin = .;
+        build/assets/pad.bin.o(.data);
+        pad_DATA_END = .;
+        pad_DATA_SIZE = ABSOLUTE(pad_DATA_END - pad_DATA_START);
     }
-    entry_bss_VRAM = ADDR(.entry_bss);
-    .entry_bss (NOLOAD) : SUBALIGN(16)
-    {
-        entry_BSS_START = .;
-        build/asm/1000.s.o(.bss);
-        entry_BSS_END = .;
-        entry_BSS_SIZE = ABSOLUTE(entry_BSS_END - entry_BSS_START);
-    }
-    __romPos += SIZEOF(.entry);
-    __romPos = ALIGN(__romPos, 16);
-    entry_ROM_END = __romPos;
-    entry_VRAM_END = .;
+    __romPos += SIZEOF(.pad);
+    pad_ROM_END = __romPos;
+    pad_VRAM_END = .;
 
     loader_ROM_START = __romPos;
     loader_VRAM = ADDR(.loader);
-    .loader entry_VRAM_END : AT(loader_ROM_START) SUBALIGN(16)
+    .loader 0x80200480 : AT(loader_ROM_START) SUBALIGN(16)
     {
         loader_TEXT_START = .;
-        build/asm/1080.s.o(.text);
+        build/asm/loader.s.o(.text);
         loader_TEXT_END = .;
         loader_TEXT_SIZE = ABSOLUTE(loader_TEXT_END - loader_TEXT_START);
         loader_DATA_START = .;
-        _1080_s = .;
-        build/asm/1080.s.o(.data);
+        loader_s = .;
+        build/asm/loader.s.o(.data);
         loader_DATA_END = .;
         loader_DATA_SIZE = ABSOLUTE(loader_DATA_END - loader_DATA_START);
         loader_RODATA_START = .;
-        build/asm/1080.s.o(.rodata);
+        build/asm/loader.s.o(.rodata);
         loader_RODATA_END = .;
         loader_RODATA_SIZE = ABSOLUTE(loader_RODATA_END - loader_RODATA_START);
     }
@@ -83,7 +66,7 @@ SECTIONS
     .loader_bss (NOLOAD) : SUBALIGN(16)
     {
         loader_BSS_START = .;
-        build/asm/1080.s.o(.bss);
+        build/asm/loader.s.o(.bss);
         loader_BSS_END = .;
         loader_BSS_SIZE = ABSOLUTE(loader_BSS_END - loader_BSS_START);
     }

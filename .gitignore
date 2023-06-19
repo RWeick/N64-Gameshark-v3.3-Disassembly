@@ -1,5 +1,13 @@
 asm_gcc/
+asm/
+assets/
+nonmatchings/
+build/
+*.bin
 *.o
 *.i
 *.obj.s
 *.Identifier
+*.s
+permute.c
+baserom.z64

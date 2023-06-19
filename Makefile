@@ -30,6 +30,11 @@ ASM_DIRS := $(shell find asm -type d -not -path "asm/nonmatchings*")
 BIN_DIRS := $(shell find assets -type d)
 # Source files
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+
+ifeq ($(PERMUTER),1)
+	C_FILES += permute.c
+endif
+
 S_FILES := $(foreach dir,$(SRC_DIRS) $(ASM_DIRS),$(wildcard $(dir)/*.s))
 B_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES := $(foreach f,$(C_FILES:.c=.c.o),build/$f) \
@@ -69,7 +74,7 @@ $(TARGET): $(ELF)
 	@$(RM) $(@:.bin=.tmp)
 
 $(ELF): $(O_FILES) gameshark.ld
-	$(LD) -T gameshark.ld --accept-unknown-input-arch -T undefined_funcs.txt -T undefined_syms.txt -o $@ -Map $(@:.elf=.map)
+	$(LD) -T gameshark.ld --accept-unknown-input-arch -T undefined_syms.txt -o $@ -Map $(@:.elf=.map)
 
 build/assets:
 	mkdir $@
@@ -91,6 +96,17 @@ build/src/%.c.o: build/src/%.c.obj
 	@$(OBJDUMP) -drz $@ > $(@:.o=.s)
 
 build/src/%.c.obj: src/%.c
+	$(UNIX2DOS) $<
+	$(CPP) $(CPPFLAGS) $< -o $@.i
+	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
+	$(SNAS) $(SNASFLAGS) $@.s -o $@
+
+build/permute.c.o: build/permute.c.obj
+	tools/psyq-obj-parser $< -o $@ -b -n > /dev/null
+	@$(STRIP) -N dummy_symbol_ $@
+	@$(OBJDUMP) -drz $@ > $(@:.o=.s)
+
+build/permute.c.obj: permute.c
 	$(UNIX2DOS) $<
 	$(CPP) $(CPPFLAGS) $< -o $@.i
 	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
