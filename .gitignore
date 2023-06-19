@@ -4,6 +4,7 @@ assets/
 nonmatchings/
 build/
 tools/gcc/
+__pycache__/
 *.bin
 *.o
 *.i
