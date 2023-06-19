@@ -3,6 +3,7 @@ asm/
 assets/
 nonmatchings/
 build/
+tools/gcc/
 *.bin
 *.o
 *.i
