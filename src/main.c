@@ -1,14 +1,17 @@
 ﻿#include "common.h"
 
-s32 func_800402D8(void);                                  /* extern */
+void func_800402D8(void);                                  /* extern */
 void setBaseAddress(u32);
 void func_80041FCC(u32, char*);                             /* extern */
 void call(void (*arg0)());                                 /* extern */
 void pifUnlock(void);                               /* extern */
-void func_800424C0(void);                                  /* extern */
-void func_80042584(u8);                                 /* extern */
+void waitVsync(void);                                  /* extern */
+void setLED(char);                                 /* extern */
 void func_8004267C(void);
 void func_800426D4(s16);
+void func_80042694(u8);
+void func_8004043C(void);
+void func_800404FC(s32, s32, u16*);
 
 typedef struct _80042100S {
     char name[4];
@@ -23,13 +26,21 @@ typedef struct {
     u8 fileData[0];
 } FileEntry;
 
+typedef struct {
+    u8 r;
+    u8 g;
+    u8 b;
+} RGB;
+
 void* func_80042178(s32 arg0);
 s32 func_8004224C(void* arg0);
 void setupHeap(u32 arg0, u32 arg1);
 
 char D_800429C0[];          // shell.bin
 char D_800429CC[];          // trainer.bin
-
+char D_800429D8[];          // gslogo3.pal
+char D_800429E4[];          // gslogo3.bin
+char D_800429F0[];          // tile1.tg~
 u8 D_80042A00[];            // 30 84 31 9F 32 C8 33 8A 34 93 35 A2 36 A0 37 8F 38 80 39 82 42 FF
 
 char D_80042A20[];          // Write Error
@@ -65,19 +76,18 @@ u32 D_80042AB0;             // 0x00000000
 u32 D_80042AB4;             // 0x00000000
 s32 D_80042AB8;             // 0x00000000
 u32 D_80042ABC;             // 0x00000000
-s32 D_80042AC0;             // 0x00020000
+u32 D_80042AC0;             // 0x00020000
 s32 D_80042AC4;             // 0x00000000
 s32 D_80042AC8;             // 0x00000000
 
-u8 D_80042AD0[];            // 20 00 2E 7F 30 84 31 9F 32 C8 33 8A 34 93 35 A2
-                            // 36 A0 37 8F 38 80 39 82 45 E0 46 E1 48 91 4C F4
-                            // 4F 84 50 C1 52 81 61 FE 62 FD 63 FB 64 F7 65 EF
-                            // 66 DF 67 BF 7A EA 00 FF FF 00
-
+u8 ledSegmentTable[];       // ' ' 00 '.' 7F '0' 84 '1' 9F '2' C8 '3' 8A '4' 93 '5' A2        4 
+                            // '6' A0 '7' 8F '8' 80 '9' 82 'E' E0 'F' E1 'H' 91 'L' F4       3 5
+                            // 'O' 84 'P' C1 'R' 81 'a' FE 'b' FD 'c' FB 'd' F7 'e' EF        2 
+                            // 'f' DF 'g' BF 'z' EA 00 FF FF 00                              1 6
+                            //                                                                0  7
+char unkLedValue;           // 0x61 'a'
+s32 D_80042B14;             // 0x00000000
 u8 D_80042B20[];
-
-extern volatile u32 VI_CURRENT_REG;
-extern volatile u32 PI_STATUS_REG;
 
 extern volatile u32 SI_BASE14_REG;
 
@@ -91,26 +101,26 @@ void func_80040180(void) {
     pifUnlock();
     setupHeap(0x80180000, 0x80200000);
     func_800402D8();
-    func_80042584(0x35);
+    setLED('5');
     
     for (i = 0; i < 0x3c; i++) {
-        func_800424C0();
+        waitVsync();
     }
     
-    func_80042584(0x34);
+    setLED('4');
     
     for (i = 0; i < 0x3c; i++) {
-        func_800424C0();
+        waitVsync();
     }
     
-    func_80042584(0x33);
+    setLED('3');
     func_80041FCC(0x80200400, D_800429C0);
-    func_80042584(0x32);
+    setLED('2');
     func_80041FCC(0x80780800, D_800429CC);
-    func_80042584(0x31);
+    setLED('1');
     
     for (i = 0; i < 0x3c; i++) {
-        func_800424C0();
+        waitVsync();
     }
     
     call((void (*)())0x80200400);
@@ -127,11 +137,95 @@ u32 func_80040278(void) {
     return cartStart == 0x80371240;
 }
 
-INCLUDE_ASM(s32, "main", func_800402D8);
+#define POS_X 40
+#define POS_Y 24
 
-INCLUDE_ASM(s32, "main", func_8004043C);
+#define HEIGHT 320
+#define WIDTH 224
 
-INCLUDE_ASM(s32, "main", func_800404FC);
+#define HSYNC 0xC15
+
+void func_800402D8(void) {
+    u16* var_s1;
+    s32 var_s2;
+    s32 var_t0;
+    u8 r;
+    u8 g;
+    u8 b;
+    RGB* temp_v1;
+    u8* var_s0;
+
+    u32* vi_regs;
+    u32 addr;
+
+    func_8004043C();
+    addr = 0x80280000;
+    func_80041FCC(addr, D_800429D8);
+    var_s0 = (u8* )0x80281001;
+    func_80041FCC(0x80281000, D_800429E4);
+    for (var_s2 = POS_X, var_s1 = (u16 *)0x80306400; var_s2 < (WIDTH - POS_X); var_s2++, var_s1 += HEIGHT) {
+        func_800422C0();
+        for (var_t0 = POS_Y + 1; var_t0 < (HEIGHT - POS_Y) + 1; var_t0++) {
+            temp_v1 = &((RGB*)addr)[*var_s0++];
+            r = temp_v1->r;
+            g = temp_v1->g;
+            b = temp_v1->b;
+            if ((r + g + b) > 0) {
+                var_s1[var_t0] = (r << 0xB) | (g << 6) | (b << 1); // RGB5551 conversion
+            }
+        }
+    };
+    vi_regs = (u32*)PHYS_TO_K1(VI_BASE_REG);
+    vi_regs[0] = VI_CTRL_DITHER_FILTER_ON | 0x3000 | VI_CTRL_TYPE_16; // the 0x3000 are two reserved bits
+    vi_regs[1] = 0x80300000;
+    vi_regs[2] = HEIGHT;
+    vi_regs[5] = (0x3E << 20) | (5 << 16) | (0x22 << 8) | (0x39 << 0);
+    vi_regs[6] = 525;
+    vi_regs[7] = HSYNC;
+    vi_regs[8] = (HSYNC << 16) | (HSYNC << 0);
+    vi_regs[9] = (0x6C << 16) | (0x2EC << 0);
+    vi_regs[10] = (0x25 << 16) | (0x1FF << 0);
+    vi_regs[11] = (0xE << 16) | (0x204 << 0);
+    vi_regs[12] = 0x200;
+    vi_regs[13] = 0x400;
+}
+
+void func_8004043C(void) {
+    s32 var_a0_2;
+    s32 var_s1_2;
+    u16 temp_v0;
+    u16* var_a0;
+    u16* temp = (u16*)0x80210000;
+    u16* temp2;
+    
+    s32 var_s1;
+    s32 var_s0;
+
+    func_80041FCC(0x80210000, D_800429F0);
+    temp2 = temp;
+    for(var_s1 = 0; var_s1 < 0x30; var_s1++) {
+        for(var_s0 = 0; var_s0 < 0x40; var_s0++, temp2++) {
+            *temp2 = ((u32) ((*temp2 >> 7) | ((*temp2 & 0x7F) << 9)) >> 1) & 0x7BDE;
+        }
+    }
+    
+    for(var_s1 = 0; var_s1 < 0xF0; var_s1 += 0x30) {
+        for(var_s0 = 0; var_s0 < 0x140; var_s0 += 0x40) {   
+            func_800404FC(var_s0, var_s1, temp);
+        }
+    }
+}
+
+void func_800404FC(s32 x, s32 y, u16* data) {
+    s32 var_a0;
+    s32 var_a3 = 0;
+    u16* var_v1 = &((u16 (*)[0x140]) 0x80300000)[y][x];
+    for (var_a3 = 0; var_a3 < 0x30; var_a3++, var_v1 += 0x140) {
+        for (var_a0 = 0; var_a0 < 0x40; var_a0++) {
+            var_v1[var_a0] = *data++;
+        }
+    }
+}
 
 #ifndef NON_MATCHING
 asm (
@@ -139,8 +233,9 @@ asm (
     "sw         $16, 0x10($29)"
 );
 #endif
-void wait_PI(void) {
-    while (PI_STATUS_REG & 3); // wait until PI is not busy
+void waitPI(void) {
+    volatile u32* pi_regs = (vu32*)PHYS_TO_K1(PI_BASE_REG);
+    while (pi_regs[4] & 3); // wait until PI is not busy
 }
 
 #ifndef NON_MATCHING
@@ -148,14 +243,14 @@ asm ("lw         $31, 0x14($29)");
 #endif
 s32 func_80040580(s32 arg0) {
     volatile s32* temp_s0 = (volatile s32 *)(baseAddress | memSize | arg0);
-    wait_PI();
+    waitPI();
     return *temp_s0;
 }
 
 void write16Doubled(u32 offset, u32 data) {
     s32 k = ((data & 0xffff) << 16) | (data & 0xffff);
     *(volatile s32 *)(baseAddress | memSize | offset) = k;
-    wait_PI();
+    waitPI();
 }
 
 void setBaseAddress(u32 addr) {
@@ -374,7 +469,34 @@ void func_80040F3C(int arg0) {
     };
 }
 
-INCLUDE_ASM(s32, "main", func_80040F90);
+void func_80040F90(s32 arg0) {
+    u32 temp_a0;
+    s32 temp_s6;
+    u32* temp_v1;
+
+    temp_s6 = D_80042A4C[arg0];
+    temp_a0 = D_80042AC0 - D_80042ABC;
+    D_80042AC0 = D_80042ABC + ((u32) (temp_a0 * D_80042A60[temp_s6 - 1]) / *D_80042A60);
+    D_80042ABC += (u32) (temp_a0 * D_80042A60[temp_s6]) / (u32) *D_80042A60;
+    while(1) {
+        if (D_80042AC0 <= 0x10000) {
+            func_80040F3C(0);
+        } else if (D_80042ABC > 0xFFFF) {
+            func_80040F3C(1);
+            D_80042ABC -= 0x10000;
+            D_80042AC0 -= 0x10000;
+        } else if ((D_80042ABC > 0x7FFF) && (D_80042AC0 <= 0x18000)) {
+            D_80042AC8++;
+            D_80042ABC -= 0x8000;
+            D_80042AC0 -= 0x8000;
+        } else {
+            break;
+        }
+        D_80042ABC *= 2;
+        D_80042AC0 *= 2;
+    }
+    func_80040DFC(temp_s6);
+}
 
 void func_80041148(s32 arg0) {
     s32 diff = D_80042AC0 - D_80042ABC;
@@ -738,60 +860,64 @@ void call(void (*arg0)()) {
 }
 #else
 asm(
+    ".set noreorder\n"
     "func_80042328:\n"
-        "jr $4"
+        "jr $4\n"
+        " nop"
     );
 
-asm( // SN AS inserts nops after jumps
+asm(
     "call:\n"
         "addiu      $29, $29, -0x14\n"
         "sw         $31, 0x10($29)\n"
         "jalr       $4\n"
+        " nop\n"
         "lw         $31, 0x10($29)\n"
         "addiu      $29, $29, 0x14\n"
-        "jr         $31"
+        "jr         $31\n"
+        " nop\n"
+    ".set reorder"
     );
 #endif
 
-asm(
-    "getStatus:\n"
-        "mfc0       $2, $12\n"
-        "jr         $31"
-    );
+u32 getStatus(void) {
+    u32 status;
+    asm("mfc0       %0, $12" : "=r" (status));
+    return status;
+}
 
-asm(
-    "setStatus:\n"
-        "mtc0       $4, $12\n"
-        "jr         $31"
-    );
+void setStatus(u32 status) {
+    asm("mtc0       %0, $12" : : "r" (status));
+}
 
-asm(
-    "getCause:\n"
-        "mfc0       $2, $13\n"
-        "jr         $31"
-    );
+u32 getCause(void) {
+    u32 cause;
+    asm("mfc0       %0, $13" : "=r" (cause));
+    return cause;
+}
 
-asm(
-    "getEPC:\n"
-        "mfc0       $2, $14\n"
-        "jr         $31"
-    );
+u32 getEPC(void) {
+    u32 epc;
+    asm("mfc0       %0, $14" : "=r" (epc));
+    return epc;
+}
 
 INCLUDE_ASM(s32, "main", func_80042380); // handwritten - tlb stuff??? uses coprocessor instrs
 
 INCLUDE_ASM(s32, "main", func_800423C8); // handwritten - same
 
-void waitPIReserved(void) {
-    while (SI_BASE14_REG & 3);
+void waitSIReserved(void) {
+    volatile u32* si_regs = (vu32*)PHYS_TO_K1(SI_BASE_REG);
+    while (si_regs[5] & 3);
 }
 
 u32 readPIRam(u32* arg0) {
-    waitPIReserved();
+    waitSIReserved();
     return *arg0;
 }
 
 void writePIRam(u32* arg0, u32 arg1) {
-    waitPIReserved();
+    waitSIReserved();
     *arg0 = arg1;
 }
 
@@ -799,79 +925,72 @@ void pifUnlock(void) {
     writePIRam((u32*)0xBFC007FC, readPIRam((u32*)0xBFC007FC) | 8);
 } // JoyChannel RAM + 0x3C
 
-#ifdef NON_MATCHING
+#ifndef NON_MATCHING
 asm(
     "addiu      $3, $0, 0x2\n"
     "lw         $2, 0x10($4)"
     );
-void func_800424C0(void) {
-    while ((VI_CURRENT_REG & 0x3FE) != 2);
-    while ((VI_CURRENT_REG & 0x3FE) == 2);
-}
-#else
-INCLUDE_ASM(void, "main", func_800424B8);
 #endif
+void waitVsync(void) {
+    vu32* vi_regs = (vu32*)PHYS_TO_K1(VI_BASE_REG);
+    while ((vi_regs[4] & 0x3FE) != 2);
+    while ((vi_regs[4] & 0x3FE) == 2);
+}
 
 void func_80042504(u32 arg0) {
     write16Doubled(0x800, arg0);
     func_8004267C();
 }
 
-s32 func_8004252C(u8 arg0) {
-    s32 var_a1;
-    s32 ret;
+s32 getLEDSegmentData(char arg0) {
+    int index = 0;
+    int rv = 0xFF;
 
-    var_a1 = 0;
-    ret = 0xFF;
-    
-    while (D_80042AD0[var_a1] != 0xFF) {
-        if (D_80042AD0[var_a1] == arg0) {
-            ret = D_80042AD0[var_a1 + 1];
+    while (ledSegmentTable[index] != 0xFF) {
+        if (ledSegmentTable[index] == arg0) {
+            rv = ledSegmentTable[index + 1];
             break;
         }
         
-        var_a1 += 2;
+        index += 2;
     }
     
-    return ret;
+    return rv;
 }
 
-void func_80042584(u8 arg0) {
+void setLED(char arg0) {
     u32 var_s0;
-    int var_s1;
+    int toWrite;
 
     func_800426D4(0x600);
-    var_s1 = func_8004252C(arg0) | 0x10000;
-    while (var_s1 >= 0x101) {
-        var_s0 = (var_s1 & 1) ? 0x02000200 : 0;
+    toWrite = getLEDSegmentData(arg0) | 0x10000;
+    while (toWrite >= 0x101) {
+        var_s0 = (toWrite & 1) ? 0x02000200 : 0;
         func_80042504(var_s0);
         func_80042504(var_s0 | 0x04000400);
         func_80042504(var_s0);
-        var_s1 = var_s1 / 2;
+        toWrite = toWrite / 2;
     };
     func_800426D4(0x200);
 }
 
-void func_80042628(u8 arg0) {
-    func_80042584(arg0);
+void func_80042628(char arg0) {
+    setLED(arg0);
 }
 
-#ifdef NON_MATCHING
-void func_80042644(void) {
-}
-#else
-INCLUDE_ASM(void, "main", func_80042644);
+#ifndef NON_MATCHING
+asm(".set noreorder\n"
+    "jr         $31\n"
+    " addiu     $29, $29, 0x18\n"
+    "addiu      $2, $0, 0x9F\n"
+    ".set reorder"
+    );
 #endif
-
-#ifdef NON_MATCHING
-void func_8004264C(void) {
+void func_80042650(void) {
     func_800426D4(0x200);
     func_80042694(0);
-    func_80042584(0);
+    setLED(0);
 }
-#else
-INCLUDE_ASM(void, "main", func_8004264C);
-#endif
 
 void func_8004267C(void) {
     int var_v0 = 0xA0;
@@ -909,20 +1028,59 @@ s32 func_80042714(s32 arg0) {
 }
 
 s32 func_800427A4(s32 arg0) {
-    return (func_80042714(arg0 >> 4) * 0x10) | func_80042714(arg0);
+    return (func_80042714(arg0 >> 4) << 4) | func_80042714(arg0);
 }
 
-INCLUDE_ASM(s32, "main", func_800427E0);
+s32 func_800427E0(s32 arg0) {
+    return (func_800427A4(arg0 >> 8) << 8) | func_800427A4(arg0);
+}
 
-INCLUDE_ASM(s32, "main", func_8004281C);
+s32 func_8004281C(s32 arg0) {
+    return (func_800427E0(arg0 >> 0x10) << 0x10) | func_800427E0(arg0);
+}
 
-INCLUDE_ASM(s32, "main", func_80042858);
+void func_80042858(void) {
+    s32 var_s0;
+
+    var_s0 = 0;
+    while (!var_s0) {
+        if ((func_80042714(0) == 0xF)) {
+            if((func_80042714(0xF) == 0)){
+                if((func_80042714(0xA) == 0xE)){
+                    if((func_80042714(0xE) == 0xA)) {
+                        var_s0 = 1;
+                    }
+                }
+            }
+        }
+    } 
+}
 
 void func_800428E4(u8* arg0) {
     while (*arg0 != 0) {
-        func_800427A4(*arg0);
-        arg0++;
+        func_800427A4(*arg0++);
     }
 }
 
-INCLUDE_ASM(s32, "main", func_80042928);
+s32 func_80042928(void) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    D_80042B14++;
+    if (D_80042B14 == 11) {
+        D_80042B14 = 0;
+        setLED(unkLedValue);
+        unkLedValue++;
+        if (unkLedValue == 'd') {
+            unkLedValue = 'g';
+        }
+        if (unkLedValue == 'h') {
+            unkLedValue = 'a';
+        }
+    }
+    if (func_800426F8() & 0x10) {
+        return func_800426F8() & 0xF;
+    } else {
+        return 0;
+    }
+}

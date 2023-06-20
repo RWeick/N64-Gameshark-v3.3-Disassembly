@@ -12,4 +12,5 @@ __pycache__/
 *.Identifier
 *.s
 permute.c
-baserom.z64
+*.z64
+*.bak

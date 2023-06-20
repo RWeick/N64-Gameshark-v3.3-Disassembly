@@ -23,7 +23,7 @@
 #define _ULTRA64_H_
 
 #include <PR/ultratypes.h>
-// #include <PR/rcp.h>
+#include <PR/rcp.h>
 #include <PR/os.h>
 #include <PR/region.h>
 #include <PR/rmon.h>
