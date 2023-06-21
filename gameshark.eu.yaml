@@ -1,8 +1,8 @@
-name: (C) Mushroom &Nu15:5 (GameShark)
-sha1: 5ac1387c18b0632f7d4c1106eb591d801835c57e
+name: (C) Mushroom &Nu16:0 (Action Replay)
+sha1: c3426114f5da1fb7abde15a766d362698ad07166
 options:
-  basename: gameshark
-  target_path: baserom.z64
+  basename: actionreplay
+  target_path: baserom.eu.z64
   base_path: .
   compiler: SN64
   find_file_boundaries: True
@@ -11,10 +11,10 @@ options:
   header_encoding: ASCII
   platform: n64
   create_undefined_funcs_auto: False
-  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  # undefined_funcs_auto_path: undefined_funcs_eu.txt
   create_undefined_syms_auto: False
-  # undefined_syms_auto_path: undefined_syms_auto.txt
-  symbol_addrs_path: symbol_addrs.txt
+  # undefined_syms_auto_path: undefined_syms_eu.txt
+  symbol_addrs_path: symbol_addrs_eu.txt
   # asm_path: asm
   # src_path: src
   # build_path: build
@@ -24,6 +24,9 @@ options:
   auto_all_sections: [".data", ".rodata", ".bss"]
   libultra_symbols: True
   hardware_regs: True
+  asset_path: assets/eu/
+  asm_path: asm/eu/
+  build_path: build/eu/
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -49,7 +52,7 @@ segments:
     start: 0x1080
     vram: 0x80200480
     subsegments:
-      - [0x1080, asm, loader]
+      - [0x1080, hasm, loader]
 
   - name: main
     type: code

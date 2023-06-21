@@ -1,7 +1,7 @@
 def apply(config, args):
-    config["baseimg"] = "baserom.z64"
-    config["myimg"] = "build/gameshark.bin"
-    config["mapfile"] = "build/gameshark.map"
+    config["baseimg"] = "baserom.eu.z64"
+    config["myimg"] = "build/actionreplay.bin"
+    config["mapfile"] = "build/actionreplay.map"
     config["source_directories"] = ["."]
     # config["show_line_numbers_default"] = True
     # config["arch"] = "mips"

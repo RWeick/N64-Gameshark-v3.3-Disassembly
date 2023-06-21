@@ -4,6 +4,9 @@
 //#define NONMATCHING_SUFFIX "_NONMATCHING"
 #define NONMATCHING_SUFFIX ""
 
+#define STRINGIFY_(x) #x
+#define STRINGIFY(x) STRINGIFY_(x)
+
 #if !defined(SPLAT) && !defined(__CTX__) && !defined(KMC) && !defined(PERMUTER)
 #ifndef INCLUDE_ASM
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
@@ -16,7 +19,7 @@
       "\t.global " #NAME NONMATCHING_SUFFIX "\r\n" \
       "\t.ent " #NAME NONMATCHING_SUFFIX "\r\n" \
       "\t.end " #NAME NONMATCHING_SUFFIX "\r\n" \
-      "\t.include \"asm/nonmatchings/"FOLDER"/"#NAME".s\"\r\n" \
+      "\t.include \"asm/"STRINGIFY(VERSION)"/nonmatchings/"FOLDER"/"#NAME".s\"\r\n" \
       "\t.set reorder\r\n" \
       "\t.set at\r\n" \
   );

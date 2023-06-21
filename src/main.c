@@ -38,8 +38,8 @@ void setupHeap(u32 arg0, u32 arg1);
 
 char D_800429C0[];          // shell.bin
 char D_800429CC[];          // trainer.bin
-char D_800429D8[];          // gslogo3.pal
-char D_800429E4[];          // gslogo3.bin
+char D_800429D8[];          // gslogo3.pal (US), arlogo3.pal (EU)
+char D_800429E4[];          // gslogo3.bin (US), arlogo3.pal (EU)
 char D_800429F0[];          // tile1.tg~
 u8 D_80042A00[];            // 30 84 31 9F 32 C8 33 8A 34 93 35 A2 36 A0 37 8F 38 80 39 82 42 FF
 
@@ -143,7 +143,13 @@ u32 func_80040278(void) {
 #define HEIGHT 320
 #define WIDTH 224
 
+
+#if defined(VERSION_US)
 #define HSYNC 0xC15
+#elif defined(VERSION_EU)
+#define HSYNC 0xC69
+#define HSYNCPERIOD 0x17
+#endif
 
 void func_800402D8(void) {
     u16* var_s1;
@@ -176,9 +182,14 @@ void func_800402D8(void) {
         }
     };
     vi_regs = (u32*)PHYS_TO_K1(VI_BASE_REG);
+#if defined(VERSION_US)
     vi_regs[0] = VI_CTRL_DITHER_FILTER_ON | 0x3000 | VI_CTRL_TYPE_16; // the 0x3000 are two reserved bits
+#elif defined(VERSION_EU)
+    vi_regs[0] = 0x3000 | (2 << 8) | VI_CTRL_TYPE_16;
+#endif
     vi_regs[1] = 0x80300000;
     vi_regs[2] = HEIGHT;
+#if defined(VERSION_US)
     vi_regs[5] = (0x3E << 20) | (5 << 16) | (0x22 << 8) | (0x39 << 0);
     vi_regs[6] = 525;
     vi_regs[7] = HSYNC;
@@ -186,6 +197,15 @@ void func_800402D8(void) {
     vi_regs[9] = (0x6C << 16) | (0x2EC << 0);
     vi_regs[10] = (0x25 << 16) | (0x1FF << 0);
     vi_regs[11] = (0xE << 16) | (0x204 << 0);
+#elif defined(VERSION_EU)
+    vi_regs[5] = (0x45 << 20) | (4 << 16) | (0x1E << 8) | (0x3A << 0);
+    vi_regs[6] = 625;
+    vi_regs[7] = (HSYNCPERIOD << 16) | (HSYNC << 0);
+    vi_regs[8] = ((HSYNC + 6) << 16) | ((HSYNC + 4) << 0);
+    vi_regs[9] = (0x80 << 16) | (0x300 << 0);
+    vi_regs[10] = (0x5F << 16) | (0x239 << 0);
+    vi_regs[11] = (0x9 << 16) | (0x26B << 0);
+#endif
     vi_regs[12] = 0x200;
     vi_regs[13] = 0x400;
 }
