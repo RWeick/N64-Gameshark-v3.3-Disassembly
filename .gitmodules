@@ -7,3 +7,6 @@
 [submodule "tools/splat"]
 	path = tools/splat
 	url = https://github.com/ethteck/splat.git
+[submodule "tools/fsblob"]
+	path = tools/fsblob
+	url = https://github.com/Jhynjhiruu/fsblob

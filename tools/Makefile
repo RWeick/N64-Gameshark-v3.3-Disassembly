@@ -5,7 +5,13 @@ GCC_DIR := gcc
 GCC-AS := $(GCC_DIR)/as
 GCC-2.8.1 := $(GCC_DIR)/gcc
 
-all: $(GCC-AS) $(GCC-2.8.1) $(PSYQ)
+PSYQ := psyq-obj-parser
+
+LZARI := lzari/lzari
+
+FSBLOB := fsblob/target/release/fsblob
+
+all: $(GCC-AS) $(GCC-2.8.1) $(PSYQ) $(LZARI) $(FSBLOB)
 
 clean:
 distclean: clean
@@ -23,6 +29,12 @@ $(GCC-AS): | $(GCC_DIR)
 
 $(PSYQ):
 	chmod +x psyq-obj-parser
+
+$(LZARI): lzari/LZARI.C
+	cc -x c -g -O2 -Wall -o $@ $<
+
+$(FSBLOB): fsblob/Cargo.toml fsblob/Cargo.lock fsblob/src/main.rs fsblob/src/lib.rs
+	cd fsblob && cargo build --release
 
 $(GCC_DIR):
 	mkdir -p $@

@@ -52,6 +52,8 @@ O_FILES := $(foreach f,$(C_FILES:.c=.c.o),build/$(VERSION)/$f) \
            $(foreach f, $(S_FILES:.s=.s.o),build/$(VERSION)/$f) \
 		   $(foreach f,$(B_FILES:.bin=.bin.o),build/$(VERSION)/$f)
 
+O_FILES += build/$(VERSION)/assets/$(VERSION)/fsblob.bin.o
+
 # Create build directories
 $(shell mkdir -p build build/$(VERSION) $(foreach dir,$(SRC_DIRS) $(ASM_DIRS),build/$(VERSION)/$(dir)))
 
@@ -117,6 +119,15 @@ build/$(VERSION)/src/%.c.obj: src/%.c
 	$(CPP) $(CPPFLAGS) $< -o $@.i
 	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
 	$(SNAS) $(SNASFLAGS) $@.s -o $@
+
+build/us/assets/us/fsblob.bin: fs/us/shell.bin fs/us/gslogo3.bin fs/us/gslogo3.pal fs/us/tile1.tg~ fs/us/trainer.bin
+	tools/fsblob/target/release/fsblob build -o $@ $^ --matching --pad 0x2B4E0
+
+build/eu/assets/eu/fsblob.bin: fs/eu/shell.bin fs/eu/arlogo3.bin fs/eu/arlogo3.pal fs/eu/tile1.tg~ fs/eu/trainer.bin
+	tools/fsblob/target/release/fsblob build -o $@ $^ --matching --pad 0x2B4E0
+
+build/$(VERSION)/assets/$(VERSION)/%.bin.o: build/$(VERSION)/assets/$(VERSION)/%.bin
+	$(OBJCOPY) -I binary -O elf32-big $< $@
 
 build/permute.c.o: build/permute.c.obj
 	tools/psyq-obj-parser $< -o $@ -b -n > /dev/null

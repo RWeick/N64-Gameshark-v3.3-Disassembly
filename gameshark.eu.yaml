@@ -60,14 +60,19 @@ segments:
     vram: 0x80040180
     subsegments:
       - [0x1180, c, main]
+      - [0x39C0, bin]
+
+  - name: fsblob
+    type: fsblob
+    start: 0x3B20
+    out_dir: fs/eu
+    vram: 0x80042B20
 
   - name: data
     type: code
-    start: 0x39C0
-    vram: 0x800429C0
-    follows_vram: main
+    start: 0x2F000
+    vram: 0x8006E000
     subsegments:
-      - [0x39C0, bin]
       - [0x2F000, hasm]
       - [0x2F100, bin]
   - [0x40000]

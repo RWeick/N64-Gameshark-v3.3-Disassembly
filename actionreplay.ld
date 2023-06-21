@@ -84,6 +84,8 @@ SECTIONS
         main_TEXT_END = .;
         main_TEXT_SIZE = ABSOLUTE(main_TEXT_END - main_TEXT_START);
         main_DATA_START = .;
+        _39C0_bin = .;
+        build/eu/assets/eu/39C0.bin.o(.data);
         main_c = .;
         build/eu/src/main.c.o(.data);
         main_DATA_END = .;
@@ -106,17 +108,29 @@ SECTIONS
     main_ROM_END = __romPos;
     main_VRAM_END = .;
 
+    fsblob_ROM_START = __romPos;
+    fsblob_VRAM = ADDR(.fsblob);
+    .fsblob 0x80042B20 : AT(fsblob_ROM_START) SUBALIGN(16)
+    {
+        fsblob_DATA_START = .;
+        fsblob_bin = .;
+        build/eu/assets/eu/fsblob.bin.o(.data);
+        fsblob_DATA_END = .;
+        fsblob_DATA_SIZE = ABSOLUTE(fsblob_DATA_END - fsblob_DATA_START);
+    }
+    __romPos += SIZEOF(.fsblob);
+    fsblob_ROM_END = __romPos;
+    fsblob_VRAM_END = .;
+
     data_ROM_START = __romPos;
     data_VRAM = ADDR(.data);
-    .data main_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
+    .data 0x8006E000 : AT(data_ROM_START) SUBALIGN(16)
     {
-        data_DATA_START = .;
-        _39C0_bin = .;
-        build/eu/assets/eu/39C0.bin.o(.data);
         data_TEXT_START = .;
         build/eu/asm/eu/2F000.s.o(.text);
         data_TEXT_END = .;
         data_TEXT_SIZE = ABSOLUTE(data_TEXT_END - data_TEXT_START);
+        data_DATA_START = .;
         _2F100_bin = .;
         build/eu/assets/eu/2F100.bin.o(.data);
         _2F000_s = .;

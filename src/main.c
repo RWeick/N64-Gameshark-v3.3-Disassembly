@@ -1,8 +1,8 @@
 ﻿#include "common.h"
 
-void func_800402D8(void);                                  /* extern */
+void loadStartupLogo(void);                                  /* extern */
 void setBaseAddress(u32);
-void func_80041FCC(u32, char*);                             /* extern */
+void loadFile(u32, char*);                             /* extern */
 void call(void (*arg0)());                                 /* extern */
 void pifUnlock(void);                               /* extern */
 void waitVsync(void);                                  /* extern */
@@ -33,60 +33,61 @@ typedef struct {
 } RGB;
 
 void* func_80042178(s32 arg0);
-s32 func_8004224C(void* arg0);
+s32 free(void* arg0);
 void setupHeap(u32 arg0, u32 arg1);
 
-char D_800429C0[];          // shell.bin
-char D_800429CC[];          // trainer.bin
-char D_800429D8[];          // gslogo3.pal (US), arlogo3.pal (EU)
-char D_800429E4[];          // gslogo3.bin (US), arlogo3.pal (EU)
-char D_800429F0[];          // tile1.tg~
-u8 D_80042A00[];            // 30 84 31 9F 32 C8 33 8A 34 93 35 A2 36 A0 37 8F 38 80 39 82 42 FF
+char D_800429C0[];              // shell.bin
+char D_800429CC[];              // trainer.bin
+char D_800429D8[];              // gslogo3.pal (US), arlogo3.pal (EU)
+char D_800429E4[];              // gslogo3.bin (US), arlogo3.pal (EU)
+char D_800429F0[];              // tile1.tg~
+u8 D_80042A00[];                // 30 84 31 9F 32 C8 33 8A 34 93 35 A2 36 A0 37 8F 38 80 39 82 42 FF
 
-char D_80042A20[];          // Write Error
+char D_80042A20[];              // Write Error
 
-mallocChunk* heapStart;     // 0x00000000
-mallocChunk* heapEnd;       // 0x00000000
-u32 D_80042A40;             // 0x00000000
-u32 D_80042A44;             // 0x00000000
-s32* D_80042A48;            // 0x00000000
-s32* D_80042A4C;            // 0x00000000
-s32 D_80042A50;             // 0x00000000
-s32 D_80042A54;             // 0x00000000
-u32 D_80042A58;             // 0x00000000
+mallocChunk* heapStart;         // 0x00000000
+mallocChunk* heapEnd;           // 0x00000000
+unsigned int mask;              // 0x00000000
+u32 mask_putbit;                // 0x00000000
+int* sym_to_char;               // 0x00000000
+int* char_to_sym;               // 0x00000000
+int in_cursor;                  // 0x00000000
+unsigned int buffer;            // 0x00000000
+u32 buffer_putbit;              // 0x00000000
+int match_length;               // 0x00000000
+unsigned int* sym_cum;          // 0x00000000
+unsigned int* position_cum;     // 0x00000000
+int* dad;                       // 0x00000000
+u8 * infile;                    // 0x00000000
+int out_cursor;                 // 0x00000000
+int uncompressed_len;           // 0x00000000
+unsigned char *text_buf;        // 0x00000000
+unsigned int* sym_freq;         // 0x00000000
+int* lson;                      // 0x00000000
 
-s32* D_80042A60;            // 0x00000000
-u32* D_80042A64;            // 0x00000000
-s32* D_80042A68;            // 0x00000000
-u8 * D_80042A6C;            // 0x00000000
-int D_80042A70;             // 0x00000000
+u8* outfile;                    // 0x00000000
+int* rson;                      // 0x00000000
+int outfile_len;                // 0x00000000
+int match_position;             // 0x00000000
 
-char *D_80042A78;           // 0x00000000
-s32* D_80042A7C;            // 0x00000000
-s32* D_80042A80;            // 0x00000000
+s32 memSize;                    // 0x00400000
+s32 baseAddress;                // 0xB0000000
 
-u8* D_80042A88;             // 0x00000000
-s32* D_80042A84;            // 0x00000000
-int D_80042A8C;             // 0x00000000
+unsigned long int textsize;     // 0x00000000
+unsigned long int codesize;     // 0x00000000
+unsigned long int printcount;   // 0x00000000
+u32 low;                        // 0x00000000
+u32 high;                       // 0x00020000
+s32 value;                      // 0x00000000
+s32 shifts;                     // 0x00000000
 
-s32 memSize;                // 0x00400000
-s32 baseAddress;            // 0xB0000000
-
-u32 D_80042AB0;             // 0x00000000
-u32 D_80042AB4;             // 0x00000000
-s32 D_80042AB8;             // 0x00000000
-u32 D_80042ABC;             // 0x00000000
-u32 D_80042AC0;             // 0x00020000
-s32 D_80042AC4;             // 0x00000000
-s32 D_80042AC8;             // 0x00000000
-
-u8 ledSegmentTable[];       // ' ' 00 '.' 7F '0' 84 '1' 9F '2' C8 '3' 8A '4' 93 '5' A2        4 
-                            // '6' A0 '7' 8F '8' 80 '9' 82 'E' E0 'F' E1 'H' 91 'L' F4       3 5
-                            // 'O' 84 'P' C1 'R' 81 'a' FE 'b' FD 'c' FB 'd' F7 'e' EF        2 
-                            // 'f' DF 'g' BF 'z' EA 00 FF FF 00                              1 6
-                            //                                                                0  7
-char unkLedValue;           // 0x61 'a'
-s32 D_80042B14;             // 0x00000000
+u8 ledSegmentTable[];           // ' ' 00 '.' 7F '0' 84 '1' 9F '2' C8 '3' 8A '4' 93 '5' A2        4 
+                                // '6' A0 '7' 8F '8' 80 '9' 82 'E' E0 'F' E1 'H' 91 'L' F4       3 5
+                                // 'O' 84 'P' C1 'R' 81 'a' FE 'b' FD 'c' FB 'd' F7 'e' EF        2 
+                                // 'f' DF 'g' BF 'z' EA 00 FF FF 00                              1 6
+                                //                                                                0  7
+char unkLedValue;               // 0x61 'a'
+s32 D_80042B14;                 // 0x00000000
 u8 D_80042B20[];
 
 extern volatile u32 SI_BASE14_REG;
@@ -100,7 +101,7 @@ void func_80040180(void) {
     
     pifUnlock();
     setupHeap(0x80180000, 0x80200000);
-    func_800402D8();
+    loadStartupLogo();
     setLED('5');
     
     for (i = 0; i < 0x3c; i++) {
@@ -114,9 +115,9 @@ void func_80040180(void) {
     }
     
     setLED('3');
-    func_80041FCC(0x80200400, D_800429C0);
+    loadFile(0x80200400, D_800429C0);
     setLED('2');
-    func_80041FCC(0x80780800, D_800429CC);
+    loadFile(0x80780800, D_800429CC);
     setLED('1');
     
     for (i = 0; i < 0x3c; i++) {
@@ -151,7 +152,7 @@ u32 func_80040278(void) {
 #define HSYNCPERIOD 0x17
 #endif
 
-void func_800402D8(void) {
+void loadStartupLogo(void) {
     u16* var_s1;
     s32 var_s2;
     s32 var_t0;
@@ -166,9 +167,9 @@ void func_800402D8(void) {
 
     func_8004043C();
     addr = 0x80280000;
-    func_80041FCC(addr, D_800429D8);
+    loadFile(addr, D_800429D8);
     var_s0 = (u8* )0x80281001;
-    func_80041FCC(0x80281000, D_800429E4);
+    loadFile(0x80281000, D_800429E4);
     for (var_s2 = POS_X, var_s1 = (u16 *)0x80306400; var_s2 < (WIDTH - POS_X); var_s2++, var_s1 += HEIGHT) {
         func_800422C0();
         for (var_t0 = POS_Y + 1; var_t0 < (HEIGHT - POS_Y) + 1; var_t0++) {
@@ -221,7 +222,7 @@ void func_8004043C(void) {
     s32 var_s1;
     s32 var_s0;
 
-    func_80041FCC(0x80210000, D_800429F0);
+    loadFile(0x80210000, D_800429F0);
     temp2 = temp;
     for(var_s1 = 0; var_s1 < 0x30; var_s1++) {
         for(var_s0 = 0; var_s0 < 0x40; var_s0++, temp2++) {
@@ -314,457 +315,604 @@ s32 func_800406FC(u8 arg0) {
 }
 
 asm("or         $2, $2, $3");
-void printWriteError(char * msg) {
+void Error(char * message) {
     
 }
 
-void func_800407C8(int arg0) {
+void PutBit(int bit) {
     s32 temp_v1;
     u32 temp_v0;
 
-    if (arg0 != 0) {
-        D_80042A58 |= D_80042A44;
+    if (bit != 0) {
+        buffer_putbit |= mask_putbit;
     }
-    D_80042A44 >>= 1;
-    if (D_80042A44 == 0) {
-        D_80042A88[D_80042A70++] = D_80042A58;
-        if (D_80042A70 >= D_80042A8C) {
-            printWriteError(D_80042A20);
+    mask_putbit >>= 1;
+    if (mask_putbit == 0) {
+        outfile[out_cursor++] = buffer_putbit;
+        if (out_cursor >= outfile_len) {
+            Error(D_80042A20);
         }
-        D_80042A58 = 0;
-        D_80042A44 = 0x80;
-        D_80042AB4 += 1;
+        buffer_putbit = 0;
+        mask_putbit = 0x80;
+        codesize++;
     }
 }
 
-void func_80040884(void) {
-    s32 var_s0;
-    for (var_s0 = 0; var_s0 < 7; var_s0++) {
-        func_800407C8(0);
+void FlushBitBuffer(void) {
+    s32 i;
+    for (i = 0; i < 7; i++) {
+        PutBit(0);
     };
 }
 
-s32 getNextFileBit(void) {
-    D_80042A40 >>= 1;
-    if (D_80042A40 == 0) {
-        D_80042A54 = D_80042A6C[D_80042A50++];
-        D_80042A40 = 0x80;
+int GetBit(void) {
+    mask >>= 1;
+    if (mask == 0) {
+        buffer = infile[in_cursor++];
+        mask = 0x80;
     }
-    return (D_80042A54 & D_80042A40) != 0;
+    return (buffer & mask) != 0;
 }
 
-void func_80040918(void) {
+#define N		 4096	/* size of ring buffer */
+#define F		   60	/* upper limit for match_length */
+#define THRESHOLD	2   /* encode string into position and length
+						   if match_length is greater than this */
+#define NIL			N	/* index for root of binary search trees */
+
+void InitTree(void) {
     int i;
-    s32 k;
 
-    for (i = 0x1001; i < 0x1101; i++) {
-        D_80042A84[i] = 0x1000;
+    for (i = (N + 1); i <= (N + 256); i++) {
+        rson[i] = NIL;
     }
 
-    k = 0x1000;
-
-    for (i = 0x0FFF; i >= 0; i--) {
-        D_80042A68[i] = k;
+    for (i = 0; i < N; i++) {
+        dad[i] = NIL;
     }
 }
 
-INCLUDE_ASM(s32, "main", func_8004096C);
+void InsertNode(int r) {
+	int  i, p, cmp, temp;
+	unsigned char  *key;
 
-void func_80040B6C(s32 arg0) {
-    s32 temp_a0_2;
-    s32 temp_v0;
-    s32 temp_v1;
-    s32 var_t1;
-
-    if (D_80042A68[arg0] != 0x1000) {
-        temp_v1 = D_80042A84[arg0];
-        if (temp_v1 == 0x1000) {
-            var_t1 = D_80042A80[arg0];
-        } else {
-            temp_v0 = D_80042A80[arg0];
-            var_t1 = temp_v1;
-            if (temp_v0 != 0x1000) {
-                var_t1 = temp_v0;
-                if (D_80042A84[temp_v0] != 0x1000) {
-                    do {
-                        var_t1 = D_80042A84[var_t1];
-                    } while (D_80042A84[var_t1] != 0x1000);
-                    D_80042A84[D_80042A68[var_t1]] = D_80042A80[var_t1];
-                    D_80042A68[D_80042A80[var_t1]] = D_80042A68[var_t1];
-                    D_80042A80[var_t1] = D_80042A80[arg0];
-                    D_80042A68[D_80042A80[arg0]] = var_t1;
-                }
-                D_80042A84[var_t1] = D_80042A84[arg0];
-                D_80042A68[D_80042A84[arg0]] = var_t1;
+	cmp = 1;
+    key = &text_buf[r];
+    p = N + 1 + key[0];
+    
+    lson[r] = NIL;
+	rson[r] = NIL;
+    
+    match_length = 0;
+	for ( ; ; ) {
+		if (cmp >= 0) {
+			if (rson[p] != NIL) {
+                p = rson[p];
+            } else {
+                rson[p] = r;
+                dad[r] = p;
+                return;
+            }
+		} else {
+			if (lson[p] != NIL) {
+                p = lson[p];
+            } else {
+                lson[p] = r;
+                dad[r] = p;
+                return;
+            }
+		}
+		for (i = 1; i < F; i++) {
+            cmp = key[i] - text_buf[p + i];
+			if (cmp != 0) {
+                break;
             }
         }
-        D_80042A68[var_t1] = D_80042A68[arg0];
-        temp_a0_2 = D_80042A68[arg0];
-        if (D_80042A84[temp_a0_2] == arg0) {
-            D_80042A84[temp_a0_2] = var_t1;
-        } else {
-            D_80042A80[temp_a0_2] = var_t1;
+		if (i > THRESHOLD) {
+			if (i > match_length) {
+				match_position = (r - p) & (N - 1);
+				if ((match_length = i) >= F) break;
+			} else if (i == match_length) {
+                temp = (r - p) & (N - 1);
+				if (temp < match_position) {
+					match_position = temp;
+                }
+			}
+		}
+	}
+    
+	dad[r] = dad[p];
+    lson[r] = lson[p];
+    rson[r] = rson[p];
+    
+	dad[lson[p]] = r;
+    dad[rson[p]] = r;
+    
+	if (rson[dad[p]] == p) {
+        rson[dad[p]] = r;
+    } else {
+        lson[dad[p]] = r;
+    }
+    
+	dad[p] = NIL;  /* remove p */
+}
+
+void DeleteNode(int p) {
+    s32 q;
+
+    if (dad[p] == NIL) {
+        return;
+    }
+    
+    if (rson[p] == NIL) {
+        q = lson[p];
+    } else if (lson[p] == NIL) {
+        q = rson[p];
+    } else {
+        q = lson[p];
+        if (rson[lson[p]] != NIL) {
+            do {
+                q = rson[q];
+            } while (rson[q] != NIL);
+            rson[dad[q]] = lson[q];
+            dad[lson[q]] = dad[q];
+            lson[q] = lson[p];
+            dad[lson[p]] = q;
         }
-        D_80042A68[arg0]= 0x1000;
+        rson[q] = rson[p];
+        dad[rson[p]] = q;
+    }
+    
+    dad[q] = dad[p];
+    
+    if (rson[dad[p]] == p) {
+        rson[dad[p]] = q;
+    } else {
+        lson[dad[p]] = q;
+    }
+    
+    dad[p] = NIL;
+}
+
+#define M   15
+
+/*	Q1 (= 2 to the M) must be sufficiently large, but not so
+	large as the unsigned long 4 * Q1 * (Q1 - 1) overflows.  */
+
+#define Q1  (1UL << M)
+#define Q2  (2 * Q1)
+#define Q3  (3 * Q1)
+#define Q4  (4 * Q1)
+#define MAX_CUM (Q1 - 1)
+
+#define N_CHAR  (256 - THRESHOLD + F)
+
+void StartModel(void) {
+    int ch, sym, i;
+
+    sym_cum[N_CHAR] = 0;
+    for (sym = N_CHAR; sym >= 1; sym--) {
+        ch = sym - 1;
+        char_to_sym[ch] = sym;
+        sym_to_char[sym] = ch;
+        sym_freq[sym] = 1;
+        sym_cum[sym-1] = sym_cum[sym] + 1;
+    }
+    sym_freq[0] = 0;
+    position_cum[N] = 0;
+    for  (i = N; i >= 1; i--) {
+        position_cum[i - 1] = position_cum[i] + 10000 / (i + 200);
     }
 }
 
-void func_80040D1C(void) {
-    int i, temp;
+void UpdateModel(int sym) {
+    s32 ch_i;
+    s32 ch_sym;
+    u32 c;
+    s32 i;
 
-    D_80042A60[0x13A] = 0;
-    for (i = 0x13A; i > 0; i--) {
-        temp = i - 1;
-        D_80042A4C[temp] = i;
-        D_80042A48[i] = temp;
-        D_80042A7C[i] = 1;
-        D_80042A60[i-1] = D_80042A60[i] + 1;
+    if (sym_cum[0] >= MAX_CUM) {
+		c = 0;
+		for (i = N_CHAR; i > 0; i--) {
+			sym_cum[i] = c;
+			c += (sym_freq[i] = (sym_freq[i] + 1) >> 1);
+		}
+		sym_cum[0] = c;
     }
-    D_80042A7C[0] = 0;
-    D_80042A64[0x1000] = 0;
-    for  (i = 0x1000; i > 0; i--) {
-        D_80042A64[i - 1] = D_80042A64[i] + 10000 / (i + 200);
+    for (i = sym; sym_freq[i] == sym_freq[i - 1]; i--);
+    if (i < sym) {
+        ch_i = sym_to_char[i];
+        ch_sym = sym_to_char[sym];
+        
+        sym_to_char[i] = ch_sym;
+        sym_to_char[sym] = ch_i;
+        
+        char_to_sym[ch_i] = sym;
+        char_to_sym[ch_sym] = i;
+    }
+    sym_freq[i]++;
+    while (--i >= 0) {
+        sym_cum[i]++;
     }
 }
 
-void func_80040DFC(s32 arg0) {
-    s32 temp_a1;
-    s32 temp_v1;
-    s32 var_a2;
-    s32 var_a2_2;
-    s32 var_a2_3;
-    s32 var_v0;
-    s32* temp_a0;
-    s32* temp_v0_2;
-    s32* temp_v1_2;
-    u32 temp_v0;
-    u32 var_a0;
-    u32* var_a1;
-    u32* var_v1;
-    u32* var_v1_2;
-    s32 var_a0_2;
-
-    if (D_80042A60[0] >= 0x7FFFU) {
-        var_a0 = 0;
-        var_a2 = 0x13A;
-        var_a1 = &D_80042A60[0x13A];
-        var_v1 = &D_80042A7C[0x13A];
-        while (var_a2 > 0) {
-            *var_a1 = var_a0;
-            var_a1 -= 1;
-            var_a2 -= 1;
-            *var_v1 = (*var_v1 + 1) >> 1;
-            var_a0 += *var_v1;
-            var_v1 -= 1;
-        }
-        *D_80042A60 = var_a0;
-    }
-    var_a2_2 = arg0;
-    var_a0_2 = arg0;
-    while (D_80042A7C[var_a0_2] == D_80042A7C[var_a0_2 - 1]) {
-            var_a0_2 -= 1;
-            var_a2_2 -= 1;
-    }
-    if (var_a2_2 < arg0) {
-        temp_a1 = D_80042A48[var_a2_2];
-        temp_v1 = D_80042A48[arg0];
-        D_80042A48[var_a2_2] = temp_v1;
-        D_80042A48[arg0] = temp_a1;
-        D_80042A4C[temp_a1] = arg0;
-        D_80042A4C[temp_v1] = var_a2_2;
-    }
-    D_80042A7C[var_a2_2]++;
-    var_a2_2--;
-    while (var_a2_2 >= 0) {
-        D_80042A60[var_a2_2]++;
-        var_a2_2--;
-    }
-}
-
-void func_80040F3C(int arg0) {
-    func_800407C8(arg0);
-    while (D_80042AC8 > 0) {
-        func_800407C8(arg0 == 0);
-        D_80042AC8--;
+void Output(int bit) {
+    PutBit(bit);
+    while (shifts > 0) {
+        PutBit(bit == 0);
+        shifts--;
     };
 }
 
-void func_80040F90(s32 arg0) {
-    u32 temp_a0;
-    s32 temp_s6;
-    u32* temp_v1;
+void EncodeChar(int ch) {
+    int sym;
+    unsigned long int range;
 
-    temp_s6 = D_80042A4C[arg0];
-    temp_a0 = D_80042AC0 - D_80042ABC;
-    D_80042AC0 = D_80042ABC + ((u32) (temp_a0 * D_80042A60[temp_s6 - 1]) / *D_80042A60);
-    D_80042ABC += (u32) (temp_a0 * D_80042A60[temp_s6]) / (u32) *D_80042A60;
-    while(1) {
-        if (D_80042AC0 <= 0x10000) {
-            func_80040F3C(0);
-        } else if (D_80042ABC > 0xFFFF) {
-            func_80040F3C(1);
-            D_80042ABC -= 0x10000;
-            D_80042AC0 -= 0x10000;
-        } else if ((D_80042ABC > 0x7FFF) && (D_80042AC0 <= 0x18000)) {
-            D_80042AC8++;
-            D_80042ABC -= 0x8000;
-            D_80042AC0 -= 0x8000;
+    sym = char_to_sym[ch];
+    range = high - low;
+    high = low + (range * sym_cum[sym - 1]) / sym_cum[0];
+    low +=       (range * sym_cum[sym    ]) / sym_cum[0];
+    for ( ; ; ) {
+        if (high <= Q2) {
+            Output(0);
+        } else if (low >= Q2) {
+            Output(1);
+            low -= Q2;
+            high -= Q2;
+        } else if ((low >= Q1) && (high <= Q3)) {
+            shifts++;
+            low -= Q1;
+            high -= Q1;
         } else {
             break;
         }
-        D_80042ABC *= 2;
-        D_80042AC0 *= 2;
+        low += low;
+        high += high;
     }
-    func_80040DFC(temp_s6);
+    UpdateModel(sym);
 }
 
-void func_80041148(s32 arg0) {
-    s32 diff = D_80042AC0 - D_80042ABC;
-    D_80042AC0 = D_80042ABC + ((diff * D_80042A64[arg0]) / *D_80042A64);
-    D_80042ABC += (diff * D_80042A64[arg0 + 1]) / *D_80042A64;
-    while (1) {
-        if (D_80042AC0 <= 0x10000U) {
-            func_80040F3C(0);
-        } else if (D_80042ABC > 0xFFFFU) {
-            func_80040F3C(1);
-            D_80042ABC -= 0x10000U;
-            D_80042AC0 -= 0x10000U; 
-        } else if ((D_80042ABC > 0x7FFFU) && (D_80042AC0 <= 0x18000U)) {
-            D_80042AC8 += 1;
-            D_80042ABC -= 0x8000;
-            D_80042AC0 -= 0x8000;
+void EncodePosition(int position) {
+    unsigned long int range;
+
+    range = high - low;
+    high = low + (range * position_cum[position    ]) / position_cum[0];
+    low +=       (range * position_cum[position + 1]) / position_cum[0];
+    for ( ; ; ) {
+        if (high <= Q2) {
+            Output(0);
+        } else if (low >= Q2) {
+            Output(1);
+            low -= Q2;
+            high -= Q2; 
+        } else if ((low >= Q1) && (high <= Q3)) {
+            shifts++;
+            low -= Q1;
+            high -= Q1;
         } else {
             break;
         }
-        D_80042ABC *= 2;
-        D_80042AC0 *= 2;
+        low += low;
+        high += high;
     }
 }
 
-void func_800412DC(void) {
-    s32 temp;
-    D_80042AC8 += 1;
-    if(D_80042ABC <= 0x7FFF)
-        func_80040F3C(0);
-    else
-        func_80040F3C(1);
-    func_80040884();
+void EncodeEnd(void) {
+    shifts++;
+    if(low < Q1) {
+        Output(0);
+    } else {
+        Output(1);
+    }
+    FlushBitBuffer();
 }
 
-int func_8004132C(u32 search) {
-    int start = 1;
-    int end = 0x13A;
-    int half;
-    while (start < end) {
-        half = (start + end) / 2;
-        if (search < D_80042A60[half]) {
-            start = half + 1;
+int BinarySearchSym(unsigned int x) {
+    int i = 1, j = N_CHAR, k;
+    while (i < j) {
+        k = (i + j) / 2;
+        if (x < sym_cum[k]) {
+            i = k + 1;
         } else {
-            end = half;
+            j = k;
         }
     }
-    return start;
+    return i;
 }
 
-int func_8004137C(u32 search) {
-    int half;
-    int start = 1;
-    int end = 0x1000;
-    while (start < end) {
-        half = (start + end) / 2;
-        if (search < D_80042A64[half]) {
-            start = half + 1;
+int BinarySearchPos(unsigned int x) {
+    int i = 1, j = N, k;
+    while (i < j) {
+        k = (i + j) / 2;
+        if (x < position_cum[k]) {
+            i = k + 1;
         } else {
-            end = half;
+            j = k;
         }
     }
-    return start - 1;
+    return i - 1;
 }
 
-void func_800413CC(void) {
-    s32 var_s0;
-    for (var_s0 = 0; var_s0 < 0x11; var_s0++) {
-        D_80042AC4 = (D_80042AC4 << 1) + getNextFileBit();
+void StartDecode(void) {
+    int i;
+    for (i = 0; i < (M + 2); i++) {
+        value = 2 * value + GetBit();
     };
 }
 
-s32 func_80041418(void) {
-    s32 temp_s0;
-    s32 temp_v0;
-    u32 diff;
+int DecodeChar(void) {
+    int sym, ch;
+    unsigned long int range;
 
-    diff = D_80042AC0 - D_80042ABC;
-    temp_v0 = func_8004132C((u32) ((((D_80042AC4 - D_80042ABC) + 1) * *D_80042A60) - 1) / diff);
-    D_80042AC0 = D_80042ABC + ((u32) (diff * D_80042A60[temp_v0 - 1]) / (u32) *D_80042A60);
-    D_80042ABC += (u32) (diff * D_80042A60[temp_v0]) / (u32) *D_80042A60;
-    while(1){
-        if ((u32) D_80042ABC > 0xFFFFU) {
-            D_80042ABC += 0xFFFF0000;
-            D_80042AC4 += 0xFFFF0000;
-            D_80042AC0 += 0xFFFF0000;
-        } else if (((u32) D_80042ABC > 0x7FFFU) && ((u32) D_80042AC0 <= 0x18000U)) {
-            D_80042ABC -= 0x8000;
-            D_80042AC0 -= 0x8000;
-            D_80042AC4 -= 0x8000;
-        } else if ((u32) D_80042AC0 > 0x10000U) {
+    range = high - low;
+    sym = BinarySearchSym(((((value - low) + 1) * sym_cum[0]) - 1) / range);
+    high = low + (range * sym_cum[sym - 1]) / sym_cum[0];
+    low +=       (range * sym_cum[sym    ]) / sym_cum[0];
+    for ( ; ; ) {
+        if (low >= Q2) {
+            value -= Q2;
+            low -= Q2;
+            high -= Q2;
+        } else if ((low >= Q1) && (high <= Q3)) {
+            value -= Q1;
+            low -= Q1;
+            high -= Q1;
+        } else if (high > Q2) {
             break;
         }
-        D_80042ABC *= 2;
-        D_80042AC0 *= 2;
-        D_80042AC4 = (D_80042AC4 << 1) + getNextFileBit();
+        low += low;
+        high += high;
+        value = 2 * value + GetBit();
     }
-    temp_s0 = D_80042A48[temp_v0];
-    func_80040DFC(temp_v0);
-    return temp_s0;
+    ch = sym_to_char[sym];
+    UpdateModel(sym);
+    return ch;
 }
 
-s32 func_8004160C(void) {
-    s32 temp_v0;
-    u32 temp_s0;
+int DecodePosition(void) {
+    int position;
+    unsigned long int range;
 
-    temp_s0 = D_80042AC0 - D_80042ABC;
-    temp_v0 = func_8004137C((u32) ((((D_80042AC4 - D_80042ABC) + 1) * *D_80042A64) - 1) / temp_s0);
-    D_80042AC0 = D_80042ABC + ((u32) (temp_s0 * D_80042A64[temp_v0]) / (u32) *D_80042A64);
-    D_80042ABC += (u32) (temp_s0 * D_80042A64[temp_v0 + 1]) / (u32) *D_80042A64;
-    while(1) {
-        if (D_80042ABC > 0xFFFFU) {
-            D_80042ABC += 0xFFFF0000;
-            D_80042AC4 += 0xFFFF0000;
-            D_80042AC0 += 0xFFFF0000;
-        } else if ((D_80042ABC > 0x7FFFU) && (D_80042AC0 <= 0x18000U)) {
-            D_80042ABC -= 0x8000;
-            D_80042AC0 -= 0x8000;
-            D_80042AC4 -= 0x8000;
-        } else if (D_80042AC0 > 0x10000U) {
+    range = high - low;
+    position = BinarySearchPos(((((value - low) + 1) * position_cum[0]) - 1) / range);
+    high = low + (range * position_cum[position    ]) / position_cum[0];
+    low +=       (range * position_cum[position + 1]) / position_cum[0];
+    for ( ; ; ) {
+        if (low >= Q2) {
+            value -= Q2;
+            low -= Q2;
+            high -= Q2;
+        } else if ((low >= Q1) && (high <= Q3)) {
+            value -= Q1;
+            low -= Q1;
+            high -= Q1;
+        } else if (high > Q2) {
             break;
         }
-        D_80042ABC *= 2;
-        D_80042AC0 *= 2;
-        D_80042AC4 = (D_80042AC4 << 1) + getNextFileBit();
+        low += low;
+        high += high;
+        value = 2 * value + GetBit();
     }
-    return temp_v0;
+    return position;
 }
 
-INCLUDE_ASM(s32, "main", func_800417E0);
+s32 Encode(u8* arg0, u8* arg1, s32 arg2) {
+    int  i, c, len, r, s, last_match_length;
 
-s32 func_80041C58(void *loadAddr, u8 *dataStart)
+    text_buf = func_80042178((N + F - 1) * sizeof(unsigned char));
+    lson = func_80042178((N + 1) * sizeof(int));
+    rson = func_80042178((N + 257) * sizeof(int));
+    dad = func_80042178((N + 1) * sizeof(int));
+    char_to_sym = func_80042178(N_CHAR * sizeof(int));
+    sym_to_char = func_80042178((N_CHAR + 1) * sizeof(int));
+    sym_freq = func_80042178((N_CHAR + 1) * sizeof(int));
+    sym_cum = func_80042178((N_CHAR + 1) * sizeof(int));
+    position_cum = func_80042178((N + 1) * sizeof(int));
+    textsize = 0;
+    codesize = 0;
+    printcount = 0;
+    buffer_putbit = 0;
+    mask_putbit = 0x80;
+    buffer = 0;
+    mask = 0;
+    low = 0;
+    high = 0x20000;
+    value = 0;
+    outfile = arg0;
+    infile = arg1;
+    uncompressed_len = arg2;
+    textsize = arg2;
+    outfile_len = arg2;
+    in_cursor = 0;
+    out_cursor = 0;
+    
+    for(i = 0; i < 4; i++) {
+        outfile[out_cursor++] = uncompressed_len >> (i * 8);
+    }
+    codesize += 4;
+    if (textsize == 0) {
+        return 0;
+    }
+    textsize = 0;
+    StartModel();
+    InitTree();
+	s = 0;
+    r = N - F;
+	for (i = s; i < r; i++) {
+        text_buf[i] = ' ';
+    }
+    
+    for(len = 0; (len < F) && (in_cursor < uncompressed_len); len++) {
+        c = infile[in_cursor++];
+        text_buf[r + len] = c;
+    }
+    
+    textsize = len;
+	for (i = 1; i <= F; i++) {
+        InsertNode(r - i);
+    }
+	InsertNode(r);
+
+    do {
+        if (match_length > len) {
+            match_length = len;
+        }
+        
+        if (match_length > len) {
+            match_length = len;
+        }
+		if (match_length <= THRESHOLD) {
+			match_length = 1; 
+            EncodeChar(text_buf[r]); 
+        } else {
+			EncodeChar(255 - THRESHOLD + match_length);
+			EncodePosition(match_position - 1);
+        }
+    
+        last_match_length = match_length;
+        
+        for(i = 0; (i < last_match_length) && (in_cursor < uncompressed_len); i++) {  
+            c = infile[in_cursor++];
+            DeleteNode(s);
+            
+            text_buf[s] = c;
+            
+			if (s < F - 1) {
+                text_buf[s + N] = c;
+            }
+            
+			s = (s + 1) & (N - 1);
+			r = (r + 1) & (N - 1);
+            
+			InsertNode(r);
+        }
+        
+        while (i++ < last_match_length) {
+			DeleteNode(s);
+			s = (s + 1) & (N - 1);
+			r = (r + 1) & (N - 1);
+			if (--len) {
+                InsertNode(r);
+            }
+		}
+    } while (len > 0);
+    EncodeEnd();
+    free(position_cum);
+    free(sym_cum);
+    free(sym_freq);
+    free(sym_to_char);
+    free(char_to_sym);
+    free(dad);
+    free(rson);
+    free(lson);
+    free(text_buf);
+    return out_cursor;
+}
+
+s32 Decode(void *loadAddr, u8 *dataStart)
 {
-  s32 temp_a2;
-  s32 temp_a3;
-  s32 var_s1;
-  s32 var_a1;
-  s32 var_a2;
-  s32 temp_v0_2;
-  u32 var_s2;
-  D_80042A78 = func_80042178(0x103B);
-  D_80042A80 = func_80042178(0x1001 * sizeof(s32));
-  D_80042A84 = func_80042178(0x1101 * sizeof(s32));
-  D_80042A68 = func_80042178(0x1001 * sizeof(s32));
-  D_80042A4C = func_80042178(0x013A * sizeof(s32));
-  D_80042A48 = func_80042178(0x013B * sizeof(s32));
-  D_80042A7C = func_80042178(0x013B * sizeof(s32));
-  D_80042A60 = func_80042178(0x013B * sizeof(s32));
-  D_80042A64 = func_80042178(0x1001 * sizeof(s32));
-  D_80042AB0 = 0;
-  D_80042AB4 = 0;
-  D_80042AB8 = 0;
-  D_80042A58 = 0;
-  D_80042A44 = 0x80;
-  D_80042A54 = 0;
-  D_80042A40 = 0;
-  D_80042ABC = 0;
-  D_80042AC0 = 0x20000;
-  D_80042AC4 = 0;
-  D_80042A88 = loadAddr;
-  D_80042A6C = dataStart;
-  D_80042A50 = 0;
-  D_80042A70 = 0;
-  D_80042AB0 = 0;
-  for (var_a2 = 0; var_a2 < 4; var_a2++)
-  {
-    D_80042AB0 |= D_80042A6C[D_80042A50] << (var_a2 * 8);
-    D_80042A50++;
-  }
-
-  D_80042A8C = D_80042AB0;
-  if (D_80042AB0 == 0)
-  {
-    return 0;
-  }
-  func_800413CC();
-  func_80040D1C();
-  for (var_a2 = 0; var_a2 < 0xFC4; var_a2++)
-  {
-    D_80042A78[var_a2] = 0x20;
-  }
-
-  var_s1 = 0xFC4;
-  var_s2 = 0;
-  while (var_s2 < D_80042AB0)
-  {
-    temp_v0_2 = func_80041418();
-    if (temp_v0_2 < 0x100)
-    {
-      var_s2++;
-      D_80042A88[D_80042A70++] = temp_v0_2;
-      D_80042A78[var_s1] = temp_v0_2;
-      var_s1++;
-      var_s1 &= 0xFFF;
+    int  i, j, k, r, c;
+	unsigned long int  count;
+    
+    text_buf = func_80042178((N + F - 1) * sizeof(unsigned char));
+    lson = func_80042178((N + 1) * sizeof(int));
+    rson = func_80042178((N + 257) * sizeof(int));
+    dad = func_80042178((N + 1) * sizeof(int));
+    char_to_sym = func_80042178(N_CHAR * sizeof(int));
+    sym_to_char = func_80042178((N_CHAR + 1) * sizeof(int));
+    sym_freq = func_80042178((N_CHAR + 1) * sizeof(int));
+    sym_cum = func_80042178((N_CHAR + 1) * sizeof(int));
+    position_cum = func_80042178((N + 1) * sizeof(int));
+    textsize = 0;
+    codesize = 0;
+    printcount = 0;
+    buffer_putbit = 0;
+    mask_putbit = 0x80;
+    buffer = 0;
+    mask = 0;
+    low = 0;
+    high = 0x20000;
+    value = 0;
+    outfile = loadAddr;
+    infile = dataStart;
+    in_cursor = 0;
+    out_cursor = 0;
+    
+    textsize = 0;
+    for (i = 0; i < 4; i++) {
+        textsize |= infile[in_cursor] << (i * 8);
+        in_cursor++;
     }
-    else
-    {
-      temp_a2 = (var_s1 - func_8004160C()) - 1;
-      temp_a2 &= 0xFFF;
-      var_a2 = temp_a2;
-      temp_a3 = temp_v0_2 - 0xFD;
-      for (var_a1 = 0; var_a1 < temp_a3; var_a1++)
-      {
-        temp_v0_2 = D_80042A78[(var_a2 + var_a1) & 0xFFF];
-        var_s2++;
-        D_80042A88[D_80042A70++] = temp_v0_2;
-        D_80042A78[var_s1] = temp_v0_2;
-        var_s1++;
-        var_s1 &= 0xFFF;
-      }
 
+    outfile_len = textsize;
+    if (textsize == 0) {
+        return 0;
     }
-  }
+    StartDecode();
+    StartModel();
+    for (i = 0; i < 0xFC4; i++) {
+        text_buf[i] = 0x20;
+    }
 
-  func_8004224C(D_80042A64);
-  func_8004224C(D_80042A60);
-  func_8004224C(D_80042A7C);
-  func_8004224C(D_80042A48);
-  func_8004224C(D_80042A4C);
-  func_8004224C(D_80042A68);
-  func_8004224C(D_80042A84);
-  func_8004224C(D_80042A80);
-  func_8004224C(D_80042A78);
-  return D_80042A70;
+    r = 0xFC4;
+    count = 0;
+    while (count < textsize) {
+        c = DecodeChar();
+        if (c < 0x100) {
+            outfile[out_cursor++] = c;
+            text_buf[r++] = c;
+            r &= 0xFFF;
+            count++;
+        } else {
+            i = ((r - DecodePosition()) - 1) & 0xFFF;
+            j = c - 0xFD;
+            for (k = 0; k < j; k++) {
+                c = text_buf[(i + k) & 0xFFF];
+                outfile[out_cursor++] = c;
+                text_buf[r++] = c;
+                r &= 0xFFF;
+                count++;
+            }
+
+        }
+    }
+
+    free(position_cum);
+    free(sym_cum);
+    free(sym_freq);
+    free(sym_to_char);
+    free(char_to_sym);
+    free(dad);
+    free(rson);
+    free(lson);
+    free(text_buf);
+    
+    return out_cursor;
 }
 
-void func_80041FCC(u32 loadAddr, char* arg1) {
+void loadFile(u32 loadAddr, char* filename) {
     u8* var_a1;
     s32 var_v1;
     u32 temp;
 
     var_a1 = (u8*) &D_80042B20;
-    while(1) {
-        s32 var_a2 = 1;
-        temp = *arg1;
-        while (temp != 0 && temp == ((FileEntry*) var_a1)->name[var_a2 - 1]) {
-            temp = arg1[var_a2];
-            var_a2++;
+    while (1) {
+        s32 i = 1;
+        temp = filename[0];
+        while (temp != 0 && temp == ((FileEntry*) var_a1)->name[i - 1]) {
+            temp = filename[i];
+            i++;
         }
         if (temp == 0) {
             break;
         }
-        var_a2 = var_a1[0] << 24;
-        var_a2 |= var_a1[1] << 16;
-        var_a2 |= var_a1[2] << 8;
-        var_a2 |= var_a1[3];
-        var_a1 += var_a2;
+        i = var_a1[0] << 24;
+        i |= var_a1[1] << 16;
+        i |= var_a1[2] << 8;
+        i |= var_a1[3];
+        var_a1 += i;
     }
-    func_80041C58((void *)loadAddr, ((FileEntry*) var_a1)->fileData);
+    Decode((void *)loadAddr, ((FileEntry*) var_a1)->fileData);
 }
 
 #ifndef NON_MATCHING
@@ -837,7 +985,7 @@ void setupHeap(u32 start, u32 end) {
 
 INCLUDE_ASM(void *, "main", func_80042178); // malloc
 
-s32 func_8004224C(void* arg0) { // free
+s32 free(void* arg0) { // free
     mallocChunk* temp_a0;
     mallocChunk* temp_a1;
     mallocChunk* temp_a3;
@@ -1030,18 +1178,16 @@ s32 func_800426F8(void) {
     return func_80040580(0);
 }
 
-#define WAIT_COND (func_800426F8() & 0x10)
-
 s32 func_80042714(s32 arg0) {
     s32 rv;
     u32 Status;
 
     Status = getStatus();
     setStatus(Status & ~SR_IE);
-    while (!WAIT_COND);
+    while (!(func_800426F8() & 0x10));
     rv = func_800426F8() & 0xF;
     func_80042694((arg0 & 0xF) | 0x10);
-    while (WAIT_COND);
+    while (func_800426F8() & 0x10);
     func_80042694(0);
     setStatus(Status);
     return rv;

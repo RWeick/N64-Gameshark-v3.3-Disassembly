@@ -14,3 +14,5 @@ __pycache__/
 permute.c
 *.z64
 *.bak
+fs/
+tools/lzari/lzari
