@@ -40,7 +40,11 @@ INCLUDE_ASM(const s32, "540", func_80202898);
 
 INCLUDE_ASM(const s32, "540", func_80202A04);
 
-INCLUDE_ASM(const s32, "540", func_80202B88);
+void func_80202B88(void) {
+    u32* si_regs = (u32*)PHYS_TO_K1(SI_BASE_REG); // bug! should be volatile!
+
+    while ((si_regs[6] & 3) != 0);
+}
 
 INCLUDE_ASM(const s32, "540", func_80202BAC);
 
