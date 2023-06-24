@@ -6,4 +6,6 @@
 
 #include <ultra64.h>
 
+typedef u8 Addr[];
+
 #endif

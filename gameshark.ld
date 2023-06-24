@@ -81,6 +81,14 @@ SECTIONS
     {
         main_TEXT_START = .;
         build/us/src/main.c.o(.text);
+        build/us/src/pi.c.o(.text);
+        build/us/src/hw.c.o(.text);
+        build/us/src/lzari.c.o(.text);
+        build/us/src/libc.c.o(.text);
+        build/us/asm/us/util.s.o(.text);
+        build/us/src/si.c.o(.text);
+        build/us/src/led.c.o(.text);
+        build/us/src/3650.c.o(.text);
         main_TEXT_END = .;
         main_TEXT_SIZE = ABSOLUTE(main_TEXT_END - main_TEXT_START);
         main_DATA_START = .;
@@ -88,10 +96,34 @@ SECTIONS
         build/us/assets/us/39C0.bin.o(.data);
         main_c = .;
         build/us/src/main.c.o(.data);
+        pi_c = .;
+        build/us/src/pi.c.o(.data);
+        hw_c = .;
+        build/us/src/hw.c.o(.data);
+        lzari_c = .;
+        build/us/src/lzari.c.o(.data);
+        libc_c = .;
+        build/us/src/libc.c.o(.data);
+        util_s = .;
+        build/us/asm/us/util.s.o(.data);
+        si_c = .;
+        build/us/src/si.c.o(.data);
+        led_c = .;
+        build/us/src/led.c.o(.data);
+        _3650_c = .;
+        build/us/src/3650.c.o(.data);
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
         main_RODATA_START = .;
         build/us/src/main.c.o(.rodata);
+        build/us/src/pi.c.o(.rodata);
+        build/us/src/hw.c.o(.rodata);
+        build/us/src/lzari.c.o(.rodata);
+        build/us/src/libc.c.o(.rodata);
+        build/us/asm/us/util.s.o(.rodata);
+        build/us/src/si.c.o(.rodata);
+        build/us/src/led.c.o(.rodata);
+        build/us/src/3650.c.o(.rodata);
         main_RODATA_END = .;
         main_RODATA_SIZE = ABSOLUTE(main_RODATA_END - main_RODATA_START);
     }
@@ -100,6 +132,14 @@ SECTIONS
     {
         main_BSS_START = .;
         build/us/src/main.c.o(.bss);
+        build/us/src/pi.c.o(.bss);
+        build/us/src/hw.c.o(.bss);
+        build/us/src/lzari.c.o(.bss);
+        build/us/src/libc.c.o(.bss);
+        build/us/asm/us/util.s.o(.bss);
+        build/us/src/si.c.o(.bss);
+        build/us/src/led.c.o(.bss);
+        build/us/src/3650.c.o(.bss);
         main_BSS_END = .;
         main_BSS_SIZE = ABSOLUTE(main_BSS_END - main_BSS_START);
     }

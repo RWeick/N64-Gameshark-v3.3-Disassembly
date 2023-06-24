@@ -3,6 +3,7 @@ from typing import List, Optional
 from util import log
 
 from os import makedirs
+from os.path import dirname, realpath
 
 from segtypes.common.bin import CommonSegBin
 
@@ -41,19 +42,21 @@ class N64SegFsblob(CommonSegBin):
             if add == 0xFFFFFFFF:
                 break
             
-            name = name.split(b"\0")[0].decode()
+            try:
+                name = name.split(b"\0")[0].decode()
+            except:
+                break
             
             data = rom_bytes[index + 0x10:index + add]
             self.files[name] = data
             index += add
-        
 
     def split(self, rom_bytes):
         for file in self.files.keys():
             with TemporaryDirectory() as tempdir:
                 with open(f"{tempdir}/comp.bin", "wb") as g:
                     g.write(self.files[file])
-                run(["tools/lzari/lzari", "d", f"{tempdir}/comp.bin", f"{tempdir}/dec.bin"])
+                run([f"{dirname(realpath(__file__))}/../lzari/lzari", "d", f"{tempdir}/comp.bin", f"{tempdir}/dec.bin"])
                 with open(f"{tempdir}/dec.bin", "rb") as f:
                     dec = bytearray(f.read())
                     makedirs(self.yaml["out_dir"], exist_ok = True)

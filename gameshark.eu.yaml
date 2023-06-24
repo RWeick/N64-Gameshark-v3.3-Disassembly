@@ -27,6 +27,7 @@ options:
   asset_path: assets/eu/
   asm_path: asm/eu/
   build_path: build/eu/
+  ld_symbol_header_path: include/linker.h
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -60,6 +61,14 @@ segments:
     vram: 0x80040180
     subsegments:
       - [0x1180, c, main]
+      - [0x1560, c, pi]
+      - [0x1580, c, hw]
+      - [0x17C0, c, lzari]
+      - [0x3060, c, libc]
+      - [0x32C0, hasm, util]
+      - [0x3410, c, si]
+      - [0x34C0, c, led]
+      - [0x3650, c]
       - [0x39C0, bin]
 
   - name: fsblob

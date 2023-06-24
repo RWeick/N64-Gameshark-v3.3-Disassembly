@@ -1,0 +1,54 @@
+name: trainer
+sha1: 257a8ee5b6a885fbfecc2e2c805903ab0eecde03
+options:
+  basename: trainer.eu
+  target_path: ../fs/eu/trainer.bin
+  base_path: .
+  compiler: SN64
+  find_file_boundaries: True
+  do_c_func_detection: yes
+  migrate_rodata_to_functions: yes
+  # header_encoding: ASCII
+  platform: n64
+  create_undefined_funcs_auto: False
+  # undefined_funcs_auto_path: undefined_funcs_eu.txt
+  create_undefined_syms_auto: False
+  # undefined_syms_auto_path: undefined_syms_eu.txt
+  symbol_addrs_path: symbol_addrs_eu.txt
+  # asm_path: asm
+  # src_path: src
+  # build_path: build
+  extensions_path: ../tools/splat_ext
+  # mips_abi_float_regs: o32
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  auto_all_sections: [".data", ".rodata", ".bss"]
+  libultra_symbols: True
+  hardware_regs: True
+  asset_path: assets/eu/
+  asm_path: asm/eu/
+  build_path: build/eu/
+  # generated_s_preamble:
+    # .include "macro.inc"
+
+    # .set noat
+
+    # .set noreorder
+
+segments:
+  - name: main
+    type: code
+    start: 0x0
+    vram: 0x80780800
+    subsegments:
+      - [0x0, c]
+      - [0x450, c]
+      - [0x14280, gsasm]
+      # - [0x17360, c]
+      # - [0x17710, c]
+      # - [0x178F0, c]
+      # - [0x17FE0, c]
+      # - [0x184F0, hasm]
+      
+  - [0x199A8]
+  
+  

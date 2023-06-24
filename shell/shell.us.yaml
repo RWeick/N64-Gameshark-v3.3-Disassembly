@@ -1,0 +1,74 @@
+name: shell
+sha1: 1b939e4cfbbfbb350534f2c460628722a5145158
+options:
+  basename: shell.us
+  target_path: ../fs/us/shell.bin
+  base_path: .
+  compiler: SN64
+  find_file_boundaries: True
+  do_c_func_detection: yes
+  migrate_rodata_to_functions: yes
+  # header_encoding: ASCII
+  platform: n64
+  create_undefined_funcs_auto: False
+  # undefined_funcs_auto_path: undefined_funcs_us.txt
+  create_undefined_syms_auto: False
+  # undefined_syms_auto_path: undefined_syms_us.txt
+  symbol_addrs_path: symbol_addrs_us.txt
+  # asm_path: asm
+  # src_path: src
+  # build_path: build
+  extensions_path: ../tools/splat_ext
+  # mips_abi_float_regs: o32
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  auto_all_sections: [".data", ".rodata", ".bss"]
+  libultra_symbols: True
+  hardware_regs: True
+  asset_path: assets/us/
+  asm_path: asm/us/
+  build_path: build/us/
+  # generated_s_preamble:
+    # .include "macro.inc"
+
+    # .set noat
+
+    # .set noreorder
+
+segments:
+  - name: main
+    type: code
+    start: 0x0
+    vram: 0x80200400
+    subsegments:
+      - [0x0, c, main]
+      - [0x540, c]
+      - [0x2CA0, c]
+      - [0x5050, bin]
+      # - [0x17360, c]
+      # - [0x17710, c]
+      # - [0x178F0, c]
+      # - [0x17FE0, c]
+      # - [0x184F0, hasm]
+      
+  - name: data
+    type: group
+    start: 0x22720
+    follows_vram: main
+    subsegments:
+      - [0x22720, bin]
+      - name: font
+        type: i4
+        start: 0x24880
+        width: 8
+        height: 768
+      - [0x25480, bin]
+      - name: fsblob
+        type: fsblob
+        out_dir: fs/us/
+        start: 0x27FE0
+      - [0x2EF7D, bin]
+  
+  
+  - [0x402C0]
+  
+  

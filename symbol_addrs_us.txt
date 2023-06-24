@@ -1,0 +1,8 @@
+malloc = 0x80042178; // type:func
+
+call = 0x80042330; // type:func
+
+getStatus = 0x80042350; // type:func
+setStatus = 0x8004235C; // type:func
+getCause = 0x80042368; // type:func
+getEPC = 0x80042374; // type:func
