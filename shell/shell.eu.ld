@@ -47,11 +47,19 @@ SECTIONS
 
     data_ROM_START = __romPos;
     data_VRAM = ADDR(.data);
-    .data main_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
+    .data main_VRAM_END : AT(data_ROM_START) SUBALIGN(1)
     {
         data_DATA_START = .;
-        data_bin = .;
-        build/eu/assets/eu/data.bin.o(.data);
+        _22800_bin = .;
+        build/eu/assets/eu/22800.bin.o(.data);
+        font_png = .;
+        build/eu/assets/eu/font.png.o(.data);
+        _255C0_bin = .;
+        build/eu/assets/eu/255C0.bin.o(.data);
+        fsblob_bin = .;
+        build/eu/assets/eu/fsblob.bin.o(.data);
+        _29A2E_bin = .;
+        build/eu/assets/eu/29A2E.bin.o(.data);
         data_DATA_END = .;
         data_DATA_SIZE = ABSOLUTE(data_DATA_END - data_DATA_START);
     }

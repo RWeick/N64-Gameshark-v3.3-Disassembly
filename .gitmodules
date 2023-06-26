@@ -10,3 +10,6 @@
 [submodule "tools/fsblob"]
 	path = tools/fsblob
 	url = https://github.com/Jhynjhiruu/fsblob
+[submodule "tools/pigment"]
+	path = tools/pigment
+	url = https://github.com/decompals/pigment.git

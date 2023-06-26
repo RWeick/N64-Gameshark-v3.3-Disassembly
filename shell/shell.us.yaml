@@ -54,6 +54,7 @@ segments:
     type: group
     start: 0x22720
     follows_vram: main
+    subalign: 1
     subsegments:
       - [0x22720, bin]
       - name: font
@@ -66,7 +67,7 @@ segments:
         type: fsblob
         out_dir: fs/us/
         start: 0x27FE0
-      - [0x2EF7D, bin]
+      - [0x296BD, bin]
   
   
   - [0x402C0]

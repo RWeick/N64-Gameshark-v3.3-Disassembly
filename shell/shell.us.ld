@@ -47,7 +47,7 @@ SECTIONS
 
     data_ROM_START = __romPos;
     data_VRAM = ADDR(.data);
-    .data main_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
+    .data main_VRAM_END : AT(data_ROM_START) SUBALIGN(1)
     {
         data_DATA_START = .;
         _22720_bin = .;
@@ -58,8 +58,8 @@ SECTIONS
         build/us/assets/us/25480.bin.o(.data);
         fsblob_bin = .;
         build/us/assets/us/fsblob.bin.o(.data);
-        _2EF7D_bin = .;
-        build/us/assets/us/2EF7D.bin.o(.data);
+        _296BD_bin = .;
+        build/us/assets/us/296BD.bin.o(.data);
         data_DATA_END = .;
         data_DATA_SIZE = ABSOLUTE(data_DATA_END - data_DATA_START);
     }

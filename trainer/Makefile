@@ -52,6 +52,8 @@ O_FILES := $(foreach f,$(C_FILES:.c=.c.o),build/$(VERSION)/$f) \
            $(foreach f, $(S_FILES:.s=.s.o),build/$(VERSION)/$f) \
 		   $(foreach f,$(B_FILES:.bin=.bin.o),build/$(VERSION)/$f)
 
+O_FILES += build/$(VERSION)/assets/$(VERSION)/fsblob.bin.o
+
 # Create build directories
 $(shell mkdir -p build build/$(VERSION) $(foreach dir,$(SRC_DIRS) $(ASM_DIRS),build/$(VERSION)/$(dir)))
 
@@ -120,6 +122,12 @@ build/$(VERSION)/src/%.c.obj: src/%.c
 	$(CPP) $(CPPFLAGS) $< -o $@.i
 	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
 	$(SNAS) $(SNASFLAGS) $@.s -o $@
+
+build/$(VERSION)/assets/$(VERSION)/fsblob.bin: fs/$(VERSION)/TILE1~1.TG~ fs/$(VERSION)/TILE2~1.TG~ fs/$(VERSION)/TILE3~1.TG~ fs/$(VERSION)/TILE4~1.TG~ fs/$(VERSION)/tile1.tg~ fs/$(VERSION)/tile2.tg~ fs/$(VERSION)/tile3.tg~ fs/$(VERSION)/menuf.tg~ fs/$(VERSION)/bits.tg~
+	../tools/fsblob/target/release/fsblob ../tools/lzari/lzari build -o $@ fs/$(VERSION)/TILE1~1.TG~ fs/$(VERSION)/TILE2~1.TG~ fs/$(VERSION)/TILE3~1.TG~ fs/$(VERSION)/TILE4~1.TG~ fs/$(VERSION)/tile1.tg~@tile1.tg~\"\\u{00}\\u{7E}\" fs/$(VERSION)/tile2.tg~@tile2.tg~\"\\u{00}\\u{7E}\" fs/$(VERSION)/tile3.tg~@tile3.tg~\"\\u{00}\\u{7E}\" fs/$(VERSION)/menuf.tg~@menuf.tg~\"\\u{00}\\u{7E}\" fs/$(VERSION)/bits.tg~@bits.tg~\"\\u{00}\\u{00}\\u{7E}\"
+
+build/$(VERSION)/assets/$(VERSION)/%.bin.o: build/$(VERSION)/assets/$(VERSION)/%.bin
+	$(OBJCOPY) -I binary -O elf32-big $< $@
 
 build/permute.c.o: build/permute.c.obj
 	../tools/psyq-obj-parser $< -o $@ -b -n > /dev/null

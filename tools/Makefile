@@ -11,7 +11,9 @@ LZARI := lzari/lzari
 
 FSBLOB := fsblob/target/release/fsblob
 
-all: $(GCC-AS) $(GCC-2.8.1) $(PSYQ) $(LZARI) $(FSBLOB)
+PIGMENT := pigment/target/release/pigment
+
+all: $(GCC-AS) $(GCC-2.8.1) $(PSYQ) $(LZARI) $(FSBLOB) $(PIGMENT)
 
 clean:
 distclean: clean
@@ -35,6 +37,9 @@ $(LZARI): lzari/LZARI.C
 
 $(FSBLOB): fsblob/Cargo.toml fsblob/Cargo.lock fsblob/src/main.rs fsblob/src/lib.rs
 	cd fsblob && cargo build --release
+
+$(PIGMENT): pigment/Cargo.toml pigment/Cargo.lock pigment/src/main.rs pigment/src/lib.rs
+	cd pigment && cargo build --release
 
 $(GCC_DIR):
 	mkdir -p $@

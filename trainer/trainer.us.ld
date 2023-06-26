@@ -43,6 +43,34 @@ SECTIONS
     main_ROM_END = __romPos;
     main_VRAM_END = .;
 
+    fsblob_ROM_START = __romPos;
+    fsblob_VRAM = ADDR(.fsblob);
+    .fsblob main_VRAM_END : AT(fsblob_ROM_START) SUBALIGN(16)
+    {
+        fsblob_DATA_START = .;
+        fsblob_bin = .;
+        build/us/assets/us/fsblob.bin.o(.data);
+        fsblob_DATA_END = .;
+        fsblob_DATA_SIZE = ABSOLUTE(fsblob_DATA_END - fsblob_DATA_START);
+    }
+    __romPos += SIZEOF(.fsblob);
+    fsblob_ROM_END = __romPos;
+    fsblob_VRAM_END = .;
+
+    data_ROM_START = __romPos;
+    data_VRAM = ADDR(.data);
+    .data fsblob_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
+    {
+        data_DATA_START = .;
+        data_bin = .;
+        build/us/assets/us/data.bin.o(.data);
+        data_DATA_END = .;
+        data_DATA_SIZE = ABSOLUTE(data_DATA_END - data_DATA_START);
+    }
+    __romPos += SIZEOF(.data);
+    data_ROM_END = __romPos;
+    data_VRAM_END = .;
+
     /DISCARD/ :
     {
         *(*);

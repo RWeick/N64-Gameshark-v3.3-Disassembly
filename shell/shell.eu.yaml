@@ -18,7 +18,7 @@ options:
   # asm_path: asm
   # src_path: src
   # build_path: build
-  extensions_path: ../../tools/splat_ext
+  extensions_path: ../tools/splat_ext
   # mips_abi_float_regs: o32
   section_order: [".text", ".data", ".rodata", ".bss"]
   auto_all_sections: [".data", ".rodata", ".bss"]
@@ -51,10 +51,24 @@ segments:
       # - [0x184F0, hasm]
       
   - name: data
-    type: bin
+    type: group
     start: 0x22800
     follows_vram: main
-    
+    subalign: 1
+    subsegments:
+      - [0x22800, bin]
+      - name: font
+        type: i4
+        start: 0x249C0
+        width: 8
+        height: 768
+      - [0x255C0, bin]
+      - name: fsblob
+        type: fsblob
+        out_dir: fs/eu/
+        start: 0x28120
+      - [0x29A2E, bin]
+  
   - [0x35F60]
   
   

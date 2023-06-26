@@ -52,6 +52,9 @@ O_FILES := $(foreach f,$(C_FILES:.c=.c.o),build/$(VERSION)/$f) \
            $(foreach f, $(S_FILES:.s=.s.o),build/$(VERSION)/$f) \
 		   $(foreach f,$(B_FILES:.bin=.bin.o),build/$(VERSION)/$f)
 
+O_FILES += build/$(VERSION)/assets/$(VERSION)/font.png.o
+O_FILES += build/$(VERSION)/assets/$(VERSION)/fsblob.bin.o
+
 # Create build directories
 $(shell mkdir -p build build/$(VERSION) $(foreach dir,$(SRC_DIRS) $(ASM_DIRS),build/$(VERSION)/$(dir)))
 
@@ -96,7 +99,7 @@ build/$(VERSION)/assets/$(VERSION): build/$(VERSION)/assets
 	mkdir $@
 
 build/$(VERSION)/assets/$(VERSION)/%.bin.o: assets/$(VERSION)/%.bin | build/$(VERSION)/assets/$(VERSION)
-	$(OBJCOPY) -I binary -O elf32-big $< $@
+	$(OBJCOPY) -I binary -O elf32-big $< $@ --set-section-alignment .data=1
 
 build/$(VERSION)/asm/$(VERSION)/%.s.o: asm/$(VERSION)/%.s
 	$(AS) $(ASFLAGS) -I include $< -o $@
@@ -116,6 +119,21 @@ build/$(VERSION)/src/%.c.obj: src/%.c
 	$(CPP) $(CPPFLAGS) $< -o $@.i
 	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
 	$(SNAS) $(SNASFLAGS) $@.s -o $@
+
+build/$(VERSION)/assets/$(VERSION)/font.png.bin: assets/$(VERSION)/font.png
+	../tools/pigment/target/release/pigment -o $@ $< i4
+
+build/$(VERSION)/assets/$(VERSION)/font.png.o: build/$(VERSION)/assets/$(VERSION)/font.png.bin
+	$(OBJCOPY) -I binary -O elf32-big $< $@
+
+build/us/assets/us/fsblob.bin: fs/us/tile1.tg~ fs/us/tile3.tg~ fs/us/tile4.tg~ fs/us/menuf.tg~ fs/us/bits.tg~
+	../tools/fsblob/target/release/fsblob ../tools/lzari/lzari build -o $@ $^
+
+build/eu/assets/eu/fsblob.bin: fs/eu/tile1.tg~ fs/eu/tile3.tg~ fs/eu/titletle.tg~ fs/eu/menuf.tg~ fs/eu/bits.tg~
+	../tools/fsblob/target/release/fsblob ../tools/lzari/lzari build -o $@ fs/eu/tile1.tg~ fs/eu/tile3.tg~ fs/eu/titletle.tg~ fs/eu/menuf.tg~@menuf.tg~\"\\u{00}\\u{67}\\u{7E}\" fs/eu/bits.tg~@bits.tg~\"\\u{00}\\u{00}\\u{67}\\u{7E}\"
+
+build/$(VERSION)/assets/$(VERSION)/%.bin.o: build/$(VERSION)/assets/$(VERSION)/%.bin
+	$(OBJCOPY) -I binary -O elf32-big $< $@
 
 build/permute.c.o: build/permute.c.obj
 	../tools/psyq-obj-parser $< -o $@ -b -n > /dev/null

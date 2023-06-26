@@ -49,6 +49,17 @@ segments:
       # - [0x17FE0, c]
       # - [0x184F0, hasm]
       
+  - name: fsblob
+    type: fsblob
+    out_dir: fs/eu/
+    start: 0x15210
+    follows_vram: main
+  
+  - name: data
+    type: bin
+    start: 0x19550
+    follows_vram: fsblob
+      
   - [0x199A8]
   
   

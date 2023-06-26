@@ -16,3 +16,4 @@ permute.c
 *.bak
 fs/
 tools/lzari/lzari
+include/linker.h

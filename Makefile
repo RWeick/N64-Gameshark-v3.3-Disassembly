@@ -10,6 +10,9 @@ NAME := actionreplay
 VERSION_DEFINE := VERSION_EU
 endif
 
+USE_BUILT_SHELL ?= 1
+USE_BUILT_TRAINER ?= 1
+
 TARGET := build/$(NAME).bin
 
 ELF := $(TARGET:.bin=.elf)
@@ -53,6 +56,34 @@ O_FILES := $(foreach f,$(C_FILES:.c=.c.o),build/$(VERSION)/$f) \
 		   $(foreach f,$(B_FILES:.bin=.bin.o),build/$(VERSION)/$f)
 
 O_FILES += build/$(VERSION)/assets/$(VERSION)/fsblob.bin.o
+
+ifeq ($(USE_BUILT_SHELL),1)
+ifeq ($(VERSION),us)
+FSBLOB_FILES := shell/build/us/shell.bin fs/us/gslogo3.bin fs/us/gslogo3.pal fs/us/tile1.tg~
+else
+FSBLOB_FILES := shell/build/eu/shell.bin fs/eu/arlogo3.bin fs/eu/arlogo3.pal fs/eu/tile1.tg~
+endif
+else
+ifeq ($(VERSION),us)
+FSBLOB_FILES := fs/us/shell.bin fs/us/gslogo3.bin fs/us/gslogo3.pal fs/us/tile1.tg~
+else
+FSBLOB_FILES := fs/eu/shell.bin fs/eu/arlogo3.bin fs/eu/arlogo3.pal fs/eu/tile1.tg~
+endif
+endif
+
+ifeq ($(USE_BUILT_TRAINER),1)
+ifeq ($(VERSION),us)
+FSBLOB_FILES += trainer/build/us/trainer.bin
+else
+FSBLOB_FILES += trainer/build/eu/trainer.bin
+endif
+else
+ifeq ($(VERSION),us)
+FSBLOB_FILES += fs/us/trainer.bin
+else
+FSBLOB_FILES += fs/eu/trainer.bin
+endif
+endif
 
 # Create build directories
 $(shell mkdir -p build build/$(VERSION) $(foreach dir,$(SRC_DIRS) $(ASM_DIRS),build/$(VERSION)/$(dir)))
@@ -120,11 +151,12 @@ build/$(VERSION)/src/%.c.obj: src/%.c
 	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
 	$(SNAS) $(SNASFLAGS) $@.s -o $@
 
-build/us/assets/us/fsblob.bin: fs/us/shell.bin fs/us/gslogo3.bin fs/us/gslogo3.pal fs/us/tile1.tg~ fs/us/trainer.bin
-	tools/fsblob/target/release/fsblob build -o $@ $^ --matching --pad 0x2B4E0
-
-build/eu/assets/eu/fsblob.bin: fs/eu/shell.bin fs/eu/arlogo3.bin fs/eu/arlogo3.pal fs/eu/tile1.tg~ fs/eu/trainer.bin
-	tools/fsblob/target/release/fsblob build -o $@ $^ --matching --pad 0x2B4E0
+build/$(VERSION)/assets/$(VERSION)/fsblob.bin: $(FSBLOB_FILES)
+ifeq ($(COMPARE),1)
+	tools/fsblob/target/release/fsblob build -o $@ $(^:tile1.tg~=tile1.tg~@tile1.tg~\"\\u{00}\\u{6C}\") --pad 0x2B4E0
+else
+	tools/fsblob/target/release/fsblob build -o $@ $^ --pad 0x2B4E0
+endif
 
 build/$(VERSION)/assets/$(VERSION)/%.bin.o: build/$(VERSION)/assets/$(VERSION)/%.bin
 	$(OBJCOPY) -I binary -O elf32-big $< $@

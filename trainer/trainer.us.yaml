@@ -43,6 +43,17 @@ segments:
       - [0x0, c]
       - [0x450, c]
       - [0x14280, gsasm]
+  
+  - name: fsblob
+    type: fsblob
+    out_dir: fs/us/
+    start: 0x151B0
+    follows_vram: main
+  
+  - name: data
+    type: bin
+    start: 0x194F0
+    follows_vram: fsblob
       
   - [0x19948]
   
