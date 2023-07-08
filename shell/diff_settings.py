@@ -1,7 +1,7 @@
 def apply(config, args):
-    config["baseimg"] = "../fs/eu/shell.bin"
-    config["myimg"] = "build/eu/shell.bin"
-    config["mapfile"] = "build/eu/shell.map"
+    config["baseimg"] = "../fs/us/shell.bin"
+    config["myimg"] = "build/us/shell.bin"
+    config["mapfile"] = "build/us/shell.map"
     config["source_directories"] = ["."]
     # config["show_line_numbers_default"] = True
     # config["arch"] = "mips"

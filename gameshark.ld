@@ -150,7 +150,7 @@ SECTIONS
 
     fsblob_ROM_START = __romPos;
     fsblob_VRAM = ADDR(.fsblob);
-    .fsblob 0x80042B20 : AT(fsblob_ROM_START) SUBALIGN(16)
+    .fsblob main_VRAM_END : AT(fsblob_ROM_START) SUBALIGN(16)
     {
         fsblob_DATA_START = .;
         fsblob_bin = .;
@@ -164,7 +164,7 @@ SECTIONS
 
     data_ROM_START = __romPos;
     data_VRAM = ADDR(.data);
-    .data 0x8006E000 : AT(data_ROM_START) SUBALIGN(16)
+    .data fsblob_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
     {
         data_TEXT_START = .;
         build/us/asm/us/2F000.s.o(.text);
@@ -173,6 +173,10 @@ SECTIONS
         data_DATA_START = .;
         _2F100_bin = .;
         build/us/assets/us/2F100.bin.o(.data);
+        keycodes_bin = .;
+        build/us/assets/us/keycodes.bin.o(.data);
+        _30000_bin = .;
+        build/us/assets/us/30000.bin.o(.data);
         _2F000_s = .;
         build/us/asm/us/2F000.s.o(.data);
         data_DATA_END = .;

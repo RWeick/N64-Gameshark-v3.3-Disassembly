@@ -27,6 +27,7 @@ options:
   asset_path: assets/us/
   asm_path: asm/us/
   build_path: build/us/
+  disasm_unknown: True
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -43,12 +44,24 @@ segments:
       - [0x0, c, main]
       - [0x540, c]
       - [0x2CA0, c]
-      - [0x5050, bin]
-      # - [0x17360, c]
-      # - [0x17710, c]
-      # - [0x178F0, c]
-      # - [0x17FE0, c]
-      # - [0x184F0, hasm]
+      - [0x5050, c]
+      - [0x5DA0, c, ai]
+      - [0x5E30, c]
+      - [0x6380, c]
+      - [0x74E0, c, scousers]
+      - [0x7D60, c]
+      - [0xD880, c]
+      - [0xDF40, c]
+      - [0xFED0, c]
+      - [0x109A0, c]
+      - [0x155D0, c]
+      - [0x17280, c]
+      - [0x17810, c]
+      - [0x17990, c]
+      - [0x17A50, c]
+      - [0x17F00, c]
+      - [0x18410, hasm]
+      - [0x20CD0, c]
       
   - name: data
     type: group

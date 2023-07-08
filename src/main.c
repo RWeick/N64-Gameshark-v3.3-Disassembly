@@ -64,7 +64,7 @@ u32 func_80040278(void) {
 
     memSize = 0x600000;
     setBaseAddress(0xB2000000);
-    cartStart = *(u32 *)0xB2C00000;
+    cartStart = READ32(PHYS_TO_K1(0x12C00000));
     setBaseAddress(0xBE000000);
     memSize = 0x400000;
     return cartStart == 0x80371240;

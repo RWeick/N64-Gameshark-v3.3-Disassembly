@@ -13,6 +13,8 @@ SECTIONS
         main_TEXT_END = .;
         main_TEXT_SIZE = ABSOLUTE(main_TEXT_END - main_TEXT_START);
         main_DATA_START = .;
+        _145C0_bin = .;
+        build/us/assets/us/145C0.bin.o(.data);
         _0_c = .;
         build/us/src/0.c.o(.data);
         _450_c = .;

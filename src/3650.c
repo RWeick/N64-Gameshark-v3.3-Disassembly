@@ -23,7 +23,7 @@ void func_8004267C(void) {
 }
 
 void func_80042694(u8 arg0) {
-    * (u32 *) 0xBE5FFFFC = (arg0 << 0x18) | (arg0 << 0x10) | (arg0 << 8) | arg0;
+    WRITE32(PHYS_TO_K1(0x1E5FFFFC), (arg0 << 0x18) | (arg0 << 0x10) | (arg0 << 8) | arg0);
     func_8004267C();
 }
 

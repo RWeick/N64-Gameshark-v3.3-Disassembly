@@ -81,7 +81,9 @@ void func_807817A0(void) {
 
 INCLUDE_ASM(const s32, "450", func_807817A8);
 
-INCLUDE_ASM(const s32, "450", func_80781800);
+int func_80781800(int arg0) {
+    return arg0;
+}
 
 void func_80781808(void) {
 }
@@ -94,11 +96,17 @@ void func_80781848(void) {
 void func_80781850(void) {
 }
 
-INCLUDE_ASM(const s32, "450", func_80781858);
+int func_80781858(void) {
+    return 0;
+}
 
-INCLUDE_ASM(const s32, "450", func_80781860);
+int func_80781860(void) {
+    return 0;
+}
 
-INCLUDE_ASM(const s32, "450", func_80781868);
+int func_80781868(void) {
+    return 0;
+}
 
 INCLUDE_ASM(const s32, "450", func_80781870);
 
@@ -433,7 +441,9 @@ INCLUDE_ASM(const s32, "450", func_807900A0);
 
 INCLUDE_ASM(const s32, "450", func_807900C0);
 
-INCLUDE_ASM(const s32, "450", func_807900D4);
+int func_807900D4(void) {
+    return 0;
+}
 
 INCLUDE_ASM(const s32, "450", func_807900DC);
 

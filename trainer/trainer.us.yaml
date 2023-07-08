@@ -27,6 +27,7 @@ options:
   asset_path: assets/us/
   asm_path: asm/us/
   build_path: build/us/
+  disasm_unknown: True
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -43,6 +44,7 @@ segments:
       - [0x0, c]
       - [0x450, c]
       - [0x14280, gsasm]
+      - [0x145C0, bin]
   
   - name: fsblob
     type: fsblob

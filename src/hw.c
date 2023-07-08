@@ -39,7 +39,7 @@ void func_8004066C(u32 byte) {
         write16Doubled(0x800, mask);
         write16Doubled(0x800, mask | 0x02000200);
         write16Doubled(0x800, mask);
-    } ;
+    }
 }
 
 s32 func_800406FC(u8 arg0) {

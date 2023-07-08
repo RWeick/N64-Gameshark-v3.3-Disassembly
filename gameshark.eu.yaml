@@ -84,4 +84,6 @@ segments:
     subsegments:
       - [0x2F000, hasm]
       - [0x2F100, bin]
+      - [0x2FC00, bin, keycodes]
+      - [0x30000, bin]
   - [0x40000]
