@@ -14,7 +14,7 @@ TARGET := build/$(VERSION)/$(NAME).bin
 
 ELF := $(TARGET:.bin=.elf)
 
-CROSS := mips-linux-gnu-
+CROSS ?= mips-linux-gnu-
 
 export COMPILER_PATH := ../tools/gcc/
 CC      := wine $(COMPILER_PATH)cc1n64.exe
