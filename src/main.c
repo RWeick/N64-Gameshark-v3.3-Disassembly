@@ -70,11 +70,11 @@ u32 func_80040278(void) {
     return cartStart == 0x80371240;
 }
 
-#define POS_X 40
-#define POS_Y 24
+#define POS_Y 40
+#define POS_X 24
 
-#define HEIGHT 320
-#define WIDTH 224
+#define WIDTH 320
+#define HEIGHT 224
 
 
 #if defined(VERSION_US)
@@ -102,9 +102,9 @@ void loadStartupLogo(void) {
     loadFile(addr, D_800429D8);
     var_s0 = (u8* )0x80281001;
     loadFile(0x80281000, D_800429E4);
-    for (var_s2 = POS_X, var_s1 = (u16 *)0x80306400; var_s2 < (WIDTH - POS_X); var_s2++, var_s1 += HEIGHT) {
+    for (var_s2 = POS_Y, var_s1 = (u16 *)0x80306400; var_s2 < (HEIGHT - POS_Y); var_s2++, var_s1 += WIDTH) {
         func_800422C0();
-        for (var_t0 = POS_Y + 1; var_t0 < (HEIGHT - POS_Y) + 1; var_t0++) {
+        for (var_t0 = POS_X + 1; var_t0 < (WIDTH - POS_X) + 1; var_t0++) {
             temp_v1 = &((RGB*)addr)[*var_s0++];
             r = temp_v1->r;
             g = temp_v1->g;
@@ -121,7 +121,7 @@ void loadStartupLogo(void) {
     vi_regs[0] = 0x3000 | (2 << 8) | VI_CTRL_TYPE_16;
 #endif
     vi_regs[1] = 0x80300000;
-    vi_regs[2] = HEIGHT;
+    vi_regs[2] = WIDTH;
 #if defined(VERSION_US)
     vi_regs[5] = (0x3E << 20) | (5 << 16) | (0x22 << 8) | (0x39 << 0);
     vi_regs[6] = 525;

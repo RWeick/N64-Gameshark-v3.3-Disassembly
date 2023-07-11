@@ -28,6 +28,7 @@ options:
   asm_path: asm/us/
   build_path: build/us/
   disasm_unknown: True
+  ld_symbol_header_path: include/linker.h
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -80,7 +81,10 @@ segments:
         type: fsblob
         out_dir: fs/us/
         start: 0x27FE0
-      - [0x296BD, bin]
+      - [0x296BD, bin, sfx0]
+      - [0x2B3B3, bin, sfx1]
+      - [0x2D259, bin, sfxpad]
+      - [0x2D25C, bin]
   
   
   - [0x402C0]

@@ -146,8 +146,14 @@ SECTIONS
         build/us/assets/us/25480.bin.o(.data);
         fsblob_bin = .;
         build/us/assets/us/fsblob.bin.o(.data);
-        _296BD_bin = .;
-        build/us/assets/us/296BD.bin.o(.data);
+        sfx0_bin = .;
+        build/us/assets/us/sfx0.bin.o(.data);
+        sfx1_bin = .;
+        build/us/assets/us/sfx1.bin.o(.data);
+        sfxpad_bin = .;
+        build/us/assets/us/sfxpad.bin.o(.data);
+        _2D25C_bin = .;
+        build/us/assets/us/2D25C.bin.o(.data);
         data_DATA_END = .;
         data_DATA_SIZE = ABSOLUTE(data_DATA_END - data_DATA_START);
     }

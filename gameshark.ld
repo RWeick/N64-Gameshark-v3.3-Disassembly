@@ -164,7 +164,7 @@ SECTIONS
 
     data_ROM_START = __romPos;
     data_VRAM = ADDR(.data);
-    .data fsblob_VRAM_END : AT(data_ROM_START) SUBALIGN(16)
+    .data 0x8006E000 : AT(data_ROM_START) SUBALIGN(16)
     {
         data_TEXT_START = .;
         build/us/asm/us/2F000.s.o(.text);

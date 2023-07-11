@@ -31,13 +31,17 @@ STRIP   := $(CROSS)strip
 
 UNIX2DOS := unix2dos
 
-INC := -I include -I include/PR -I include/sys -I src -I include/src
+INC := -I include -I include/shared -I include/sys -I src -I include/src
 CPPFLAGS := $(INC) -D_MIPS_SZLONG=32 -D_LANGUAGE_C -nostdinc -Wall -D$(VERSION_DEFINE) -DVERSION=$(VERSION)
 SNCPPFLAGS := -D__SN64__
 CFLAGS := -quiet -G0 -mcpu=vr4300 -mips3 -mhard-float -meb -Wall
 ASFLAGS := -G0 -EB -mtune=vr4300 -march=vr4300 -mabi=32 -O1 --no-construct-floats
 SNASFLAGS := $(INC) -q G0
 OPTFLAGS := -O2 -g3
+
+ifeq ($(COMPARE),0)
+CPPFLAGS += -DNON_MATCHING
+endif
 
 # Source dirs
 SRC_DIRS := $(shell find src -type d)
@@ -135,7 +139,7 @@ build/$(VERSION)/assets/$(VERSION)/%.bin.o: assets/$(VERSION)/%.bin | build/$(VE
 
 build/$(VERSION)/asm/$(VERSION)/%.s.o: asm/$(VERSION)/%.s
 	$(UNIX2DOS) $<
-	$(AS) $(ASFLAGS) -I include $< -o $@
+	$(AS) $(ASFLAGS) -I include -I include/shared $< -o $@
 
 build/$(VERSION)/src/%.s.o: src/%.s
 	$(UNIX2DOS) $<

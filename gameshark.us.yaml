@@ -82,7 +82,6 @@ segments:
     type: code
     start: 0x2F000
     vram: 0x8006E000
-    follows_vram: fsblob
     subsegments:
       - [0x2F000, hasm]
       - [0x2F100, bin]

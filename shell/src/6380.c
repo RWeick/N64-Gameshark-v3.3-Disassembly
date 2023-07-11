@@ -96,13 +96,13 @@ void func_80206A14(void) {
     func_80218218(0x2FC00, D_80249890, 0x400);
 }
 
-s32 func_80206A40(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+s32 func_80206A40(u32 crc1, u32 crc2, u8 checksum, u32 pc) {
     int i;
-    u32 var_a0 = arg0 + arg1 + arg3;
+    u32 calculated_checksum = crc1 + crc2 + pc;
     for (i = 0; i != 4; i++) {
-        var_a0 += ((u32* )PHYS_TO_K1(0x1EC00030))[i];
+        calculated_checksum += ((u32* )PHYS_TO_K1(0x1EC00030))[i];
     }
-    return ((arg2 ^ var_a0) & 0xFF) == 0;
+    return ((checksum ^ (calculated_checksum & 0xFF))) == 0;
 }
 
 u32 func_80206A7C(s32 arg0, s32 arg1) {

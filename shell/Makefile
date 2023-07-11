@@ -18,7 +18,7 @@ CROSS := mips-linux-gnu-
 
 export COMPILER_PATH := ../tools/gcc/
 CC      := wine $(COMPILER_PATH)cc1n64.exe
-CPP		:= wine $(COMPILER_PATH)/cppn64.exe
+CPP		:= wine $(COMPILER_PATH)cppn64.exe
 AS      := $(CROSS)as
 SNAS	:= wine $(COMPILER_PATH)asn64.exe
 LD      := $(CROSS)ld
@@ -28,7 +28,7 @@ STRIP   := $(CROSS)strip
 
 UNIX2DOS := unix2dos
 
-INC := -I ../include -I ../include/PR -I ../include/sys -I src
+INC := -I include -I ../include/shared -I include/sys -I src
 CPPFLAGS := $(INC) -D_MIPS_SZLONG=32 -D_LANGUAGE_C -nostdinc -Wall -D$(VERSION_DEFINE) -DVERSION=$(VERSION)
 SNCPPFLAGS := -D__SN64__
 CFLAGS := -quiet -G0 -mcpu=vr4300 -mips3 -mhard-float -meb
@@ -38,6 +38,7 @@ OPTFLAGS := -O2 -g3
 
 ifeq ($(COMPARE),0)
 CPPFLAGS += -DNON_MATCHING
+CPPFLAGS += -DBUG_FIX_AUDIO
 endif
 
 # Source dirs
