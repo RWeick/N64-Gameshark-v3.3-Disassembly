@@ -28,7 +28,7 @@ STRIP   := $(CROSS)strip
 
 UNIX2DOS := unix2dos
 
-INC := -I ../include -I ../include/PR -I ../include/sys -I src
+INC := -I include -I ../include/shared -I include/sys -I src
 CPPFLAGS := $(INC) -D_MIPS_SZLONG=32 -D_LANGUAGE_C -nostdinc -Wall -D$(VERSION_DEFINE) -DVERSION=$(VERSION)
 SNCPPFLAGS := -D__SN64__
 CFLAGS := -quiet -G0 -mcpu=vr4300 -mips3 -mhard-float -meb
