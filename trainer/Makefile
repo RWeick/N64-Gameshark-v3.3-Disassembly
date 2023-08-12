@@ -16,11 +16,15 @@ ELF := $(TARGET:.bin=.elf)
 
 CROSS ?= mips-linux-gnu-
 
-export COMPILER_PATH := ../tools/gcc/
-CC      := wine $(COMPILER_PATH)cc1n64.exe
-CPP		:= wine $(COMPILER_PATH)cppn64.exe
+SN64_PATH ?= ../tools/gcc/
+
+SET_CPATH := COMPILER_PATH=$(SN64_PATH)
+
+CC		:= $(CROSS)gcc
+SNCC    := $(SET_CPATH) wine $(SN64_PATH)cc1n64.exe
+CPP		:= $(SET_CPATH) wine $(SN64_PATH)cppn64.exe
 AS      := $(CROSS)as
-SNAS	:= wine $(COMPILER_PATH)asn64.exe
+SNAS	:= $(SET_CPATH) wine $(SN64_PATH)asn64.exe
 LD      := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 OBJDUMP := $(CROSS)objdump
@@ -28,11 +32,11 @@ STRIP   := $(CROSS)strip
 
 UNIX2DOS := unix2dos
 
-INC := -I include -I ../include/shared -I include/sys -I src
+INC := -I include -I ../include/shared -I ../include/shared/sys -I src -I include/src
 CPPFLAGS := $(INC) -D_MIPS_SZLONG=32 -D_LANGUAGE_C -nostdinc -Wall -D$(VERSION_DEFINE) -DVERSION=$(VERSION)
 SNCPPFLAGS := -D__SN64__
-CFLAGS := -quiet -G0 -mcpu=vr4300 -mips3 -mhard-float -meb
-ASFLAGS := $(INC) -G0 -EB -mtune=vr4300 -march=vr4300 -mabi=32 -O1 --no-construct-floats
+CFLAGS := -quiet -G0 -mcpu=vr4300 -mips3 -mhard-float -meb -Wall -mno-abicalls
+ASFLAGS := $(INC) -G0 -EB -mtune=vr4300 -march=vr4300 -mabi=32 -O1
 SNASFLAGS := $(INC) -q G0
 OPTFLAGS := -O2 -g3
 
@@ -101,17 +105,15 @@ build/$(VERSION)/assets/$(VERSION): build/$(VERSION)/assets
 build/$(VERSION)/assets/$(VERSION)/%.bin.o: assets/$(VERSION)/%.bin | build/$(VERSION)/assets/$(VERSION)
 	$(OBJCOPY) -I binary -O elf32-big $< $@
 
-build/$(VERSION)/asm/$(VERSION)/%.s.o: asm/$(VERSION)/%.s
-	#$(AS) $(ASFLAGS) -I include $< -o $@
-	$(UNIX2DOS) $<
-	$(SNAS) $(SNASFLAGS) $< -o $@.obj
-	../tools/psyq-obj-parser $@.obj -o $@ -b -n > /dev/null
-	@$(STRIP) -N dummy_symbol_ $@
-
 build/$(VERSION)/src/%.s.o: src/%.s
-	$(CC) -x assembler-with-cpp $(ASFLAGS) -c $< -o $@
+	$(UNIX2DOS) $<
+	$(CC) -x assembler-with-cpp $(ASFLAGS) -mno-abicalls -c $< -o $@
 	@$(STRIP) -N dummy_symbol_ $@
 	@$(OBJDUMP) -drz $@ > $(@:.o=.s)
+
+build/$(VERSION)/asm/$(VERSION)/%.s.o: asm/$(VERSION)/%.s
+	$(UNIX2DOS) $<
+	$(AS) $(ASFLAGS) -I include -I include/shared $< -o $@
 
 build/$(VERSION)/src/%.c.o: build/$(VERSION)/src/%.c.obj
 	../tools/psyq-obj-parser $< -o $@ -b -n > /dev/null
@@ -121,7 +123,7 @@ build/$(VERSION)/src/%.c.o: build/$(VERSION)/src/%.c.obj
 build/$(VERSION)/src/%.c.obj: src/%.c
 	$(UNIX2DOS) $<
 	$(CPP) $(CPPFLAGS) $(SNCPPFLAGS) $< -o $@.i
-	$(CC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
+	$(SNCC) $(CFLAGS) $(OPTFLAGS) $@.i -o $@.s
 	$(SNAS) $(SNASFLAGS) $@.s -o $@
 
 build/$(VERSION)/assets/$(VERSION)/fsblob.bin: fs/$(VERSION)/TILE1~1.TG~ fs/$(VERSION)/TILE2~1.TG~ fs/$(VERSION)/TILE3~1.TG~ fs/$(VERSION)/TILE4~1.TG~ fs/$(VERSION)/tile1.tg~ fs/$(VERSION)/tile2.tg~ fs/$(VERSION)/tile3.tg~ fs/$(VERSION)/menuf.tg~ fs/$(VERSION)/bits.tg~

@@ -1,5 +1,11 @@
 COMPARE ?= 1
 
+BUG_FIX ?= 0
+
+ifeq ($(BUG_FIX),1)
+COMPARE := 0
+endif
+
 VERSION ?= us
 
 ifeq ($(VERSION),us)
@@ -38,6 +44,9 @@ OPTFLAGS := -O2 -g3
 
 ifeq ($(COMPARE),0)
 CPPFLAGS += -DNON_MATCHING
+endif
+
+ifeq ($(BUG_FIX),1)
 CPPFLAGS += -DBUG_FIX_AUDIO
 endif
 

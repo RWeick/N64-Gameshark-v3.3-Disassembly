@@ -8,7 +8,7 @@ SECTIONS
     {
         header_DATA_START = .;
         header_s = .;
-        build/us/asm/us/header.s.o(.data);
+        build/us/src/header.s.o(.data);
         header_DATA_END = .;
         header_DATA_SIZE = ABSOLUTE(header_DATA_END - header_DATA_START);
     }
@@ -30,35 +30,21 @@ SECTIONS
     boot_ROM_END = __romPos;
     boot_VRAM_END = .;
 
-    pad_ROM_START = __romPos;
-    pad_VRAM = ADDR(.pad);
-    .pad : AT(pad_ROM_START) SUBALIGN(16)
-    {
-        pad_DATA_START = .;
-        pad_bin = .;
-        build/us/assets/us/pad.bin.o(.data);
-        pad_DATA_END = .;
-        pad_DATA_SIZE = ABSOLUTE(pad_DATA_END - pad_DATA_START);
-    }
-    __romPos += SIZEOF(.pad);
-    pad_ROM_END = __romPos;
-    pad_VRAM_END = .;
-
     loader_ROM_START = __romPos;
     loader_VRAM = ADDR(.loader);
-    .loader 0x80200480 : AT(loader_ROM_START) SUBALIGN(16)
+    .loader 0x80200400 : AT(loader_ROM_START) SUBALIGN(16)
     {
         loader_TEXT_START = .;
-        build/us/asm/us/loader.s.o(.text);
+        build/us/src/loader.s.o(.text);
         loader_TEXT_END = .;
         loader_TEXT_SIZE = ABSOLUTE(loader_TEXT_END - loader_TEXT_START);
         loader_DATA_START = .;
         loader_s = .;
-        build/us/asm/us/loader.s.o(.data);
+        build/us/src/loader.s.o(.data);
         loader_DATA_END = .;
         loader_DATA_SIZE = ABSOLUTE(loader_DATA_END - loader_DATA_START);
         loader_RODATA_START = .;
-        build/us/asm/us/loader.s.o(.rodata);
+        build/us/src/loader.s.o(.rodata);
         loader_RODATA_END = .;
         loader_RODATA_SIZE = ABSOLUTE(loader_RODATA_END - loader_RODATA_START);
     }
@@ -66,7 +52,7 @@ SECTIONS
     .loader_bss (NOLOAD) : SUBALIGN(16)
     {
         loader_BSS_START = .;
-        build/us/asm/us/loader.s.o(.bss);
+        build/us/src/loader.s.o(.bss);
         loader_BSS_END = .;
         loader_BSS_SIZE = ABSOLUTE(loader_BSS_END - loader_BSS_START);
     }
@@ -85,7 +71,7 @@ SECTIONS
         build/us/src/hw.c.o(.text);
         build/us/src/lzari.c.o(.text);
         build/us/src/libc.c.o(.text);
-        build/us/asm/us/util.s.o(.text);
+        build/us/src/util.s.o(.text);
         build/us/src/si.c.o(.text);
         build/us/src/led.c.o(.text);
         build/us/src/3650.c.o(.text);
@@ -105,7 +91,7 @@ SECTIONS
         libc_c = .;
         build/us/src/libc.c.o(.data);
         util_s = .;
-        build/us/asm/us/util.s.o(.data);
+        build/us/src/util.s.o(.data);
         si_c = .;
         build/us/src/si.c.o(.data);
         led_c = .;
@@ -120,7 +106,7 @@ SECTIONS
         build/us/src/hw.c.o(.rodata);
         build/us/src/lzari.c.o(.rodata);
         build/us/src/libc.c.o(.rodata);
-        build/us/asm/us/util.s.o(.rodata);
+        build/us/src/util.s.o(.rodata);
         build/us/src/si.c.o(.rodata);
         build/us/src/led.c.o(.rodata);
         build/us/src/3650.c.o(.rodata);
@@ -136,7 +122,7 @@ SECTIONS
         build/us/src/hw.c.o(.bss);
         build/us/src/lzari.c.o(.bss);
         build/us/src/libc.c.o(.bss);
-        build/us/asm/us/util.s.o(.bss);
+        build/us/src/util.s.o(.bss);
         build/us/src/si.c.o(.bss);
         build/us/src/led.c.o(.bss);
         build/us/src/3650.c.o(.bss);
@@ -167,7 +153,7 @@ SECTIONS
     .data 0x8006E000 : AT(data_ROM_START) SUBALIGN(16)
     {
         data_TEXT_START = .;
-        build/us/asm/us/2F000.s.o(.text);
+        build/us/src/except_redir.s.o(.text);
         data_TEXT_END = .;
         data_TEXT_SIZE = ABSOLUTE(data_TEXT_END - data_TEXT_START);
         data_DATA_START = .;
@@ -175,14 +161,14 @@ SECTIONS
         build/us/assets/us/2F100.bin.o(.data);
         keycodes_bin = .;
         build/us/assets/us/keycodes.bin.o(.data);
-        _30000_bin = .;
-        build/us/assets/us/30000.bin.o(.data);
-        _2F000_s = .;
-        build/us/asm/us/2F000.s.o(.data);
+        cheats_bin = .;
+        build/us/assets/us/cheats.bin.o(.data);
+        except_redir_s = .;
+        build/us/src/except_redir.s.o(.data);
         data_DATA_END = .;
         data_DATA_SIZE = ABSOLUTE(data_DATA_END - data_DATA_START);
         data_RODATA_START = .;
-        build/us/asm/us/2F000.s.o(.rodata);
+        build/us/src/except_redir.s.o(.rodata);
         data_RODATA_END = .;
         data_RODATA_SIZE = ABSOLUTE(data_RODATA_END - data_RODATA_START);
     }
@@ -190,7 +176,7 @@ SECTIONS
     .data_bss (NOLOAD) : SUBALIGN(16)
     {
         data_BSS_START = .;
-        build/us/asm/us/2F000.s.o(.bss);
+        build/us/src/except_redir.s.o(.bss);
         data_BSS_END = .;
         data_BSS_SIZE = ABSOLUTE(data_BSS_END - data_BSS_START);
     }

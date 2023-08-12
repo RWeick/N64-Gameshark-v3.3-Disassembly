@@ -25,9 +25,11 @@ options:
   libultra_symbols: True
   hardware_regs: True
   asset_path: assets/us/
-  asm_path: asm/us/
+  asm_path: src/
+  nonmatchings_path: ../asm/us/nonmatchings/
   build_path: build/us/
   ld_symbol_header_path: include/linker.h
+  asm_emit_size_directive: false
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -44,16 +46,12 @@ segments:
     type: bin
     start: 0x40
 
-  - name: pad
-    type: bin
-    start: 0x1000
-
   - name: loader
     type: code
-    start: 0x1080
-    vram: 0x80200480
+    start: 0x1000
+    vram: 0x80200400
     subsegments:
-      - [0x1080, hasm, loader]
+      - [0x1000, hasm, loader]
 
   - name: main
     type: code
@@ -83,8 +81,8 @@ segments:
     start: 0x2F000
     vram: 0x8006E000
     subsegments:
-      - [0x2F000, hasm]
+      - [0x2F000, hasm, except_redir]
       - [0x2F100, bin]
       - [0x2FC00, bin, keycodes]
-      - [0x30000, bin]
+      - [0x30000, bin, cheats]
   - [0x40000]

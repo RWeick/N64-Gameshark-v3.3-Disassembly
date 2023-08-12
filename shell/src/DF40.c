@@ -6,7 +6,7 @@ u8* D_80227C00;
 char ** D_80227C04;
 char ** D_80227C08;
 
-s32 D_80228278;
+extern s32 D_80228278;
 
 void func_8020E404(void);
 s32 func_8020E5C8(void);
@@ -23,7 +23,7 @@ void func_8020E340(void) {
     }
     func_802181FC(0x30000, D_80227C00, D_80225884);
     if (D_80227C04 == 0) {
-        D_80227C04 = func_80215874(0x3E80);
+        D_80227C04 = func_80215874(16000);
         D_80227C08 = func_80215874(0x400);
     }
     func_8020E404();
@@ -49,14 +49,14 @@ void func_8020E404(void) {
     }
 }
 
-char* func_8020E494(s32 arg0) {
-    if (arg0 == 0) {
+char* func_8020E494(s32 game) {
+    if (game == 0) {
         return (char*)-1;
     }
-    if (func_8020E5C8() < arg0) {
+    if (func_8020E5C8() < game) {
         return (char*)-1;
     }
-    return D_80227C04[arg0];
+    return D_80227C04[game];
 }
 
 INCLUDE_ASM(u8*, "DF40", func_8020E4EC);
@@ -93,22 +93,22 @@ void func_8020E5FC(s32 arg0) { // should probably be unsigned
     D_80227C00[3] = arg0 & 0xFF;
 }
 
-int func_8020E630(s32 arg0) {
+int func_8020E630(s32 game) {
     char* temp_v0;
     char* temp_v0_2;
     s32 var_v1;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
-    if ((arg0 == 1) && (func_8020E5C8() == arg0)) {
+    if ((game == 1) && (func_8020E5C8() == game)) {
         var_v1 = 4;
         for (var_v1 = 4; var_v1 < D_80225884; var_v1++) {
             D_80227C00[var_v1] = 0;
         }
     } else {
-        temp_v0_2 = func_8020E494(arg0 + 1);
+        temp_v0_2 = func_8020E494(game + 1);
         if (temp_v0_2 != (char*)-1) {
             func_8020FBD8(temp_v0, temp_v0_2, (u32)func_8020E708() - (u32)temp_v0_2);
         }
@@ -126,32 +126,32 @@ INCLUDE_ASM(const s32, "DF40", func_8020E734);
 
 INCLUDE_ASM(const s32, "DF40", func_8020E9C8);
 
-char* func_8020EAF4(char* arg0, int c) {
-    if (arg0 == (char*)-1) {
+char* func_8020EAF4(char* game_struct, int code) {
+    if (game_struct == (char*)-1) {
         return (char*)-1;
     }
-    if (func_8020ED70() < c) {
+    if (func_8020ED70(game_struct) < code) {
         return (char*)-1;
     }
-    return D_80227C08[c];
+    return D_80227C08[code];
 }
 
 INCLUDE_ASM(const s32, "DF40", func_8020EB44);
 
-int func_8020EB98(char* arg0, s32 arg1) {
+int func_8020EB98(char* game_struct, s32 code) {
     char* temp_v0;
     char* var_s0;
 
-    temp_v0 = func_8020EAF4(arg0, arg1);
+    temp_v0 = func_8020EAF4(game_struct, code);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
-    var_s0 = func_8020EAF4(arg0, arg1 + 1);
+    var_s0 = func_8020EAF4(game_struct, code + 1);
     if (var_s0 == (char*)-1) {
-        var_s0 = func_8020E4EC(arg0);
+        var_s0 = func_8020E4EC(game_struct);
     }
     func_8020FBD8(temp_v0, var_s0, (u32)func_8020E708() - (u32)var_s0);
-    func_8020EE30(arg0);
+    func_8020EE30(game_struct);
     return 0;
 }
 
@@ -210,7 +210,7 @@ INCLUDE_ASM(const s32, "DF40", func_8020EEB8);
 
 INCLUDE_ASM(const s32, "DF40", func_8020EFDC);
 
-int func_8020F0BC(s32 arg0, s32 arg1, s32 arg2) {
+int func_8020F0BC(s32 game, s32 arg1, s32 arg2) {
     s32 var_s0;
     s32 var_s0_2;
     s32 var_s0_3;
@@ -220,7 +220,7 @@ int func_8020F0BC(s32 arg0, s32 arg1, s32 arg2) {
     char* var_a0;
     char* var_v0;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char* )-1) {
         return -1;
     }
@@ -328,11 +328,11 @@ INCLUDE_ASM(const s32, "DF40", func_8020F32C);
 
 INCLUDE_ASM(const s32, "DF40", func_8020F3C8);
 
-int func_8020F4F4(s32 arg0, s32 arg1, s32 arg2) {
+int func_8020F4F4(s32 game, s32 arg1, s32 arg2) {
     char* temp_v0;
     s32 temp_v0_2;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
@@ -346,11 +346,11 @@ int func_8020F4F4(s32 arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-int func_8020F568(s32 arg0, s32 arg1) {
+int func_8020F568(s32 game, s32 arg1) {
     char* temp_v0;
     char* temp_v0_2;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if ((temp_v0 == (char*)-1)) {
         return -1;
     }
@@ -362,18 +362,18 @@ int func_8020F568(s32 arg0, s32 arg1) {
         return -2;
     }
     func_8020E404();
-    func_8020F6CC(arg0);
+    func_8020F6CC(game);
     return 0;
 }
 
-void func_8020F5E4(s32 arg0, s32 arg1) {
+void func_8020F5E4(s32 game, s32 arg1) {
     s32 i;
     s32 len;
     char* temp_v0;
     char* var_a0;
     char* var_a1;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char* )-1) {
         return;
     }
@@ -397,11 +397,11 @@ void func_8020F5E4(s32 arg0, s32 arg1) {
     }
 }
 
-s32 func_8020F6CC(s32 arg0) {
+s32 func_8020F6CC(s32 game) {
     s32 temp_v0;
     char* temp_v0_2;
 
-    temp_v0_2 = func_8020E494(arg0);
+    temp_v0_2 = func_8020E494(game);
     if (temp_v0_2 == (char*)-1) {
         return -1;
     }
@@ -409,14 +409,14 @@ s32 func_8020F6CC(s32 arg0) {
     if (temp_v0 == -1) {
         return -1;
     }
-    func_8020F5E4(arg0, temp_v0);
+    func_8020F5E4(game, temp_v0);
     return temp_v0;
 }
 
-int func_8020F734(s32 arg0, s32 arg1) {
+int func_8020F734(s32 game, s32 arg1) {
     char* temp_v0;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
@@ -424,15 +424,15 @@ int func_8020F734(s32 arg0, s32 arg1) {
         return -1;
     }
     func_8020E404();
-    func_8020F6CC(arg0);
+    func_8020F6CC(game);
     return 0;
 }
 
-int func_8020F7A4(s32 arg0, s32 arg1, s32 arg2) {
+int func_8020F7A4(s32 game, s32 arg1, s32 arg2) {
     char* temp_v0;
     char* temp_v0_2;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
@@ -444,18 +444,18 @@ int func_8020F7A4(s32 arg0, s32 arg1, s32 arg2) {
         return -1;
     }
     func_8020E404();
-    func_8020F6CC(arg0);
+    func_8020F6CC(game);
     return 0;
 }
 
 INCLUDE_ASM(const s32, "DF40", func_8020F830);
 
-s32 func_8020F8DC(s32 arg0, s32 arg1) {
+s32 func_8020F8DC(s32 game, s32 arg1) {
     s32 temp_v0;
     char* temp_v0_2;
     char*  temp_v0_3;
 
-    temp_v0_2 = func_8020E494(arg0);
+    temp_v0_2 = func_8020E494(game);
     if (temp_v0_2 == (char*)-1) {
         return -1;
     }
@@ -470,10 +470,10 @@ s32 func_8020F8DC(s32 arg0, s32 arg1) {
     return temp_v0;
 }
 
-int func_8020F944(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+int func_8020F944(s32 game, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char* temp_v0;
 
-    temp_v0 = func_8020E494(arg0);
+    temp_v0 = func_8020E494(game);
     if (temp_v0 == (char*)-1) {
         return -1;
     }
@@ -496,23 +496,23 @@ int func_8020F944(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 
 INCLUDE_ASM(const s32, "DF40", func_8020FA18);
 
-void func_8020FB08(s32 arg0, s32 arg1, char* arg2) {
+void func_8020FB08(s32 game, s32 code, char* dst) { // get_code_name
     int i;
     char* temp_v0;
 
-    temp_v0 = func_8020EAF4(func_8020E494(arg0), arg1);
+    temp_v0 = func_8020EAF4(func_8020E494(game), code);
     for (i = 0; temp_v0[i] != 0; i++) {
-        arg2[i] = temp_v0[i];
+        dst[i] = temp_v0[i];
     }
-    arg2[i] = 0;
+    dst[i] = 0;
 }
 
-void func_8020FB7C(s32 arg0, char* dest) {
+void func_8020FB7C(s32 game, char* dest) {
     int c;
     char* src;
     int i;
     
-    src = func_8020E494(arg0);
+    src = func_8020E494(game);
     for (i = 0; src[i] != 0; i++) {
         dest[i] = src[i];
     }
@@ -533,12 +533,12 @@ void func_8020FBD8(u8* dest, u8* src, int len) {
     }
 }
 
-void func_8020FC48(s32 arg0, s32 arg1, s32 arg2, u32* arg3) {
+void func_8020FC48(s32 game, s32 arg1, s32 arg2, u32* arg3) {
     char* temp_v0;
     int i;
     u32 var_s1 = 0;
 
-    temp_v0 = func_8020EAF4(func_8020E494(arg0), arg1);
+    temp_v0 = func_8020EAF4(func_8020E494(game), arg1);
     if (func_8020F250(temp_v0) == 0) {
         arg3[0] = 0;
         arg3[1] = 0;

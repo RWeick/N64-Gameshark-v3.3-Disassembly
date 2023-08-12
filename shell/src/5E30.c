@@ -65,12 +65,7 @@ u32 func_802063A0(void) {
 }
 
 void func_802063BC(s32 arg0) {
-    s32 var_s0;
-
-    var_s0 = 0;
-    if (arg0 != 0) {
-        var_s0 = 0x400040;
-    }
+    s32 var_s0 = arg0 ? 0x400040 : 0;
     while ((func_802063A0() & 0x400040) != var_s0);
 }
 

@@ -12,7 +12,7 @@ u32 D_80225A74[];
 
 s16 D_80243418[];
 
-u8 *D_802497D8;
+u32 *D_802497D8;
 
 void func_80202B88(void);
 u8 func_80202C90(void);
@@ -161,7 +161,7 @@ u8 func_80202C90(void) {
     
     temp_s0[63] = 1;
     for (var_s1 = 0; var_s1 < 0x10; var_s1++) {
-        func_80218C18(&D_802497D8[var_s1 * 4]);
+        func_80218C18(&D_802497D8[var_s1]);
     }
     func_802026E4(D_802497D8);
     for (var_s1 = 0; var_s1 < 330000; var_s1++);

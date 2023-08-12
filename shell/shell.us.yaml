@@ -27,7 +27,8 @@ options:
   asset_path: assets/us/
   asm_path: asm/us/
   build_path: build/us/
-  disasm_unknown: True
+  #disasm_unknown: True
+  asm_emit_size_directive: false
   ld_symbol_header_path: include/linker.h
   # generated_s_preamble:
     # .include "macro.inc"
@@ -55,13 +56,21 @@ segments:
       - [0xDF40, c]
       - [0xFED0, c]
       - [0x109A0, c]
+      - [0x140E0, c]
+      - [0x144A0, c]
+      - [0x15360, c]
       - [0x155D0, c]
+      - [0x15940, c, lzari]
       - [0x17280, c]
       - [0x17810, c]
       - [0x17990, c]
       - [0x17A50, c]
       - [0x17F00, c]
-      - [0x18410, hasm]
+      - [0x18410, asm]
+      - [0x18AC0, rodata, 0x18410]
+      - [0x1D2C0, asm]
+      - [0x1F6E0, asm]
+      - [0x1FB00, asm]
       - [0x20CD0, c]
       
   - name: data

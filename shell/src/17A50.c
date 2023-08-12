@@ -2,13 +2,39 @@
 
 extern s32 D_80225884;
 
+extern s32 D_802283C4;
+
 extern u16 D_802283D2;
 
 s32 D_80243314;
 
-INCLUDE_ASM(const s32, "17A50", func_80217E50);
+void func_80217E50(s32 arg0, s32 arg1) {
+    s32 temp_a0;
+    s32* temp_s0;
 
-INCLUDE_ASM(const s32, "17A50", func_80217EB8);
+    temp_a0 = D_802283C4 | 0xE00000;
+    temp_s0 = temp_a0 | ((arg0 & 1) << 0x14) | ((arg0 & 0x1FFFE) << 1);
+    func_80217D90();
+    *temp_s0 = arg1 << 0x10;
+    func_80217D90();
+}
+
+s32 func_80217EB8(s32 arg0) {
+    s32 var_s1;
+
+    var_s1 = D_802283C4 | 0xE00000;
+    var_s1 = var_s1 | ((arg0 & 1) << 0x14);
+    var_s1 = var_s1 | ((arg0 & 0x1FFFE) << 1);
+    func_80217D90();
+    var_s1 = *(s32*)var_s1;
+    if ((arg0 & 1) == 0) {
+        var_s1 = var_s1 >> 0x10;
+    }
+    var_s1 &= 0xFFFF;
+    func_80217D90();
+    
+    return var_s1;
+}
 
 void func_80217F28(void) {
     s32 temp_s0;
@@ -25,7 +51,17 @@ INCLUDE_ASM(const s32, "17A50", func_80217F74);
 
 INCLUDE_ASM(const s32, "17A50", func_80218094);
 
-INCLUDE_ASM(const s32, "17A50", func_80218118);
+void func_80218118(s32 arg0, u8* arg1, s32 arg2) {
+    s32 temp = arg2 + 0xFF;
+    s32 temp2 = 0xC00000;
+    
+    temp = (temp) & ~0xFF;
+    arg0 = arg0 | temp2 | D_802283C4;
+    for (; temp != 0; temp--) {
+        *arg1++ = func_80217C10(arg0++);
+    }
+    func_80218BBC();
+}
 
 void func_80218190(void) {
     func_80217F28();

@@ -58,7 +58,7 @@ INCLUDE_ASM(const s32, "17280", func_80217B08);
 
 INCLUDE_ASM(const s32, "17280", func_80217B38);
 
-#ifdef NON_MATCHING
+#ifdef EQUIVALENT
 void func_80217BC4(const char * msg, ...) {
     s32 pad[4];
 }
@@ -66,7 +66,7 @@ void func_80217BC4(const char * msg, ...) {
 INCLUDE_ASM(const s32, "17280", func_80217BC4);
 #endif
 
-#ifdef NON_MATCHING
+#ifdef EQUIVALENT
 void func_80217BE0(void) {
     s32 pad[4];
 

@@ -1,62 +1,37 @@
 #include "common.h"
 
+void* D_802497BC;
+
+void func_80215CFC(void*);
+
 INCLUDE_ASM(const s32, "155D0", func_802159D0);
 
 INCLUDE_ASM(const s32, "155D0", func_80215A8C);
 
 INCLUDE_ASM(const s32, "155D0", func_80215B4C);
 
-INCLUDE_ASM(const s32, "155D0", func_80215BC4);
+void func_80215BC4(void) {
+    func_80215CFC(D_802497BC);
+}
 
 INCLUDE_ASM(const s32, "155D0", func_80215BE8);
 
-INCLUDE_ASM(const s32, "155D0", func_80215C94);
+void func_80215C94(void) {
+    u32* si_regs = (u32*)PHYS_TO_K1(SI_BASE_REG); // bug! should be volatile!
 
-INCLUDE_ASM(const s32, "155D0", func_80215CB8);
-
-INCLUDE_ASM(const s32, "155D0", func_80215CFC);
-
-INCLUDE_ASM(const s32, "155D0", func_80215D40);
-
-INCLUDE_ASM(const s32, "155D0", func_80215DA8);
-
-INCLUDE_ASM(const s32, "155D0", func_80215FC4);
-
-INCLUDE_ASM(const s32, "155D0", func_802161A8);
-
-INCLUDE_ASM(const s32, "155D0", func_80216298);
-
-INCLUDE_ASM(const s32, "155D0", func_802163D0);
-
-INCLUDE_ASM(const s32, "155D0", func_802164BC);
-
-INCLUDE_ASM(const s32, "155D0", func_80216654);
-
-INCLUDE_ASM(const s32, "155D0", func_802167CC);
-
-INCLUDE_ASM(const s32, "155D0", func_80216874);
-
-INCLUDE_ASM(const s32, "155D0", func_802168C4);
-
-INCLUDE_ASM(const s32, "155D0", func_80216914);
-
-INCLUDE_ASM(const s32, "155D0", func_8021698C);
-
-INCLUDE_ASM(const s32, "155D0", func_80216BA0);
-
-INCLUDE_ASM(const s32, "155D0", func_80216D94);
-
-INCLUDE_ASM(const s32, "155D0", func_80217194);
-
-INCLUDE_ASM(const s32, "155D0", func_802174B4);
-
-void func_80217548(void) {
+    while ((si_regs[6] & 3) != 0);
 }
 
-INCLUDE_ASM(const s32, "155D0", func_80217550);
+void func_80215CB8(void* arg0) {
+    vu32* si_regs = (vu32*)PHYS_TO_K1(SI_BASE_REG); 
+    func_80215C94();
+    si_regs[0] = (u32)arg0 & 0x1FFFFFFF;
+    si_regs[4] = PIF_RAM_START;
+}
 
-INCLUDE_ASM(const s32, "155D0", func_802175C0);
-
-INCLUDE_ASM(const s32, "155D0", func_80217628);
-
-INCLUDE_ASM(const s32, "155D0", func_80217678);
+void func_80215CFC(void* arg0) {
+    vu32* si_regs = (vu32*)PHYS_TO_K1(SI_BASE_REG); 
+    func_80215C94();
+    si_regs[0] = (u32)arg0 & 0x1FFFFFFF;
+    si_regs[1] = PIF_RAM_START;
+}

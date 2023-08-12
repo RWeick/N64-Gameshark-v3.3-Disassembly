@@ -4,14 +4,14 @@ extern u32 D_80227C10;
 s32 D_80227C14;
 s32 D_80227C18;
 
-s32 D_80228274;
+extern s32 D_80228274;
 
 extern u32 D_80228290;
 extern u32 D_80228294;
 extern u32 D_8022829C;
 extern u32 D_802282A0;
 
-u8 D_80249800[];
+extern u8 D_80249800[];
 
 INCLUDE_ASM(const s32, "FED0", func_802102D0);
 
@@ -48,7 +48,7 @@ void func_802108BC(void) {
     buf[idx++] = (D_80228274 >> 8) & 0xFF;
     buf[idx++] = D_8022829C & 0xFF;
     
-    for (i = 0; i < 0x64; idx++, i++) {
+    for (i = 0; i < 100; idx++, i++) {
         buf[idx] = D_80249800[i];
     }
     

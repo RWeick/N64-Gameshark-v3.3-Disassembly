@@ -25,9 +25,11 @@ options:
   libultra_symbols: True
   hardware_regs: True
   asset_path: assets/us/
-  asm_path: asm/us/
+  asm_path: src/
+  nonmatchings_path: ../asm/us/nonmatchings/
   build_path: build/us/
   disasm_unknown: True
+  asm_emit_size_directive: false
   # generated_s_preamble:
     # .include "macro.inc"
 
@@ -41,8 +43,16 @@ segments:
     start: 0x0
     vram: 0x80780800
     subsegments:
-      - [0x0, c]
+      - [0x0, c, main]
       - [0x450, c]
+      - [0xAE0, hasm]
+      - [0xC40, c]
+      - [0xF80, c]
+      - [0x5390, c]
+      - [0x5960, c]
+      - [0x7780, c, hw]
+      - [0x7850, c]
+      - [0xF8E0, c]
       - [0x14280, gsasm]
       - [0x145C0, bin]
   
