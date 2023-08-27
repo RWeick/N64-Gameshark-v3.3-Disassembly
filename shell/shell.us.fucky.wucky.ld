@@ -58,11 +58,6 @@ SECTIONS
         build/us/assets/us/font.png.o(.data);
         _25480_bin = .;
         build/us/assets/us/25480.bin.o(.data);
-        _5E30_c = .;
-        build/us/src/5E30.c.o(.data);
-        build/us/src/6380.c.o(.rdata);
-        _27720_bin = .;
-        build/us/assets/us/27720.bin.o(.data);
     }
     main_bss_VRAM = ADDR(.main_bss);
     .main_bss (NOLOAD) : SUBALIGN(16)
@@ -99,6 +94,13 @@ SECTIONS
         build/us/src/20CD0.c.o(.bss);
         main_BSS_END = .;
         main_BSS_SIZE = ABSOLUTE(main_BSS_END - main_BSS_START);
+        _5E30_c = .;
+        build/us/src/5E30.c.o(.data);
+        build/us/src/6380.c.o(.rdata);
+        main_RODATA_END = .;
+        main_RODATA_SIZE = ABSOLUTE(main_RODATA_END - main_RODATA_START);
+        _27720_bin = .;
+        build/us/assets/us/27720.bin.o(.data);
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
     }

@@ -1,7 +1,7 @@
 name: shell
 sha1: 1b939e4cfbbfbb350534f2c460628722a5145158
 options:
-  basename: shell.us
+  basename: shell.us.fucky.wucky
   target_path: ../fs/us/shell.bin
   base_path: .
   compiler: SN64
@@ -62,30 +62,42 @@ segments:
       - [0x155D0, c]
       - [0x15940, c, lzari]
       - [0x17280, c]
+      - [0x17630, c]
       - [0x17810, c]
       - [0x17990, c]
       - [0x17A50, c]
       - [0x17F00, c]
       - [0x18410, asm]
-      - [0x18AC0, rodata, 0x18410]
+      - [0x18AC0, rodata, 18410]
       - [0x1D2C0, asm]
       - [0x1F6E0, asm]
       - [0x1FB00, asm]
       - [0x20CD0, c]
-      
-  - name: data
-    type: group
-    start: 0x22720
-    follows_vram: main
-    subalign: 1
-    subsegments:
       - [0x22720, bin]
+      - [0x22860, .rdata, 5050]
+      - [0x22920, bin]
+      - [0x22DE0, rodata, FED0]
+      - [0x22E00, bin]
+      - [0x246E0, rodata, 144A0]
+      - [0x24840, .rdata, lzari]
+      - [0x24850, .rdata, 17630]
+      - [0x24860, bin]
       - name: font
         type: i4
         start: 0x24880
         width: 8
         height: 768
       - [0x25480, bin]
+      - [0x276D0, .data, 5E30]
+      - [0x276E0, .rdata, 6380]
+      - [0x27720, bin]
+      
+  - name: data
+    type: group
+    start: 0x27FE0
+    follows_vram: main
+    subalign: 1
+    subsegments:
       - name: fsblob
         type: fsblob
         out_dir: fs/us/

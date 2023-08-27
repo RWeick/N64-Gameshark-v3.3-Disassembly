@@ -1,9 +1,9 @@
 #include "common.h"
 
-s32 D_80227AD0;
-s32 D_80227AD4;
-s32 D_80227AD8;
-s32 D_80227ADC;
+s32 D_80227AD0 = 0;
+s32 D_80227AD4 = 0;
+s32 D_80227AD8 = 1;
+s32 D_80227ADC = 1;
 volatile s32 D_BE500000;
 
 void func_8020622C(void) {
@@ -131,39 +131,61 @@ s32 func_80206500(void) {
     return i < 6;
 }
 
-s32 func_802065B4(u8* arg0, s32 arg1) {
-    s32 var_a2;
-    int j;
+int func_802065B4(u8* buf, int len) {
+    int crc;
+    int cur;
+    int tmp;
+    
     int i;
-    s32 var_v1;
-    u8* temp_v0;
-    s32 tmp;
+    int j;
 
-    var_a2 = 0xFFFF;
-    for (i = 0; i < arg1; i += 2) {
-        
-        temp_v0 = &arg0[i];
-        var_v1 = (temp_v0[0] << 8) | temp_v0[1];
-        
+    crc = 0xFFFF;
+    for (i = 0; i < len; i += 2) {
+        cur = (buf[i] << 8) | buf[i + 1];
         for(j = 0; j < 16; j++) {
-            tmp = var_a2 & 0x8000;
-            var_a2 *= 2;
-            if (var_v1 & 0x8000) {
-                var_a2 |= 1;
+            tmp = crc & 0x8000;
+            crc <<= 1;
+            if (cur & 0x8000) {
+                crc |= 1;
             }
-            var_v1 *= 2;
+            cur <<= 1;
             
             if (tmp) {
-                var_a2 ^= 0x8005;
+                crc ^= 0x8005;
             }
             
-            var_a2 &= 0xFFFF;
+            crc &= 0xFFFF;
         }
     }
-    return var_a2;
+    return crc;
 }
 
-INCLUDE_ASM(const s32, "5E30", func_8020661C);
+u32 func_8020661C(u32 arg0) {
+    u8 sp10[8];
+    u32 var_s0;
+    int i;
+    u32 temp_v0;
+
+    sp10[0] = D_80227AD8;
+    sp10[1] = D_80227ADC;
+    sp10[2] = arg0 >> 0x18;
+    sp10[3] = arg0 >> 0x10;
+    sp10[4] = arg0 >> 8;
+    sp10[5] = arg0;
+    temp_v0 = func_802065B4(sp10, 6);
+    sp10[6] = temp_v0 >> 8;
+    sp10[7] = temp_v0;
+    for (i = 0; i < 8; i++) {
+        func_8020640C(sp10[i]);
+    }
+    func_80206260(0xA);
+    var_s0 = 0;
+    for (i = 0; i < 4; i++) {
+        var_s0 <<= 8;
+        var_s0 |= func_80206474();
+    }
+    return var_s0;
+}
 
 void func_802066E0(void) {
     if (D_80227AD4 == 0) {

@@ -7,6 +7,17 @@ typedef struct {
     u32 pad[8];
 } UnkStruct;
 
+const u8 D_80227AE0[] = {
+    ' ', 0x00, '.', 0x7F, '0', 0x84, '1', 0x9F,
+    '2', 0xC8, '3', 0x8A, '4', 0x93, '5', 0xA2,
+    '6', 0xA0, '7', 0x8F, '8', 0x80, '9', 0x82,
+	'E', 0xE0, 'F', 0xE1, 'H', 0x91, 'L', 0xF4,
+    'O', 0x84, 'P', 0xC1, 'R', 0x81, 'a', 0xFE,
+    'b', 0xFD, 'c', 0xFB, 'd', 0xF7, 'e', 0xEF,
+	'f', 0xDF, 'g', 0xBF, 'z', 0xEA, 000, 0xFF,
+    0xFF, 0x00,
+};
+
 s32 D_80227B28;
 s32 D_80227B2C;
 s32 D_80227B30;
@@ -28,7 +39,21 @@ void func_80206780(s32 arg0) {
     func_802176AC();
 }
 
-INCLUDE_ASM(const s32, "6380", func_802067A8);
+s32 func_802067A8(char arg0) {
+    int index = 0;
+    int rv = 0xFF;
+
+    while (D_80227AE0[index] != 0xFF) {
+        if (D_80227AE0[index] == arg0) {
+            rv = D_80227AE0[index + 1];
+            break;
+        }
+        
+        index += 2;
+    }
+    
+    return rv;
+}
 
 void func_80206800(u8 arg0) {
     s32 var_s0;

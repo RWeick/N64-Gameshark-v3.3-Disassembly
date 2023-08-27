@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include "linker.h"
+
 typedef struct {
     /* 0x00 */ s32 incursor;
     /* 0x04 */ s32 outcursor;
@@ -37,10 +39,6 @@ typedef struct {
     u8 fileData[0];
 } FileEntry;
 
-char D_80224C40[];
-
-u8 D_802283E0[];
-
 extern LZARIStruct D_80243338;
 
 // see bottom of file for explanation
@@ -61,7 +59,7 @@ _static inline void PutBit(int bit) {
     if ((D_80243338.outmask >>= 1) == 0) {
         D_80243338.outfile[D_80243338.outcursor++] = D_80243338.outbuffer;
         if (D_80243338.outcursor >= D_80243338.outfile_len) {
-            Error(D_80224C40);
+            Error("Write Error");
         }
         D_80243338.outbuffer = 0;
         D_80243338.outmask = 0x80;
@@ -628,7 +626,7 @@ void func_802174B4(u32 loadAddr, char* filename) {
     u8* var_a1;
     u32 temp;
 
-    var_a1 = D_802283E0;
+    var_a1 = fsblob_bin;
     while (1) {
         s32 i = 1;
         temp = filename[0];
@@ -639,10 +637,10 @@ void func_802174B4(u32 loadAddr, char* filename) {
         if (temp == 0) {
             break;
         }
-        i = var_a1[0] << 24;
+        i  = var_a1[0] << 24;
         i |= var_a1[1] << 16;
-        i |= var_a1[2] << 8;
-        i |= var_a1[3];
+        i |= var_a1[2] <<  8;
+        i |= var_a1[3] <<  0;
         var_a1 += i;
     }
     func_80217194((void *)loadAddr, ((FileEntry*) var_a1)->fileData, 0, 0, 0);
@@ -668,7 +666,7 @@ void _PutBit(int bit) {
     if ((D_80243338.outmask >>= 1) == 0) {
         D_80243338.outfile[D_80243338.outcursor++] = D_80243338.outbuffer;
         if (D_80243338.outcursor >= D_80243338.outfile_len) {
-            Error(D_80224C40); // the inline version
+            Error("Write Error"); // the inline version
         }
         D_80243338.outbuffer = 0;
         D_80243338.outmask = 0x80;
@@ -695,4 +693,7 @@ asm(
     ".word 0xAFB10014\n"
     ".word 0xAFB00010"
     );
+
+static const u32 _rodata_fill[] __attribute__((section(".rdata"))) = { 0x80215474 };
+
 #endif
